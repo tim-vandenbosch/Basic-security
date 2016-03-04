@@ -4,7 +4,7 @@ Basic security 2TiNi 2015-2016
 
 ## Groepsleden
 
-- De Leo Kevin
+- De Leo Kevin is cool
 - Ghekiere Lander
 - Van Den Bosch Tim
 
