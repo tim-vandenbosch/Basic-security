@@ -4,6 +4,8 @@ Basic security 2TiNi 2015-2016
 
 ## Groepsleden
 
+- Lupo Daniela
+- Shabani Nasim
 - De Leo Kevin
 - Ghekiere Lander
 - Van Den Bosch Tim
