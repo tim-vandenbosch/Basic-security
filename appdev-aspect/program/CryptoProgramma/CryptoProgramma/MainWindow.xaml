@@ -6,7 +6,18 @@
         xmlns:local="clr-namespace:CryptoProgramma"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <TabControl x:Name="mainTabs" Height="325" >
+            <TabItem x:Name="nyet1" Header="Nyet 1" Visibility="Collapsed">
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="switchToNyet2" Content="Button" Height="30" Width="100" Margin="0,0,0,0" Click="switchToNyet2_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Nyet 2" x:Name="nyet2" Visibility="Collapsed">
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="SwitchToNyet1" Content="Button"  Margin="0,0,0,0"  Width="75" Height="30" Click="SwitchToNyet1_Click"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
 </Window>

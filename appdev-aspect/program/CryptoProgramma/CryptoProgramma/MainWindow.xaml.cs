@@ -24,5 +24,17 @@ namespace CryptoProgramma
         {
             InitializeComponent();
         }
+
+        private void SwitchToNyet1_Click(object sender, RoutedEventArgs e)
+        {
+            mainTabs.SelectedItem = mainTabs.FindName("nyet1");
+
+        }
+
+        private void switchToNyet2_Click(object sender, RoutedEventArgs e)
+        {
+            mainTabs.SelectedItem = mainTabs.FindName("nyet2");
+
+        }
     }
 }
