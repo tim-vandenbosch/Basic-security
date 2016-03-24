@@ -1,0 +1,22 @@
+﻿<Window x:Class="RSAKeysGenereren.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RSAKeysGenereren"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="727.6" Width="862">
+    <Grid>
+        <Label BorderThickness="1" BorderBrush="Black" x:Name="PadFileLabel" Content="..." HorizontalAlignment="Left" Margin="92,61,0,0" VerticalAlignment="Top" Height="34" Width="473"/>
+        <Button x:Name="BrowseButton" Content="Browse" HorizontalAlignment="Left" Margin="589,65,0,0" VerticalAlignment="Top" Width="75" Click="BrowseButton_Click"/>
+        <Button x:Name="encryptButton" Content="Encrypt!" HorizontalAlignment="Left" Margin="221,171,0,0" VerticalAlignment="Top" Width="75" Click="encryptButton_Click"/>
+        <TextBox x:Name="txtFile" HorizontalAlignment="Left" Height="338" Margin="27,231,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="245"/>
+        <TextBox x:Name="txtEncrypt" HorizontalAlignment="Left" Height="338" Margin="330,231,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="249" RenderTransformOrigin="0.5,0.5">
+        </TextBox>
+        <TextBox x:Name="txtDecrypt" HorizontalAlignment="Left" Height="338" Margin="610,231,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="234"/>
+        <Label x:Name="label" Content="Bestand" HorizontalAlignment="Left" Margin="27,210,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="GeEncrypteerd" HorizontalAlignment="Left" Margin="327,210,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2" Content="GeDEcrypteerd" HorizontalAlignment="Left" Margin="610,210,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
