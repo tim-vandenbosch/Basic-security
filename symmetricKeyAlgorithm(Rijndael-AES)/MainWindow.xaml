@@ -1,0 +1,18 @@
+﻿<Window x:Class="symmetricKeyAlgorithm_Rijndael_AES_.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:symmetricKeyAlgorithm_Rijndael_AES_"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Label x:Name="label" Content="plainText :" HorizontalAlignment="Left" Margin="53,63,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPlainText" Content="" Background="Bisque" HorizontalAlignment="Left" Margin="134,63,0,0" VerticalAlignment="Top" Width="220"/>
+        <Label x:Name="label_Decrypted" Content="Decrypted :" HorizontalAlignment="Left" Margin="53,141,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDecrypted" Content="" Background="Bisque" HorizontalAlignment="Left" Margin="134,141,0,0" VerticalAlignment="Top" Width="220"/>
+        <Label x:Name="label_Encrypted" Content="Encrypted :" HorizontalAlignment="Left" Margin="53,102,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtboxEncrypted" Background="Bisque" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="220" Margin="134,104,0,0"/>
+
+    </Grid>
+</Window>
