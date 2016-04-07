@@ -5,19 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CryptoProgramma"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Crypto Program" Height="350" Width="525">
     <StackPanel>
-        <TabControl x:Name="mainTabs" Height="325" >
-            <TabItem x:Name="nyet1" Header="Nyet 1" Visibility="Collapsed">
-                <Grid Background="#FFE5E5E5">
-                    <Button x:Name="switchToNyet2" Content="Button" Height="30" Width="100" Margin="0,0,0,0" Click="switchToNyet2_Click"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Nyet 2" x:Name="nyet2" Visibility="Collapsed">
-                <Grid Background="#FFE5E5E5">
-                    <Button x:Name="SwitchToNyet1" Content="Button"  Margin="0,0,0,0"  Width="75" Height="30" Click="SwitchToNyet1_Click"/>
-                </Grid>
-            </TabItem>
-        </TabControl>
+        <!--   <TabControl x:Name="mainTabs" Height="325" RenderTransformOrigin="0.236,0.452">
+            <TabItem x:Name="homePage" Header="HomePage" Visibility="Collapsed"> -->
+        <Grid Name="homePageGrid" Background="Beige" Height="350" Width="525" Visibility="Collapsed" >
+            <Label x:Name="welcomeLabel" Content="Welcome, &#xD; &#xA; Choose what you want to do" FontSize="16"/>
+            <Button x:Name="encryptHomeButton" Content="Encrypt a file" Height="50" Width="150" Margin="-200,0,0,0" Click="encryptHomeButton_Click" ToolTip="Click here if you want to encrypt a file"/>
+            <Button x:Name="decryptHomeButton" Content="Decrypt a file" Height="50" Width="150" Margin="200,0,0,0" Click="decryptHomeButton_Click" ToolTip="Click here if you want to decrypt a file"/>
+        </Grid>
+        <!--  </TabItem>
+            <TabItem x:Name="encryptFile" Header="encryptFile"  Visibility="Collapsed"> -->
+        <Grid Name="encryptFileGrid" Background="Beige" Visibility="Collapsed" Height="350" Width="525" >
+            <Label Name="encryptlbl" Content="Encrypt a file here" Margin="10,0,400,322" />
+            <Label Content="Please enter the name of the sender and receiver" Margin="104,33,150,292" />
+            <Label Content="Sender" Margin="64,71,400,254"/>
+            <TextBox Margin="130,80,306,254" Background="AntiqueWhite"/>
+            <Label Content="Receiver" Margin="251,71,213,254"/>
+            <TextBox Margin="317,80,117,254" Background="AntiqueWhite" />
+            <Label Content=" Algorithm Symmetric key" Margin="39,117,329,208"/>
+            <Label Content="DES" Margin="212,117,252,208"/>
+            <Slider Margin="246,117,207,208" />
+            <Label Content="AES" Margin="323,117,141,208" />
+            <Label Content="Find your file" Margin="21,167,400,158" />
+            <TextBlock Margin="113,171,150,158" Opacity="0.5" Background="BlanchedAlmond" />
+            <Button Content="Browse" Margin="423,171,24,158" />
+            <Button x:Name="encryptButton" Content="Encrypt"  Margin="212,239,213,73"  Width="100" Click="encryptButton_Click" FontSize="16"/>
+        </Grid>
+        <!--   </TabItem>
+            <TabItem x:Name="decryptFile" Header="decryptFile" Visibility="Collapsed"> -->
+
+        <Grid Name="decryptFileGrid" Background="Beige"  Visibility="Visible" Height="350" Width="525" >
+            <Button x:Name="decryptButton" Content="Decrypt"  Margin="214,285,220,29" Click="decryptButton_Click" FontSize="21.333"/>
+            <Label x:Name="label_2" Content="Encrypted symetric key" HorizontalAlignment="Left" Margin="14,117,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="privateLbl" Content=""  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="166,243,0,0" VerticalAlignment="Top" Width="237"/>
+            <Label x:Name="label_3" Content="Encrypted hash" HorizontalAlignment="Left" Margin="17,159,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="publicLbl" Content=""  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="166,200,0,0" VerticalAlignment="Top" Width="237"/>
+            <Label x:Name="hashLbl" Content=""  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="166,159,0,0" VerticalAlignment="Top" Width="237"/>
+            <Label x:Name="symkeyLbl" Content=""  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="166,117,0,0" VerticalAlignment="Top" Width="237"/>
+            <Label x:Name="label4" Content="Public key sender" HorizontalAlignment="Left" Margin="17,200,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="fileLbl" Content=""  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="166,73,0,0" VerticalAlignment="Top" Width="237"/>
+            <Label x:Name="label5" Content="Private key receiver" HorizontalAlignment="Left" Margin="17,240,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label_1" Content="Encrypted file" HorizontalAlignment="Left" Margin="17,73,0,0" VerticalAlignment="Top" Width="89"/>
+            <Button x:Name="browseFileBut" Content="Browse" HorizontalAlignment="Left" Margin="423,82,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="browseSemKeyBut" Content="Browse" HorizontalAlignment="Left" Margin="423,123,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="browseHashBut" Content="Browse" HorizontalAlignment="Left" Margin="423,165,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="browsePublicBut" Content="Browse" HorizontalAlignment="Left" Margin="423,206,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="browsePrivateBut" Content="Browse" HorizontalAlignment="Left" Margin="423,246,0,0" VerticalAlignment="Top" Width="75"/>
+            <Label x:Name="label1" Content="Browse to these files to decrypt" HorizontalAlignment="Left" Margin="17,12,0,0" VerticalAlignment="Top" Width="227"/>
+        </Grid>
+        <!-- </TabItem>
+        </TabControl>  -->
     </StackPanel>
 </Window>
