@@ -37,7 +37,7 @@ namespace CryptoProgramma
         private void encryptButton_Click(object sender, RoutedEventArgs e)
         {
             //mainTabs.SelectedItem = mainTabs.FindName("homePage");
-            homePageGrid.Visibility = Visibility.Visible;
+            encryptingGrid.Visibility = Visibility.Visible;
             encryptFileGrid.Visibility = Visibility.Collapsed;
 
         }
@@ -45,18 +45,51 @@ namespace CryptoProgramma
         private void decryptHomeButton_Click(object sender, RoutedEventArgs e)
         {
             //mainTabs.SelectedItem = mainTabs.FindName("decryptFile");
-            homePageGrid.Visibility = Visibility.Collapsed;
             decryptFileGrid.Visibility = Visibility.Visible;
+            homePageGrid.Visibility = Visibility.Collapsed;
 
         }
 
         private void decryptButton_Click(object sender, RoutedEventArgs e)
         {
             //mainTabs.SelectedItem = mainTabs.FindName("homePage");
-            homePageGrid.Visibility = Visibility.Visible;
+            decryptingGrid.Visibility = Visibility.Visible;
             decryptFileGrid.Visibility = Visibility.Collapsed;
 
 
         }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            homePageGrid.Visibility = Visibility.Visible;
+            encryptFileGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void backButton2_Click(object sender, RoutedEventArgs e)
+        {
+            homePageGrid.Visibility = Visibility.Visible;
+            decryptFileGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void checkBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void backBtn_Click(object sender, RoutedEventArgs e)
+        {
+            homePageGrid.Visibility = Visibility.Visible;
+            decryptingGrid.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void back_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            homePageGrid.Visibility = Visibility.Visible;
+            decryptingGrid.Visibility = Visibility.Collapsed;
+
+        }
+
+
     }
 }
