@@ -30,8 +30,12 @@ namespace CryptoProgramma
             //mainTabs.SelectedItem = mainTabs.FindName("encryptFile");
             encryptFileGrid.Visibility = Visibility.Visible;
             homePageGrid.Visibility = Visibility.Collapsed;
+        }
 
-
+        private void backButton_EnFileGr_Click(object sender, RoutedEventArgs e)
+        {
+            homePageGrid.Visibility = Visibility.Visible;
+            encryptFileGrid.Visibility = Visibility.Collapsed;
         }
 
         private void encryptButton_Click(object sender, RoutedEventArgs e)
@@ -39,6 +43,17 @@ namespace CryptoProgramma
             //mainTabs.SelectedItem = mainTabs.FindName("homePage");
             encryptingGrid.Visibility = Visibility.Visible;
             encryptFileGrid.Visibility = Visibility.Collapsed;
+            CryptoProgramWin.Height = 700;
+            CryptoProgramWin.Width = 600;
+
+        }
+
+        private void backBtn_EnGr_Click(object sender, RoutedEventArgs e)
+        {
+            homePageGrid.Visibility = Visibility.Visible;
+            encryptingGrid.Visibility = Visibility.Collapsed;
+            CryptoProgramWin.Height = 500;
+            CryptoProgramWin.Width = 500;
 
         }
 
@@ -50,46 +65,37 @@ namespace CryptoProgramma
 
         }
 
+        private void backButton_DeFileGr_Click(object sender, RoutedEventArgs e)
+        {
+            homePageGrid.Visibility = Visibility.Visible;
+            decryptFileGrid.Visibility = Visibility.Collapsed;
+        }
+
         private void decryptButton_Click(object sender, RoutedEventArgs e)
         {
             //mainTabs.SelectedItem = mainTabs.FindName("homePage");
             decryptingGrid.Visibility = Visibility.Visible;
             decryptFileGrid.Visibility = Visibility.Collapsed;
-
-
         }
 
-        private void backButton_Click(object sender, RoutedEventArgs e)
+        private void backBtn_DeGr_Click(object sender, RoutedEventArgs e)
         {
             homePageGrid.Visibility = Visibility.Visible;
-            encryptFileGrid.Visibility = Visibility.Collapsed;
+            decryptingGrid.Visibility = Visibility.Collapsed;
+
         }
 
-        private void backButton2_Click(object sender, RoutedEventArgs e)
-        {
-            homePageGrid.Visibility = Visibility.Visible;
-            decryptFileGrid.Visibility = Visibility.Collapsed;
-        }
+
 
         private void checkBox_Checked(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void backBtn_Click(object sender, RoutedEventArgs e)
+        private void HamburgerMenu_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
-            homePageGrid.Visibility = Visibility.Visible;
-            decryptingGrid.Visibility = Visibility.Collapsed;
 
         }
-
-        private void back_Btn_Click(object sender, RoutedEventArgs e)
-        {
-            homePageGrid.Visibility = Visibility.Visible;
-            decryptingGrid.Visibility = Visibility.Collapsed;
-
-        }
-
-
     }
 }
+/* Bronnen:  https://github.com/alicanerdogan/HamburgerMenu */
