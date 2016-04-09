@@ -44,7 +44,7 @@ namespace CryptoProgramma
             encryptingGrid.Visibility = Visibility.Visible;
             encryptFileGrid.Visibility = Visibility.Collapsed;
             CryptoProgramWin.Height = 700;
-            CryptoProgramWin.Width = 600;
+          CryptoProgramWin.Width = 550;
 
         }
 
@@ -92,10 +92,68 @@ namespace CryptoProgramma
 
         }
 
-        private void HamburgerMenu_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+
+        private void home_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            homePageGrid.Visibility = Visibility.Visible;
+            encryptFileGrid.Visibility = Visibility.Collapsed;
+            encryptingGrid.Visibility = Visibility.Collapsed;
+            decryptFileGrid.Visibility = Visibility.Collapsed;
+            decryptingGrid.Visibility = Visibility.Collapsed;
+            CryptoProgramWin.Height = 500;
+            CryptoProgramWin.Width = 500;
+        }
+
+        private void stega_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            steganografieGrid.Visibility = Visibility.Visible;
+            homePageGrid.Visibility = Visibility.Collapsed;
+            encryptFileGrid.Visibility = Visibility.Collapsed;
+            encryptingGrid.Visibility = Visibility.Collapsed;
+            decryptFileGrid.Visibility = Visibility.Collapsed;
+            decryptingGrid.Visibility = Visibility.Collapsed;
+            settingsGrid.Visibility = Visibility.Collapsed;
 
         }
+
+        private void settings_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            settingsGrid.Visibility = Visibility.Visible;
+            homePageGrid.Visibility = Visibility.Collapsed;
+            encryptFileGrid.Visibility = Visibility.Collapsed;
+            encryptingGrid.Visibility = Visibility.Collapsed;
+            decryptFileGrid.Visibility = Visibility.Collapsed;
+            decryptingGrid.Visibility = Visibility.Collapsed;
+            steganografieGrid.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void help_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            helpGrid.Visibility = Visibility.Visible;
+            homePageGrid.Visibility = Visibility.Collapsed;
+            encryptFileGrid.Visibility = Visibility.Collapsed;
+            encryptingGrid.Visibility = Visibility.Collapsed;
+            decryptFileGrid.Visibility = Visibility.Collapsed;
+            decryptingGrid.Visibility = Visibility.Collapsed;
+            steganografieGrid.Visibility = Visibility.Collapsed;
+            settingsGrid.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void exit_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void backSteg_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            steganografieGrid.Visibility = Visibility.Collapsed;
+            homePageGrid.Visibility = Visibility.Visible;
+
+
+        }
+
     }
 }
 /* Bronnen:  https://github.com/alicanerdogan/HamburgerMenu */
