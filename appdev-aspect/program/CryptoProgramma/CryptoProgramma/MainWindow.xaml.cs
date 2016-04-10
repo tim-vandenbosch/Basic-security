@@ -66,9 +66,9 @@ namespace CryptoProgramma
                 //Hier word de symetric AESkey genereert 
                 string filetext = File.ReadAllText(FileForEncrypt);
 
-               if(sKeySlider.Value == 2)
+                if (sKeySlider.Value == 2)
                 {
-                    string cipherText = AES.Encrypt (
+                    string cipherText = AES.Encrypt(
                             filetext,   // original plaintext
                          "Pas5pr@se",    // can be any string
                         "s@1tValue",      // can be any string
@@ -78,43 +78,41 @@ namespace CryptoProgramma
                           256       // can be 192 or 128
                            );
 
-                }else if(sKeySlider.Value == 1)
+                }
+                else if (sKeySlider.Value == 1)
                 {
                     string cryptedString = DES.Encrypt(filetext);
                 }
 
                 //public en private keys gemaakt en gesaved
-                opgeslagenBestanden =  RSA.keys(hoofdPad, senderTxt.Text, receiverTxt.Text);
-               
+                opgeslagenBestanden = RSA.keys(hoofdPad, senderTxt.Text, receiverTxt.Text);
+
+                encryptingGrid.Visibility = Visibility.Visible;
+                encryptFileGrid.Visibility = Visibility.Collapsed;
+                CryptoProgramWin.Height = 700;
+                CryptoProgramWin.Width = 550;
+
+                namePrKeySenderLbl.Content = Convert.ToString(opgeslagenBestanden[1]);
+                padPrivateSenderLbl.Content = Convert.ToString(opgeslagenBestanden[4]);
+                checkBox1.IsChecked = true;
+
+
+                namePuKeySenderLbl.Content = Convert.ToString(opgeslagenBestanden[0]);
+                padPublicSenderLbl.Content = Convert.ToString(opgeslagenBestanden[5]);
+                checkBox2.IsChecked = true;
+
+                namePrKeyReceiverLbl.Content = Convert.ToString(opgeslagenBestanden[3]);
+                padPrivateReceiverLbl.Content = Convert.ToString(opgeslagenBestanden[6]);
+                checkBox3.IsChecked = true;
+
+                namePuKeyReceiverLbl.Content = Convert.ToString(opgeslagenBestanden[2]);
+                padPublicReceiverLbl.Content = Convert.ToString(opgeslagenBestanden[7]);
+                checkBox4.IsChecked = true;
             }
             else
             {
                 MessageBox.Show("Je heb nog geen bestand gekozen");
             }
-
-
-            encryptingGrid.Visibility = Visibility.Visible;
-            encryptFileGrid.Visibility = Visibility.Collapsed;
-            CryptoProgramWin.Height = 700;
-            CryptoProgramWin.Width = 550;
-
-            namePrKeySenderLbl.Content = Convert.ToString(opgeslagenBestanden[1]);
-            padPrivateSenderLbl.Content = Convert.ToString(opgeslagenBestanden[4]);
-            checkBox1.IsChecked = true;
-
-
-            namePuKeySenderLbl.Content = Convert.ToString(opgeslagenBestanden[0]);
-            padPublicSenderLbl.Content = Convert.ToString(opgeslagenBestanden[5]);
-            checkBox2.IsChecked = true;
-
-            namePrKeyReceiverLbl.Content = Convert.ToString(opgeslagenBestanden[3]);
-            padPrivateReceiverLbl.Content = Convert.ToString(opgeslagenBestanden[6]);
-            checkBox3.IsChecked = true;
-
-            namePuKeyReceiverLbl.Content = Convert.ToString(opgeslagenBestanden[2]);
-            padPublicReceiverLbl.Content = Convert.ToString(opgeslagenBestanden[7]);
-            checkBox4.IsChecked = true;
-
         }
 
         private void backBtn_EnGr_Click(object sender, RoutedEventArgs e)
