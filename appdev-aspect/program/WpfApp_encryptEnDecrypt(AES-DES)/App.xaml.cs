@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace symmetricKeyAlgorithm_Rijndael_AES_
+namespace WpfApp_encryptEnDecrypt_DES_
 {
     /// <summary>
     /// Interaction logic for App.xaml

@@ -7,11 +7,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("symmetricKeyAlgorithm(Rijndael-AES)")]
+[assembly: AssemblyTitle("WpfApp_encryptEnDecrypt(DES)")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("symmetricKeyAlgorithm(Rijndael-AES)")]
+[assembly: AssemblyProduct("WpfApp_encryptEnDecrypt(DES)")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -1,7 +1,7 @@
-﻿<Application x:Class="symmetricKeyAlgorithm_Rijndael_AES_.App"
+﻿<Application x:Class="WpfApp_encryptEnDecrypt_DES_.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:symmetricKeyAlgorithm_Rijndael_AES_"
+             xmlns:local="clr-namespace:WpfApp_encryptEnDecrypt_DES_"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

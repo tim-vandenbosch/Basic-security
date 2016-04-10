@@ -1,0 +1,29 @@
+﻿<Window x:Class="WpfApp_encryptEnDecrypt_DES_.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp_encryptEnDecrypt_DES_"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="642.862">
+    <Grid Background="GhostWhite">
+        <GroupBox x:Name="gb" Header=" Encrypt / Decrypt with symmetric key (DES) " BorderBrush="DarkGray" FontSize="10" HorizontalAlignment="Left" Margin="24,28,0,0" VerticalAlignment="Top" Height="186" Width="586">
+            <Grid>
+
+                <TextBlock x:Name="txtBlock_urTxt" FontSize="10" HorizontalAlignment="Left" Margin="29,79,0,0" TextWrapping="Wrap" Text="Enter your text :" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtBox_txt" FontSize="10" HorizontalAlignment="Left" Height="19" Margin="114,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="331"/>
+                <Button x:Name="btn_encrypt" FontSize="10" Content="Encrypt it" HorizontalAlignment="Left" Margin="467,75,0,0" VerticalAlignment="Top" Width="75" Click="btn_encrypt_Click"/>
+                <TextBlock x:Name="txtBlock_crypt" FontSize="10" HorizontalAlignment="Left" MinWidth="300"  Margin="117,111,0,0" TextWrapping="Wrap" Foreground="DarkOrange" Text="" VerticalAlignment="Top" FontWeight="Bold" Height="15"/>
+                <Button x:Name="btn_decrypt" Background="DarkOrange" Foreground="White" FontSize="10" Content="Decrypt it" HorizontalAlignment="Left" Margin="467,109,0,0" VerticalAlignment="Top" Width="75" Click="btn_decrypt_Click"/>
+                <TextBlock x:Name="txtBlock_resultTxt" HorizontalAlignment="Left" FontSize="10" Foreground="DarkOrange" Text="Encrypt Result :" TextWrapping="Wrap" VerticalAlignment="Top" Margin="28,113,0,0"/>
+                <ComboBox x:Name="comboBox" HorizontalAlignment="Left" SelectedItem="0" FontSize="10" Margin="115,45,0,0" VerticalAlignment="Top" Width="79" >
+                    <ComboBoxItem x:Name="aes" IsSelected="True">AES</ComboBoxItem>
+                    <ComboBoxItem x:Name="des">DES</ComboBoxItem>
+                </ComboBox>
+                <TextBlock x:Name="txtBlock" FontSize="10" HorizontalAlignment="Left" Margin="31,49,0,0" TextWrapping="Wrap" Text="AES / DES" VerticalAlignment="Top"/>
+
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</Window>

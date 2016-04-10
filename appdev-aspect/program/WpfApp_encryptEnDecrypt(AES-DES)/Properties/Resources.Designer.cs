@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace symmetricKeyAlgorithm_Rijndael_AES_.Properties
+namespace WpfApp_encryptEnDecrypt_DES_.Properties
 {
 
 
@@ -44,7 +44,7 @@ namespace symmetricKeyAlgorithm_Rijndael_AES_.Properties
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("symmetricKeyAlgorithm_Rijndael_AES_.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WpfApp_encryptEnDecrypt_DES_.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

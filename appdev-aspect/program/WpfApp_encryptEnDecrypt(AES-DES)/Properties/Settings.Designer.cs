@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace symmetricKeyAlgorithm_Rijndael_AES_.Properties
+namespace WpfApp_encryptEnDecrypt_DES_.Properties
 {
 
 
