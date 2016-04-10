@@ -46,6 +46,17 @@ namespace CryptoProgramma
             encryptFileGrid.Visibility = Visibility.Collapsed;
         }
 
+        private void browseEnBtn_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog browseVenster = new OpenFileDialog();
+            if (browseVenster.ShowDialog() == true)
+            {
+                FileForEncrypt = browseVenster.FileName;
+                padEnFileLbl.Content = browseVenster.FileName;
+            }
+
+        }
+
         private void encryptButton_Click(object sender, RoutedEventArgs e)
         {
             //mainTabs.SelectedItem = mainTabs.FindName("homePage");
@@ -57,7 +68,7 @@ namespace CryptoProgramma
 
                if(sKeySlider.Value == 2)
                 {
-                    string cipherText = RijndaelSimple.Encrypt (
+                    string cipherText = AES.Encrypt (
                             filetext,   // original plaintext
                          "Pas5pr@se",    // can be any string
                         "s@1tValue",      // can be any string
@@ -69,11 +80,12 @@ namespace CryptoProgramma
 
                 }else if(sKeySlider.Value == 1)
                 {
-
+                    string cryptedString = DES.Encrypt(filetext);
                 }
 
                 //public en private keys gemaakt en gesaved
                 opgeslagenBestanden =  RSA.keys(hoofdPad, senderTxt.Text, receiverTxt.Text);
+               
             }
             else
             {
@@ -231,17 +243,6 @@ namespace CryptoProgramma
             steganografieGrid.Visibility = Visibility.Collapsed;
             homePageGrid.Visibility = Visibility.Visible;
 
-
-        }
-
-        private void browseEnBtn_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog browseVenster = new OpenFileDialog();
-            if (browseVenster.ShowDialog() == true)
-            {
-                FileForEncrypt = browseVenster.FileName;
-                padEnFileLbl.Content = browseVenster.FileName;
-            }
 
         }
 

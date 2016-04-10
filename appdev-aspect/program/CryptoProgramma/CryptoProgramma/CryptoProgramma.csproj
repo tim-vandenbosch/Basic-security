@@ -59,7 +59,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="RijndaelSimple.cs" />
+    <Compile Include="AES.cs" />
+    <Compile Include="DES.cs" />
     <Compile Include="RSA.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

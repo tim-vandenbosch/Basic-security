@@ -14,8 +14,11 @@ namespace CryptoProgramma
         private static string _public_A;
         private static string _private_B;
         private static string _public_B;
+       public static string public_Receiver, private_Receiver;
         private static UnicodeEncoding _encoder = new UnicodeEncoding();
-      //  private static string enc = "", dec = "";
+        
+
+        //  private static string enc = "", dec = "";
 
         public static string[] keys(string hoofdPad, string nameS, string nameR) //string pad, 
         {
@@ -33,8 +36,7 @@ namespace CryptoProgramma
             Directory.CreateDirectory(private_Pad);
             //Directory.CreateDirectory(PupadReceiver);
             //Directory.CreateDirectory(PrpadReceiver);
-
-            string[] returnwaarde = new string[8];
+             string[] returnwaarde = new string[8];
             returnwaarde[0] = "PublicKey_" + nameS + ".txt";
             returnwaarde[1] = "PrivateKey_" + nameS + ".txt";
 
@@ -77,6 +79,8 @@ namespace CryptoProgramma
                 File.WriteAllText(@returnwaarde[7], _public_B);
             }
 
+            public_Receiver = returnwaarde[7];
+            private_Receiver = returnwaarde[6];
             return returnwaarde;
         }
 
@@ -86,9 +90,9 @@ namespace CryptoProgramma
         {
             var rsa = new RSACryptoServiceProvider();
 
-           // string publicB = File.ReadAllText(@"C:\TestCrypto\Keys_B\Public_B.txt");
+           string publicB = File.ReadAllText(@public_Receiver);
 
-            rsa.FromXmlString(_public_B); //encrypteren met de publickey sender
+            rsa.FromXmlString(publicB); //encrypteren met de publickey receiver (publicB)
             var dataToEncrypt = _encoder.GetBytes(data);
             var encryptedByteArray = rsa.Encrypt(dataToEncrypt, false).ToArray();
             var length = encryptedByteArray.Count();
@@ -116,9 +120,9 @@ namespace CryptoProgramma
                 dataByte[i] = Convert.ToByte(dataArray[i]);
             }
 
-            string priveB = File.ReadAllText(@"C:\TestCrypto\Keys_B\Private_B.txt");
+            string priveB = File.ReadAllText(@private_Receiver);
 
-            rsa.FromXmlString(priveB); //decryteren met de privatekey sender
+            rsa.FromXmlString(priveB); //decryteren met de privatekey receiver (privateB)
             var decryptedByte = rsa.Decrypt(dataByte, false);
             return _encoder.GetString(decryptedByte);
         }
