@@ -18,8 +18,10 @@ namespace RSAKeysGenereren
         private static string _private_B;
         private static string _public_B;
         private static UnicodeEncoding _encoder = new UnicodeEncoding();
-        private static string FileForEncrypt = "";
+        //private static string FileForEncrypt = "";
         private static string enc = "", dec = "";
+        private static string FileForEncrypt = "";
+
 
         public MainWindow()
         {

@@ -22,34 +22,34 @@
             <Label Name="encryptlbl" Content="Encrypt a file here" Margin="21,10,297,461" />
             <Label Content="Please enter the name of the sender and receiver" Margin="92,44,79,424" />
             <Label Content="Sender" Margin="34,94,367,382"/>
-            <TextBox Margin="46,132,342,347" BorderBrush="Black" BorderThickness="1" Background="AntiqueWhite"/>
+            <TextBox Name="senderTxt" Margin="46,132,342,347" BorderBrush="Black" BorderThickness="1" Background="AntiqueWhite"/>
             <Label Content="Receiver" Margin="248,100,146,376"/>
-            <TextBox Margin="322,132,59,347" BorderBrush="Black" BorderThickness="1" Background="AntiqueWhite" RenderTransformOrigin="0.5,0.5"/>
+            <TextBox Name="receiverTxt" Margin="322,132,59,347" BorderBrush="Black" BorderThickness="1" Background="AntiqueWhite" RenderTransformOrigin="0.5,0.5"/>
             <Label Content=" Algorithm Symmetric key" Margin="21,195,276,275"/>
             <Label Content="DES" Margin="166,225,243,245"/>
-            <Slider Margin="212,225,174,254" Maximum="2" Minimum="1" IsSnapToTickEnabled="True" />
+            <Slider Name="sKeySlider" Margin="212,225,174,254" Maximum="2" Minimum="1" IsSnapToTickEnabled="True"/>
             <Label Content="AES" Margin="281,225,136,245" />
             <Label Content="Find your file" Margin="21,278,342,199" />
-            <Label Margin="34,315,119,162" BorderBrush="Black" BorderThickness="1" Background="BlanchedAlmond" />
-            <Button Content="Browse" Margin="356,315,35,162" />
+            <Label Content="C:\" Name="padEnFileLbl" Margin="34,315,99,152" BorderBrush="Black" BorderThickness="1" Background="BlanchedAlmond" />
+            <Button Content="Browse" Name="browseEnBtn" Click="browseEnBtn_Click" Margin="356,325,35,152" />
             <Button x:Name="encryptButton" Content="Encrypt"  Margin="46,377,297,65" Click="encryptButton_Click" FontSize="16"/>
             <Button x:Name="backButton_EnFileGr" Content="&lt; Back" Click="backButton_EnFileGr_Click" HorizontalAlignment="Left" Margin="281,415,0,0" VerticalAlignment="Top" Width="75"/>
         </Grid>
         <Grid Name="encryptingGrid" Background="Beige" Visibility="Collapsed" Height="700" Width="750" >
             <Label x:Name="labelPrS" Content="Private key sender saved as" HorizontalAlignment="Left" Margin="21,18,0,0" VerticalAlignment="Top" Width="179"/>
-            <Label x:Name="padPrivateSenderLbl" Content="C:\" HorizontalAlignment="Left" Margin="43,49,0,0" VerticalAlignment="Top" Width="157"/>
+            <Label x:Name="padPrivateSenderLbl" Content="C:\" HorizontalAlignment="Left" Margin="43,54,0,0" VerticalAlignment="Top" Width="350"/>
             <Label x:Name="labelPuS" Content="Public key sender saved as" HorizontalAlignment="Left" Margin="21,80,0,0" VerticalAlignment="Top" Width="179"/>
-            <Label x:Name="padPublicSenderLbl" Content="C:\" HorizontalAlignment="Left" Margin="43,111,0,0" VerticalAlignment="Top" Width="157"/>
+            <Label x:Name="padPublicSenderLbl" Content="C:\" HorizontalAlignment="Left" Margin="43,119,0,0" VerticalAlignment="Top" Width="350" Height="23"/>
             <Label x:Name="labelPrR" Content="Private key receiver saved as" HorizontalAlignment="Left" Margin="21,142,0,0" VerticalAlignment="Top" Width="179"/>
-            <Label x:Name="padPrivateReceiverLbl" Content="C:\" HorizontalAlignment="Left" Margin="43,173,0,0" VerticalAlignment="Top" Width="157"/>
+            <Label x:Name="padPrivateReceiverLbl" Content="C:\" HorizontalAlignment="Left" Margin="43,181,0,0" VerticalAlignment="Top" Width="350"/>
             <Label x:Name="labelPuR" Content="Public key receiver saved as" HorizontalAlignment="Left" Margin="21,212,0,0" VerticalAlignment="Top" Width="179"/>
-            <Label x:Name="padPublicReceiverLbl" Content="C:\" HorizontalAlignment="Left" Margin="43,243,0,0" VerticalAlignment="Top" Width="157"/>
+            <Label x:Name="padPublicReceiverLbl" Content="C:\" HorizontalAlignment="Left" Margin="43,256,0,0" VerticalAlignment="Top" Width="350"/>
             <Label x:Name="labelEnF" Content="Encrypted file saved as" HorizontalAlignment="Left" Margin="21,274,0,0" VerticalAlignment="Top" Width="179"/>
-            <Label x:Name="padEncryptedFile" Content="C:\" HorizontalAlignment="Left" Margin="43,305,0,-13" VerticalAlignment="Top" Width="157"/>
+            <Label x:Name="padEncryptedFile" Content="C:\" HorizontalAlignment="Left" Margin="43,310,0,0" VerticalAlignment="Top" Width="350"/>
             <Label x:Name="labelEnSk" Content="Encrypted symetric key saved as" HorizontalAlignment="Left" Margin="21,336,0,0" VerticalAlignment="Top" Width="179"/>
-            <Label x:Name="padEncryptedSkey" Content="C:\" HorizontalAlignment="Left" Margin="43,367,0,-75" VerticalAlignment="Top" Width="157"/>
+            <Label x:Name="padEncryptedSkey" Content="C:\" HorizontalAlignment="Left" Margin="43,367,0,0" VerticalAlignment="Top" Width="350"/>
             <Label x:Name="labelEnH" Content="Encrypted hash saved as" HorizontalAlignment="Left" Margin="21,398,0,0" VerticalAlignment="Top" Width="179"/>
-            <Label x:Name="padEncryptedHash" Content="C:\" HorizontalAlignment="Left" Margin="43,432,0,0" VerticalAlignment="Top" Width="157"/>
+            <Label x:Name="padEncryptedHash" Content="C:\" HorizontalAlignment="Left" Margin="43,432,0,0" VerticalAlignment="Top" Width="350"/>
             <Label x:Name="namePrKeySenderLbl" Content="" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Margin="205,29,0,0" VerticalAlignment="Top" Width="188"/>
             <Label x:Name="namePuKeySenderLbl" Content="" BorderThickness="1" BorderBrush="Black"  HorizontalAlignment="Left" Margin="205,91,0,0" VerticalAlignment="Top" Width="188"/>
             <Label x:Name="namePrKeyReceiverLbl" Content="" BorderThickness="1" BorderBrush="Black"  HorizontalAlignment="Left" Margin="205,153,0,0" VerticalAlignment="Top" Width="188"/>
@@ -120,22 +120,19 @@
         <Grid Name="settingsGrid" Background="Beige" Visibility="Collapsed" Height="500" Width="450">
             <Label x:Name="label2" Content="Edit your preferences" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="146"/>
             <Label x:Name="label2_Copy" Content="Locations" HorizontalAlignment="Left" Margin="163,51,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.883,0.654"/>
-            <Label x:Name="label2_Copy1" Content="Public Keys" HorizontalAlignment="Left" Margin="24,82,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="publicKeys_lbl" Content="C:/Documents/Secret/Keys" HorizontalAlignment="Left" Margin="73,113,0,0" VerticalAlignment="Top" Width="246"/>
-            <Label x:Name="label2_Copy3" Content="Private Keys" HorizontalAlignment="Left" Margin="24,147,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="privateKeys_lbl" Content="C:/Documents/Secret/Keys" HorizontalAlignment="Left" Margin="73,178,0,0" VerticalAlignment="Top" Width="232"/>
-            <Label x:Name="label2_Copy5" Content="Encrypted file" HorizontalAlignment="Left" Margin="15,222,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="encryptedFile_lbl" Content="C:/Documents/Secret/" HorizontalAlignment="Left" Margin="73,253,0,0" VerticalAlignment="Top" Width="246"/>
-            <Label x:Name="label2_Copy7" Content="Encrypted symetric key" HorizontalAlignment="Left" Margin="10,284,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="encryptedSkey_lbl" Content="C:/Documents/Secret/" HorizontalAlignment="Left" Margin="73,321,0,0" VerticalAlignment="Top" Width="232"/>
-            <Label x:Name="label2_Copy9" Content="Encrypted hash" HorizontalAlignment="Left" Margin="15,347,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="encryptedHash_lbl" Content="C:/Documents/Secret" HorizontalAlignment="Left" Margin="73,378,0,0" VerticalAlignment="Top" Width="232"/>
+            <Label x:Name="label2_Copy1" Content="RsaKeys" HorizontalAlignment="Left" Margin="24,82,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="rsaKeys_lbl" Content="C:\" HorizontalAlignment="Left" Margin="73,113,0,0" VerticalAlignment="Top" Width="246"/>
+            <Label x:Name="label2_Copy5" Content="Encrypted file" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="encryptedFile_lbl" Content="C:/Documents/Secret/" HorizontalAlignment="Left" Margin="73,202,0,0" VerticalAlignment="Top" Width="246"/>
+            <Label x:Name="label2_Copy7" Content="Encrypted symetric key" HorizontalAlignment="Left" Margin="10,244,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="encryptedSkey_lbl" Content="C:/Documents/Secret/" HorizontalAlignment="Left" Margin="73,287,0,0" VerticalAlignment="Top" Width="232"/>
+            <Label x:Name="label2_Copy9" Content="Encrypted hash" HorizontalAlignment="Left" Margin="10,327,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="encryptedHash_lbl" Content="C:/Documents/Secret" HorizontalAlignment="Left" Margin="73,358,0,0" VerticalAlignment="Top" Width="232"/>
             <Label x:Name="label2_Copy11" Content="Change the color of the program" HorizontalAlignment="Left" Margin="10,411,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="public_ChangeBtn" Content="Change" HorizontalAlignment="Left" Margin="325,116,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="private_ChangeBtn" Content="Change" HorizontalAlignment="Left" Margin="325,178,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="encrypted_FileChangeBtn" Content="Change" HorizontalAlignment="Left" Margin="325,256,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="encrypted_SkeyChangeBtn" Content="Change" HorizontalAlignment="Left" Margin="325,321,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="encrypted_HashChangeBtn" Content="Change" HorizontalAlignment="Left" Margin="325,378,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="rsaKeys_ChangeBtn" Click="rsaKeys_ChangeBtn_Click" Content="Change" HorizontalAlignment="Left" Margin="325,116,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="encrypted_FileChangeBtn" Content="Change" HorizontalAlignment="Left" Margin="325,205,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="encrypted_SkeyChangeBtn" Content="Change" HorizontalAlignment="Left" Margin="325,290,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="encrypted_HashChangeBtn" Content="Change" HorizontalAlignment="Left" Margin="325,358,0,0" VerticalAlignment="Top" Width="75"/>
         </Grid>
 
         <Grid Name="helpGrid"  Background="Beige" Visibility="Collapsed" Height="500" Width="450">

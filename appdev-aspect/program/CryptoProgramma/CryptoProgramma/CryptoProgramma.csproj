@@ -59,6 +59,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="RijndaelSimple.cs" />
+    <Compile Include="RSA.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -106,6 +108,11 @@
     <Resource Include="home.jpg" />
     <Resource Include="settings.png" />
     <Resource Include="steganographie.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="decrypt.jpg" />
+    <Resource Include="encrypt.jpg" />
+    <Resource Include="encryption.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
