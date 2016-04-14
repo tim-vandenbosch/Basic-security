@@ -11,56 +11,70 @@ namespace CryptoProgramma
 {
     public class DES
     {
-        static byte[] bytes = ASCIIEncoding.ASCII.GetBytes("ZeroCool");
-
-
-        /// <summary>
-        /// Encrypt a string.
-        /// </summary>
-        /// <param name="originalString">The original string.</param>
-        /// <returns>The encrypted string.</returns>
-        /// <exception cref="ArgumentNullException">This exception will be thrown when the original string is null or empty.</exception>
-        public static string Encrypt(string originalString)
+        public static void EncryptFile(string source, string destination, string sKey)
         {
-            if (String.IsNullOrEmpty(originalString))
-            {
-                throw new ArgumentNullException("The string which needs to be encrypted can not be null.");
-            }
+            FileStream fsInput = new FileStream(source,
+                FileMode.Open,
+                FileAccess.Read);
 
-            DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
-            MemoryStream memoryStream = new MemoryStream();
-            CryptoStream cryptoStream = new CryptoStream(memoryStream, cryptoProvider.CreateEncryptor(bytes, bytes), CryptoStreamMode.Write);
+            FileStream fsEncrypted = new FileStream(destination,
+                            FileMode.Create,
+                            FileAccess.Write);
 
-            StreamWriter writer = new StreamWriter(cryptoStream);
-            writer.Write(originalString);
-            writer.Flush();
-            cryptoStream.FlushFinalBlock();
-            writer.Flush();
-
-            return Convert.ToBase64String(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
+            DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+            DES.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
+            DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
+            ICryptoTransform desencrypt = DES.CreateEncryptor();
+            CryptoStream cryptostream = new CryptoStream(fsEncrypted,
+                                desencrypt,
+                                CryptoStreamMode.Write);
+            byte[] bytearrayinput = new byte[fsInput.Length - 1];
+            fsInput.Read(bytearrayinput, 0, bytearrayinput.Length);
+            cryptostream.Write(bytearrayinput, 0, bytearrayinput.Length);
+            cryptostream.Close();
+            fsInput.Close();
+            fsEncrypted.Close();
         }
 
 
-
-        /// <summary>
-        /// Decrypt a crypted string.
-        /// </summary>
-        /// <param name="cryptedString">The crypted string.</param>
-        /// <returns>The decrypted string.</returns>
-        /// <exception cref="ArgumentNullException">This exception will be thrown when the crypted string is null or empty.</exception>
-        public static string Decrypt(string cryptedString)
+        //function to generate a 64 bit key
+        public static string GenerateKey()
         {
-            if (String.IsNullOrEmpty(cryptedString))
-            {
-                throw new ArgumentNullException("The string which needs to be decrypted can not be null.");
-            }
+            // Create an instance of Symetric Algorithm. Key and IV is generated automatically.
+            DESCryptoServiceProvider desCrypto = (DESCryptoServiceProvider)DESCryptoServiceProvider.Create();
 
-            DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
-            MemoryStream memoryStream = new MemoryStream(Convert.FromBase64String(cryptedString));
-            CryptoStream cryptoStream = new CryptoStream(memoryStream, cryptoProvider.CreateDecryptor(bytes, bytes), CryptoStreamMode.Read);
-            StreamReader reader = new StreamReader(cryptoStream);
+            // Use the Automatically generated key for Encryption. 
+            return ASCIIEncoding.ASCII.GetString(desCrypto.Key);
 
-            return reader.ReadToEnd();
+        }
+
+
+        public static void DecryptFile(string source, string destination, string sKey)
+        {
+            DESCryptoServiceProvider DES = new DESCryptoServiceProvider();
+            //A 64 bit key and IV is required for this provider.
+            //Set secret key For DES algorithm.
+            DES.Key = ASCIIEncoding.ASCII.GetBytes(sKey);
+            //Set initialization vector.
+            DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
+
+            //Create a file stream to read the encrypted file back.
+            FileStream fsread = new FileStream(source,
+                                           FileMode.Open,
+                                           FileAccess.Read);
+            //Create a DES decryptor from the DES instance.
+            ICryptoTransform desdecrypt = DES.CreateDecryptor();
+            //Create crypto stream set to read and do a 
+            //DES decryption transform on incoming bytes.
+            CryptoStream cryptostreamDecr = new CryptoStream(fsread,
+                                                         desdecrypt,
+                                                         CryptoStreamMode.Read);
+            //Print the contents of the decrypted file.
+            StreamWriter fsDecrypted = new StreamWriter(destination);
+            fsDecrypted.Write(new StreamReader(cryptostreamDecr).ReadToEnd());
+            fsDecrypted.Flush();
+            fsDecrypted.Close();
+
         }
     }
 }

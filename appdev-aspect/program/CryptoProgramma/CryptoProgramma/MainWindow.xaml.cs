@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,6 +27,12 @@ namespace CryptoProgramma
         static string  hoofdPad = "C:\\";
         string[] opgeslagenBestanden = new string[8];
 
+        //****************door Nasim toegevoed*******************
+        string encryptedFilePath;
+        string encryptedFileName;
+
+        static string sKey;
+        //*************************END**************************
 
 
         public MainWindow()
@@ -57,6 +64,28 @@ namespace CryptoProgramma
 
         }
 
+        //****************door Nasim toegevoed*******************
+        private static string SplitNameOfFile(string plainFilePath, string algirithme, string newSuffix)
+        {
+            return System.IO.Path.GetFileNameWithoutExtension(plainFilePath) + algirithme + newSuffix;
+        }
+        
+        /// <summary>
+        /// Generate random byte array
+        /// </summary>
+        /// <param name="length">array length</param>
+        /// <returns>Random byte array</returns>
+        private static byte[] GenerateRandom(int length)
+        {
+            byte[] bytes = new byte[length];
+            using (RNGCryptoServiceProvider random = new RNGCryptoServiceProvider())
+            {
+                random.GetBytes(bytes);
+            }
+            return bytes;
+        }
+        //*************************END**************************
+
         private void encryptButton_Click(object sender, RoutedEventArgs e)
         {
             //mainTabs.SelectedItem = mainTabs.FindName("homePage");
@@ -66,26 +95,56 @@ namespace CryptoProgramma
                 //Hier word de symetric AESkey genereert 
                 string filetext = File.ReadAllText(FileForEncrypt);
 
+                
                 if (sKeySlider.Value == 2)
                 {
-                    string cipherText = AES.Encrypt(
-                            filetext,   // original plaintext
-                         "Pas5pr@se",    // can be any string
-                        "s@1tValue",      // can be any string
-                        "SHA1",          // can be "MD5"
-                          2,            // can be any number
-                        "@1B2c3D4e5F6g7H8",// must be 16 bytes
-                          256       // can be 192 or 128
-                           );
+                    //****************door Nasim toegevoed*******************
+                    string plainFilePath = padEnFileLbl.Content.ToString();
+                    encryptedFileName = SplitNameOfFile(plainFilePath, "AES", ".encrypted");
+                    encryptedFilePath = hoofdPad + "Keys\\" + encryptedFileName;
+
+                    byte[] encryptionKey = GenerateRandom(16);
+                    byte[] encryptionIV = GenerateRandom(16);
+                    byte[] signatureKey = GenerateRandom(64);
+
+
+                    AES.EncryptFile(plainFilePath, encryptedFilePath, encryptionKey, encryptionIV);
+                    // tonen meer info over encrypteren
+                    MessageBox.Show(string.Format(AES.CreateEncryptionInfoXml(signatureKey, encryptionKey, encryptionIV)), "Info about encryption", MessageBoxButton.OK, MessageBoxImage.Information);
+                    //*************************END**************************
+
+
+
+                    //Tis oude versie van Nasim die in de commentaar gezet worden.
+                    //string cipherText = AES.Encrypt(
+                    //        filetext,   // original plaintext
+                    //     "Pas5pr@se",    // can be any string
+                    //    "s@1tValue",      // can be any string
+                    //    "SHA1",          // can be "MD5"
+                    //      2,            // can be any number
+                    //    "@1B2c3D4e5F6g7H8",// must be 16 bytes
+                    //      256       // can be 192 or 128
+                    //       );
 
                 }
                 else if (sKeySlider.Value == 1)
                 {
-                    string cryptedString = DES.Encrypt(filetext);
-                }
+                    //****************door Nasim toegevoed*******************
+                    sKey = DES.GenerateKey();
 
-                //public en private keys gemaakt en gesaved
-                opgeslagenBestanden = RSA.keys(hoofdPad, senderTxt.Text, receiverTxt.Text);
+                    string source = padEnFileLbl.Content.ToString();
+                    encryptedFileName = SplitNameOfFile(source, "DES", ".encrypted");
+                    encryptedFilePath = hoofdPad + "Keys\\" + encryptedFileName;
+                    string destination = encryptedFilePath;
+                    DES.EncryptFile(source, destination, sKey);
+                    
+                    MessageBox.Show("Succesfully Encrypted!", "Info about encryption", MessageBoxButton.OK, MessageBoxImage.Information);
+                  //*************************END**************************
+                 }
+
+
+            //public en private keys gemaakt en gesaved
+            opgeslagenBestanden = RSA.keys(hoofdPad, senderTxt.Text, receiverTxt.Text);
 
                 encryptingGrid.Visibility = Visibility.Visible;
                 encryptFileGrid.Visibility = Visibility.Collapsed;
@@ -108,6 +167,10 @@ namespace CryptoProgramma
                 namePuKeyReceiverLbl.Content = Convert.ToString(opgeslagenBestanden[2]);
                 padPublicReceiverLbl.Content = Convert.ToString(opgeslagenBestanden[7]);
                 checkBox4.IsChecked = true;
+
+                padEncryptedFile.Content = encryptedFilePath;
+                nameEnFileLbl.Content = encryptedFileName;
+                checkBox5.IsChecked = true;
             }
             else
             {
