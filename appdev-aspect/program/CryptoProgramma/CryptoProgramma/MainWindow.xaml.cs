@@ -113,19 +113,6 @@ namespace CryptoProgramma
                     MessageBox.Show(string.Format(AES.CreateEncryptionInfoXml(signatureKey, encryptionKey, encryptionIV)), "Info about encryption", MessageBoxButton.OK, MessageBoxImage.Information);
                     //*************************END**************************
 
-
-
-                    //Tis oude versie van Nasim die in de commentaar gezet worden.
-                    //string cipherText = AES.Encrypt(
-                    //        filetext,   // original plaintext
-                    //     "Pas5pr@se",    // can be any string
-                    //    "s@1tValue",      // can be any string
-                    //    "SHA1",          // can be "MD5"
-                    //      2,            // can be any number
-                    //    "@1B2c3D4e5F6g7H8",// must be 16 bytes
-                    //      256       // can be 192 or 128
-                    //       );
-
                 }
                 else if (sKeySlider.Value == 1)
                 {
