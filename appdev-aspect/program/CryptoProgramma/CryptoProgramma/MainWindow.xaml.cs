@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace CryptoProgramma
 {
@@ -24,6 +25,8 @@ namespace CryptoProgramma
     public partial class MainWindow : Window
     {
         private static string FileForEncrypt = "";
+        static string PadRSAKeys = "C\\";
+        
         static string  hoofdPad = "C:\\";
         string[] opgeslagenBestanden = new string[8];
 
@@ -55,7 +58,7 @@ namespace CryptoProgramma
 
         private void browseEnBtn_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog browseVenster = new OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog browseVenster = new Microsoft.Win32.OpenFileDialog();
             if (browseVenster.ShowDialog() == true)
             {
                 FileForEncrypt = browseVenster.FileName;
@@ -101,6 +104,8 @@ namespace CryptoProgramma
                     //****************door Nasim toegevoed*******************
                     string plainFilePath = padEnFileLbl.Content.ToString();
                     encryptedFileName = SplitNameOfFile(plainFilePath, "AES", ".encrypted");
+                    //Krijg anders error als ik Keys map verwijder? Maakt deze gewoon aan indien deze nog niet bestaat
+                    System.IO.Directory.CreateDirectory(hoofdPad + "\\Keys");
                     encryptedFilePath = hoofdPad + "Keys\\" + encryptedFileName;
 
                     byte[] encryptionKey = GenerateRandom(16);
@@ -110,7 +115,7 @@ namespace CryptoProgramma
 
                     AES.EncryptFile(plainFilePath, encryptedFilePath, encryptionKey, encryptionIV);
                     // tonen meer info over encrypteren
-                    MessageBox.Show(string.Format(AES.CreateEncryptionInfoXml(signatureKey, encryptionKey, encryptionIV)), "Info about encryption", MessageBoxButton.OK, MessageBoxImage.Information);
+                    System.Windows.MessageBox.Show(string.Format(AES.CreateEncryptionInfoXml(signatureKey, encryptionKey, encryptionIV)), "Info about encryption", MessageBoxButton.OK, MessageBoxImage.Information);
                     //*************************END**************************
 
                 }
@@ -121,11 +126,13 @@ namespace CryptoProgramma
 
                     string source = padEnFileLbl.Content.ToString();
                     encryptedFileName = SplitNameOfFile(source, "DES", ".encrypted");
+                    //Krijg anders error als ik Keys map verwijder? Maakt deze gewoon aan indien deze nog niet bestaat
+                    System.IO.Directory.CreateDirectory(hoofdPad + "\\Keys");
                     encryptedFilePath = hoofdPad + "Keys\\" + encryptedFileName;
                     string destination = encryptedFilePath;
                     DES.EncryptFile(source, destination, sKey);
-                    
-                    MessageBox.Show("Succesfully Encrypted!", "Info about encryption", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    System.Windows.MessageBox.Show("Succesfully Encrypted!", "Info about encryption", MessageBoxButton.OK, MessageBoxImage.Information);
                   //*************************END**************************
                  }
 
@@ -161,7 +168,7 @@ namespace CryptoProgramma
             }
             else
             {
-                MessageBox.Show("Je heb nog geen bestand gekozen");
+                System.Windows.MessageBox.Show("Je heb nog geen bestand gekozen");
             }
         }
 
@@ -281,7 +288,7 @@ namespace CryptoProgramma
 
         private void exit_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Application.Current.Shutdown();
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void backSteg_Btn_Click(object sender, RoutedEventArgs e)
@@ -296,16 +303,21 @@ namespace CryptoProgramma
 
         private void rsaKeys_ChangeBtn_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog browseVenster = new OpenFileDialog();
-            if (browseVenster.ShowDialog() == true)
-            {
-                string pad;
-                int nr;
-                pad = browseVenster.FileName;
-                nr  = pad.LastIndexOf('\\');
-                hoofdPad = pad.Substring(0, nr);
-                rsaKeys_lbl.Content = hoofdPad ;
-            }
+
+            FolderBrowserDialog browseFolder = new FolderBrowserDialog();
+            browseFolder.ShowDialog() ;
+            hoofdPad = browseFolder.SelectedPath + "\\";
+           
+           // OpenFileDialog browseVenster = new OpenFileDialog();
+            //if (browseVenster.ShowDialog() == true)
+            //{
+            //    string pad;
+            //    int nr;
+            //    pad = browseVenster.P;
+            //    nr  = pad.LastIndexOf('\\');
+            //    hoofdPad = pad.Substring(0, nr);
+            //    rsaKeys_lbl.Content = hoofdPad ;
+            //}
         }
     }
 }
