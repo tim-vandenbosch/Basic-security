@@ -97,6 +97,9 @@ namespace CryptoProgramma
             {
                 //Hier word de symetric AESkey genereert 
                 string filetext = File.ReadAllText(FileForEncrypt);
+
+                statusLbl.Content = "Hashing file (MD5)";
+                encrProgressbar.Value = 0;
                 string md5sum = hash(FileForEncrypt);
                 Console.WriteLine(md5sum);
 
@@ -108,7 +111,7 @@ namespace CryptoProgramma
                 if (sKeySlider.Value == 2)
                 {
                     statusLbl.Content = "Preparing (AES)";
-                    encrProgressbar.Value = 0;
+                    encrProgressbar.Value = 10;
                     //****************door Nasim toegevoed*******************
                     string plainFilePath = padEnFileLbl.Content.ToString();
                     encryptedFileName = SplitNameOfFile(plainFilePath, "AES", ".encrypted");
@@ -121,7 +124,7 @@ namespace CryptoProgramma
                     byte[] signatureKey = GenerateRandom(64);
 
                     statusLbl.Content = "Encrypting (AES) ";
-                    encrProgressbar.Value = 10;
+                    encrProgressbar.Value = 20;
                     AES.EncryptFile(plainFilePath, encryptedFilePath, encryptionKey, encryptionIV);
                     statusLbl.Content = "Finished (AES)";
                     encrProgressbar.Value = 100;
@@ -136,7 +139,7 @@ namespace CryptoProgramma
                     //****************door Nasim toegevoed*******************
 
                     statusLbl.Content = "Preparing (DES)";
-                    encrProgressbar.Value = 0;
+                    encrProgressbar.Value = 10;
 
                     sKey = DES.GenerateKey();
 
@@ -148,7 +151,7 @@ namespace CryptoProgramma
                     string destination = encryptedFilePath;
 
                     statusLbl.Content = "Encrypting (DES)";
-                    encrProgressbar.Value = 10;
+                    encrProgressbar.Value = 20;
 
                     DES.EncryptFile(source, destination, sKey);
 
