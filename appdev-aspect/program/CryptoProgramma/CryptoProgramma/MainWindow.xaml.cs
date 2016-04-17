@@ -98,9 +98,15 @@ namespace CryptoProgramma
                 //Hier word de symetric AESkey genereert 
                 string filetext = File.ReadAllText(FileForEncrypt);
 
-                
+                encryptingGrid.Visibility = Visibility.Visible;
+                encryptFileGrid.Visibility = Visibility.Collapsed;
+                CryptoProgramWin.Height = 700;
+                CryptoProgramWin.Width = 550;
+
                 if (sKeySlider.Value == 2)
                 {
+                    statusLbl.Content = "Preparing (AES)";
+                    encrProgressbar.Value = 0;
                     //****************door Nasim toegevoed*******************
                     string plainFilePath = padEnFileLbl.Content.ToString();
                     encryptedFileName = SplitNameOfFile(plainFilePath, "AES", ".encrypted");
@@ -112,16 +118,24 @@ namespace CryptoProgramma
                     byte[] encryptionIV = GenerateRandom(16);
                     byte[] signatureKey = GenerateRandom(64);
 
-
+                    statusLbl.Content = "Encrypting (AES) ";
+                    encrProgressbar.Value = 10;
                     AES.EncryptFile(plainFilePath, encryptedFilePath, encryptionKey, encryptionIV);
+                    statusLbl.Content = "Finished (AES)";
+                    encrProgressbar.Value = 100;
+
                     // tonen meer info over encrypteren
-                    System.Windows.MessageBox.Show(string.Format(AES.CreateEncryptionInfoXml(signatureKey, encryptionKey, encryptionIV)), "Info about encryption", MessageBoxButton.OK, MessageBoxImage.Information);
+                    // System.Windows.MessageBox.Show(string.Format(AES.CreateEncryptionInfoXml(signatureKey, encryptionKey, encryptionIV)), "Info about encryption", MessageBoxButton.OK, MessageBoxImage.Information);
                     //*************************END**************************
 
                 }
                 else if (sKeySlider.Value == 1)
                 {
                     //****************door Nasim toegevoed*******************
+
+                    statusLbl.Content = "Preparing (DES)";
+                    encrProgressbar.Value = 0;
+
                     sKey = DES.GenerateKey();
 
                     string source = padEnFileLbl.Content.ToString();
@@ -130,9 +144,15 @@ namespace CryptoProgramma
                     System.IO.Directory.CreateDirectory(hoofdPad + "\\Keys");
                     encryptedFilePath = hoofdPad + "Keys\\" + encryptedFileName;
                     string destination = encryptedFilePath;
+
+                    statusLbl.Content = "Encrypting (DES)";
+                    encrProgressbar.Value = 10;
+
                     DES.EncryptFile(source, destination, sKey);
 
-                    System.Windows.MessageBox.Show("Succesfully Encrypted!", "Info about encryption", MessageBoxButton.OK, MessageBoxImage.Information);
+                    statusLbl.Content = "Finished (DES)";
+                    encrProgressbar.Value = 100;
+                    // System.Windows.MessageBox.Show("Succesfully Encrypted!", "Info about encryption", MessageBoxButton.OK, MessageBoxImage.Information);
                   //*************************END**************************
                  }
 
@@ -140,10 +160,6 @@ namespace CryptoProgramma
             //public en private keys gemaakt en gesaved
             opgeslagenBestanden = RSA.keys(hoofdPad, senderTxt.Text, receiverTxt.Text);
 
-                encryptingGrid.Visibility = Visibility.Visible;
-                encryptFileGrid.Visibility = Visibility.Collapsed;
-                CryptoProgramWin.Height = 700;
-                CryptoProgramWin.Width = 550;
 
                 namePrKeySenderLbl.Content = Convert.ToString(opgeslagenBestanden[1]);
                 padPrivateSenderLbl.Content = Convert.ToString(opgeslagenBestanden[4]);

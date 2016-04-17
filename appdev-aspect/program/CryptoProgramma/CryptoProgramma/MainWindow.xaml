@@ -11,7 +11,7 @@
         <!--   <TabControl x:Name="mainTabs" Height="325" RenderTransformOrigin="0.236,0.452">
             <TabItem x:Name="homePage" Header="HomePage" Visibility="Collapsed"> -->
 
-        <Grid Name="homePageGrid" Background="Beige" Width="450" Visibility="Visible" >
+        <Grid Name="homePageGrid" Background="Beige" Width="450" Visibility="Visible" d:IsHidden="True" >
             <Label x:Name="welcomeLabel" Content="Welcome, &#xD; &#xA; Choose what you want to do" FontSize="16" Margin="0,0,0,365" HorizontalAlignment="Left" Width="347"/>
             <Button x:Name="encryptHomeButton" Content="Encrypt a file" Margin="78,249,240,178" Click="encryptHomeButton_Click" ToolTip="Click here if you want to encrypt a file"/>
             <Button x:Name="decryptHomeButton" Content="Decrypt a file" Margin="265,249,37,178" Click="decryptHomeButton_Click" ToolTip="Click here if you want to decrypt a file"/>
@@ -57,8 +57,8 @@
             <Label x:Name="nameEnFileLbl" Content="" BorderThickness="1" BorderBrush="Black"  HorizontalAlignment="Left" Margin="205,285,0,0" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0.537,2.212"/>
             <Label x:Name="nameEnSymKLbl" Content="" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Margin="205,342,0,0" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0.537,2.212"/>
             <Label x:Name="nameEnHashLbl" Content="" BorderThickness="1" BorderBrush="Black"  HorizontalAlignment="Left" Margin="205,398,0,0" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0.537,2.212"/>
-            <ProgressBar HorizontalAlignment="Left" Height="15" Margin="21,489,0,0" VerticalAlignment="Top" Width="424"/>
-            <Label x:Name="statusLbl" Content="Status" FontSize="50" HorizontalAlignment="Left" Margin="133,509,0,0" VerticalAlignment="Top" Width="150" Height="74" RenderTransformOrigin="0.5,0.5"/>
+            <ProgressBar x:Name="encrProgressbar" HorizontalAlignment="Left" Height="15" Margin="21,489,0,0" VerticalAlignment="Top" Width="424"/>
+            <Label x:Name="statusLbl" Content="Status" FontSize="50" HorizontalAlignment="Left" Margin="133,509,0,0" VerticalAlignment="Top" Width="200" Height="74" RenderTransformOrigin="0.5,0.5"/>
             <Button x:Name="backBtn_EnGr" Click="backBtn_EnGr_Click" Content="Back to home" HorizontalAlignment="Left" Margin="312,637,0,0" VerticalAlignment="Top" Width="133" Height="24"/>
             <CheckBox x:Name="checkBox1" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="407,42,0,0" VerticalAlignment="Top" Width="24" Checked="checkBox_Checked"/>
             <CheckBox x:Name="checkBox2" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="407,104,0,0" VerticalAlignment="Top" Width="24" Checked="checkBox_Checked"/>
