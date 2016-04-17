@@ -97,6 +97,8 @@ namespace CryptoProgramma
             {
                 //Hier word de symetric AESkey genereert 
                 string filetext = File.ReadAllText(FileForEncrypt);
+                string md5sum = hash(FileForEncrypt);
+                Console.WriteLine(md5sum);
 
                 encryptingGrid.Visibility = Visibility.Visible;
                 encryptFileGrid.Visibility = Visibility.Collapsed;
@@ -334,6 +336,39 @@ namespace CryptoProgramma
             //    hoofdPad = pad.Substring(0, nr);
             //    rsaKeys_lbl.Content = hoofdPad ;
             //}
+        }
+
+        /**
+        * <summary>
+        * Calculates the specified hash of a message
+        * </summary>
+        * <param name="message">The message</param>
+        * <param name="type">The type of hash (for example: "MD5" or "SHA1")</param>
+        * <returns>A hash of message</returns>
+        */
+        private String hash(String message, String type)
+        {
+            byte[] enc = new UTF8Encoding().GetBytes(message);
+            byte[] hash = ((HashAlgorithm)CryptoConfig.CreateFromName(type)).ComputeHash(enc);
+            return BitConverter.ToString(hash).Replace("-", String.Empty).ToLower();
+        }
+
+        /**
+         * <summary>
+         * Calculates the MD5 hash of a specified file
+         * </summary>
+         * <param name="path">The path to the file</param>
+         * <returns>MD5 hash of specified file</returns>
+         */
+        private String hash(String path)
+        {
+            using (var md5 = MD5.Create())
+            {
+                using (var stream = File.OpenRead(path))
+                {
+                    return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", String.Empty).ToLower();
+                }
+            }
         }
     }
 }
