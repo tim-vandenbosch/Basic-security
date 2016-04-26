@@ -1,10 +1,12 @@
 ﻿<Window x:Class="CryptoProgramma.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:HamburgerMenu="clr-namespace:HamburgerMenu;assembly=HamburgerMenu"
         xmlns:local="clr-namespace:CryptoProgramma"
+        
         mc:Ignorable="d"
         Title="Crypto Program" Name="CryptoProgramWin" Height="500" Width="500">
     <DockPanel>
@@ -133,6 +135,7 @@
             <Button x:Name="encrypted_FileChangeBtn" Content="Change" HorizontalAlignment="Left" Margin="325,205,0,0" VerticalAlignment="Top" Width="75"/>
             <Button x:Name="encrypted_SkeyChangeBtn" Content="Change" HorizontalAlignment="Left" Margin="325,290,0,0" VerticalAlignment="Top" Width="75"/>
             <Button x:Name="encrypted_HashChangeBtn" Content="Change" HorizontalAlignment="Left" Margin="325,358,0,0" VerticalAlignment="Top" Width="75"/>
+            <xctk:ColorPicker Name="ClrPcker_Background" SelectedColorChanged="ClrPcker_Background_SelectedColorChanged" HorizontalAlignment="Left" Margin="200,415,0,0" VerticalAlignment="Top"></xctk:ColorPicker>
         </Grid>
 
         <Grid Name="helpGrid"  Background="Beige" Visibility="Collapsed" Height="500" Width="450">
@@ -154,7 +157,7 @@
         </Grid>
 
         <Grid Visibility="Visible">
-            <HamburgerMenu:HamburgerMenu Background="Bisque" MenuIconColor="Black" SelectionIndicatorColor="Black" MenuItemForeground="Black" HorizontalAlignment="Right" Margin="-300,0,0,0" Width="50" Grid.RowSpan="1">
+            <HamburgerMenu:HamburgerMenu x:Name="SideMenu" Background="Bisque" MenuIconColor="Black" SelectionIndicatorColor="Black" MenuItemForeground="Black" HorizontalAlignment="Right" Margin="-300,0,0,0" Width="50" Grid.RowSpan="1">
                 <HamburgerMenu:HamburgerMenuItem Name="home_Menu" Icon="home.jpg" Text="Home" SelectionCommand="{Binding ElementName=this_}" MouseDoubleClick="home_Menu_MouseDoubleClick" />
                 <HamburgerMenu:HamburgerMenuItem  Name="stega_Menu" Icon="steganographie.jpg" Text="Steganografie" MouseDoubleClick="stega_Menu_MouseDoubleClick"/>
                 <HamburgerMenu:HamburgerMenuItem  Name="settings_Menu" Icon="settings.png" Text="Settings" MouseDoubleClick="settings_Menu_MouseDoubleClick"/>

@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
+using Xceed.Wpf.Toolkit;
 
 namespace CryptoProgramma
 {
@@ -318,27 +319,19 @@ namespace CryptoProgramma
             CryptoProgramWin.Width = 500;
             steganografieGrid.Visibility = Visibility.Collapsed;
             homePageGrid.Visibility = Visibility.Visible;
-
-
         }
 
         private void rsaKeys_ChangeBtn_Click(object sender, RoutedEventArgs e)
         {
-
             FolderBrowserDialog browseFolder = new FolderBrowserDialog();
             browseFolder.ShowDialog() ;
             hoofdPad = browseFolder.SelectedPath + "\\";
-           
-           // OpenFileDialog browseVenster = new OpenFileDialog();
-            //if (browseVenster.ShowDialog() == true)
-            //{
-            //    string pad;
-            //    int nr;
-            //    pad = browseVenster.P;
-            //    nr  = pad.LastIndexOf('\\');
-            //    hoofdPad = pad.Substring(0, nr);
-            //    rsaKeys_lbl.Content = hoofdPad ;
-            //}
+        }
+
+        private void ClrPcker_Background_SelectedColorChanged(object sender, RoutedEventArgs e)
+        {       
+            Brush brush = new SolidColorBrush(ClrPcker_Background.SelectedColor.Value);
+            SideMenu.Background= brush;            
         }
 
         /**
