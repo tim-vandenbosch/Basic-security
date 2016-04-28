@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:CryptoProgramma"
         
         mc:Ignorable="d"
-        Title="Crypto Program" Name="CryptoProgramWin" Height="500" Width="500">
+        Title="Crypto Program" Name="CryptoProgramWin" Height="500" Width="500" MaxWidth="500" MaxHeight="500">
     <DockPanel>
         <!--   <TabControl x:Name="mainTabs" Height="325" RenderTransformOrigin="0.236,0.452">
             <TabItem x:Name="homePage" Header="HomePage" Visibility="Collapsed"> -->
