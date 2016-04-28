@@ -27,7 +27,7 @@ namespace CryptoProgramma
     {
         #region properties
         private static string FileForEncrypt = "";
-        static string PadRSAKeys = "C\\";
+        // static string PadRSAKeys = "C\\"; // --> Deze waarde is nooit gebruikt
         static string  hoofdPad = "C:\\";
         string[] opgeslagenBestanden = new string[8];
         // edit nasim
@@ -243,58 +243,6 @@ namespace CryptoProgramma
 
         }
         
-        private void home_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            homePageGrid.Visibility = Visibility.Visible;
-            encryptFileGrid.Visibility = Visibility.Collapsed;
-            encryptingGrid.Visibility = Visibility.Collapsed;
-            decryptFileGrid.Visibility = Visibility.Collapsed;
-            decryptingGrid.Visibility = Visibility.Collapsed;
-            CryptoProgramWin.Height = 500;
-            CryptoProgramWin.Width = 500;
-        }
-
-        private void stega_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            CryptoProgramWin.Height = 500;
-            CryptoProgramWin.Width = 500;
-            steganografieGrid.Visibility = Visibility.Visible;
-            homePageGrid.Visibility = Visibility.Collapsed;
-            encryptFileGrid.Visibility = Visibility.Collapsed;
-            encryptingGrid.Visibility = Visibility.Collapsed;
-            decryptFileGrid.Visibility = Visibility.Collapsed;
-            decryptingGrid.Visibility = Visibility.Collapsed;
-            settingsGrid.Visibility = Visibility.Collapsed;
-        }
-
-        private void settings_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            CryptoProgramWin.Height = 500;
-            CryptoProgramWin.Width = 500;
-            settingsGrid.Visibility = Visibility.Visible;
-            homePageGrid.Visibility = Visibility.Collapsed;
-            encryptFileGrid.Visibility = Visibility.Collapsed;
-            encryptingGrid.Visibility = Visibility.Collapsed;
-            decryptFileGrid.Visibility = Visibility.Collapsed;
-            decryptingGrid.Visibility = Visibility.Collapsed;
-            steganografieGrid.Visibility = Visibility.Collapsed;
-            rsaKeys_lbl.Content = hoofdPad;
-        }
-
-        private void help_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            CryptoProgramWin.Height = 500;
-            CryptoProgramWin.Width = 500;
-            helpGrid.Visibility = Visibility.Visible;
-            homePageGrid.Visibility = Visibility.Collapsed;
-            encryptFileGrid.Visibility = Visibility.Collapsed;
-            encryptingGrid.Visibility = Visibility.Collapsed;
-            decryptFileGrid.Visibility = Visibility.Collapsed;
-            decryptingGrid.Visibility = Visibility.Collapsed;
-            steganografieGrid.Visibility = Visibility.Collapsed;
-            settingsGrid.Visibility = Visibility.Collapsed;
-        }
-
         private void exit_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
@@ -352,6 +300,58 @@ namespace CryptoProgramma
                     return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", String.Empty).ToLower();
                 }
             }
+        }
+
+        private void home_Menu_Selected(object sender, RoutedEventArgs e)
+        {
+            homePageGrid.Visibility = Visibility.Visible;
+            encryptFileGrid.Visibility = Visibility.Collapsed;
+            encryptingGrid.Visibility = Visibility.Collapsed;
+            decryptFileGrid.Visibility = Visibility.Collapsed;
+            decryptingGrid.Visibility = Visibility.Collapsed;
+            CryptoProgramWin.Height = 500;
+            CryptoProgramWin.Width = 500;
+        }
+
+        private void stega_Menu_Selected(object sender, RoutedEventArgs e)
+        {
+            CryptoProgramWin.Height = 500;
+            CryptoProgramWin.Width = 500;
+            steganografieGrid.Visibility = Visibility.Visible;
+            homePageGrid.Visibility = Visibility.Collapsed;
+            encryptFileGrid.Visibility = Visibility.Collapsed;
+            encryptingGrid.Visibility = Visibility.Collapsed;
+            decryptFileGrid.Visibility = Visibility.Collapsed;
+            decryptingGrid.Visibility = Visibility.Collapsed;
+            settingsGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void settings_Menu_Selected(object sender, RoutedEventArgs e)
+        {
+            CryptoProgramWin.Height = 500;
+            CryptoProgramWin.Width = 500;
+            settingsGrid.Visibility = Visibility.Visible;
+            homePageGrid.Visibility = Visibility.Collapsed;
+            encryptFileGrid.Visibility = Visibility.Collapsed;
+            encryptingGrid.Visibility = Visibility.Collapsed;
+            decryptFileGrid.Visibility = Visibility.Collapsed;
+            decryptingGrid.Visibility = Visibility.Collapsed;
+            steganografieGrid.Visibility = Visibility.Collapsed;
+            rsaKeys_lbl.Content = hoofdPad;
+        }
+
+        private void help_Menu_Selected(object sender, RoutedEventArgs e)
+        {
+            CryptoProgramWin.Height = 500;
+            CryptoProgramWin.Width = 500;
+            helpGrid.Visibility = Visibility.Visible;
+            homePageGrid.Visibility = Visibility.Collapsed;
+            encryptFileGrid.Visibility = Visibility.Collapsed;
+            encryptingGrid.Visibility = Visibility.Collapsed;
+            decryptFileGrid.Visibility = Visibility.Collapsed;
+            decryptingGrid.Visibility = Visibility.Collapsed;
+            steganografieGrid.Visibility = Visibility.Collapsed;
+            settingsGrid.Visibility = Visibility.Collapsed;
         }
     }
 }
