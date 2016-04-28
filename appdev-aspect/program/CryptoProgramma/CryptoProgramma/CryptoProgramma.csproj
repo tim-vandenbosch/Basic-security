@@ -129,16 +129,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="exit.png" />
-    <Resource Include="help.png" />
-    <Resource Include="home.jpg" />
-    <Resource Include="settings.png" />
-    <Resource Include="steganographie.jpg" />
+    <Resource Include="img\exit.png" />
+    <Resource Include="img\help.png" />
+    <Resource Include="img\home.jpg" />
+    <Resource Include="img\settings.png" />
+    <Resource Include="img\steganographie.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="decrypt.jpg" />
-    <Resource Include="encrypt.jpg" />
-    <Resource Include="encryption.jpeg" />
+    <Resource Include="img\decrypt.jpg" />
+    <Resource Include="img\encrypt.jpg" />
+    <Resource Include="img\encryption.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

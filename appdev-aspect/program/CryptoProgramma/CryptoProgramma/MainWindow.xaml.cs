@@ -25,19 +25,16 @@ namespace CryptoProgramma
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region properties
         private static string FileForEncrypt = "";
         static string PadRSAKeys = "C\\";
-        
         static string  hoofdPad = "C:\\";
         string[] opgeslagenBestanden = new string[8];
-
-        //****************door Nasim toegevoed*******************
+        // edit nasim
         string encryptedFilePath;
         string encryptedFileName;
-
         static string sKey;
-        //*************************END**************************
-
+        #endregion
 
         public MainWindow()
         {
@@ -65,10 +62,9 @@ namespace CryptoProgramma
                 FileForEncrypt = browseVenster.FileName;
                 padEnFileLbl.Content = browseVenster.FileName;
             }
-
         }
 
-        //****************door Nasim toegevoed*******************
+        // edit Nasim
         private static string SplitNameOfFile(string plainFilePath, string algirithme, string newSuffix)
         {
             return System.IO.Path.GetFileNameWithoutExtension(plainFilePath) + algirithme + newSuffix;
@@ -88,7 +84,6 @@ namespace CryptoProgramma
             }
             return bytes;
         }
-        //*************************END**************************
 
         private void encryptButton_Click(object sender, RoutedEventArgs e)
         {
@@ -200,7 +195,6 @@ namespace CryptoProgramma
             encryptingGrid.Visibility = Visibility.Collapsed;
             CryptoProgramWin.Height = 500;
             CryptoProgramWin.Width = 500;
-
         }
 
         private void decryptHomeButton_Click(object sender, RoutedEventArgs e)
@@ -208,7 +202,6 @@ namespace CryptoProgramma
             //mainTabs.SelectedItem = mainTabs.FindName("decryptFile");
             decryptFileGrid.Visibility = Visibility.Visible;
             homePageGrid.Visibility = Visibility.Collapsed;
-
         }
 
         private void backButton_DeFileGr_Click(object sender, RoutedEventArgs e)
@@ -242,17 +235,14 @@ namespace CryptoProgramma
         {
             homePageGrid.Visibility = Visibility.Visible;
             decryptingGrid.Visibility = Visibility.Collapsed;
-
         }
-
-
-
+        
+        // empty
         private void checkBox_Checked(object sender, RoutedEventArgs e)
         {
 
         }
-
-
+        
         private void home_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             homePageGrid.Visibility = Visibility.Visible;
@@ -275,7 +265,6 @@ namespace CryptoProgramma
             decryptFileGrid.Visibility = Visibility.Collapsed;
             decryptingGrid.Visibility = Visibility.Collapsed;
             settingsGrid.Visibility = Visibility.Collapsed;
-
         }
 
         private void settings_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -290,7 +279,6 @@ namespace CryptoProgramma
             decryptingGrid.Visibility = Visibility.Collapsed;
             steganografieGrid.Visibility = Visibility.Collapsed;
             rsaKeys_lbl.Content = hoofdPad;
-
         }
 
         private void help_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -305,7 +293,6 @@ namespace CryptoProgramma
             decryptingGrid.Visibility = Visibility.Collapsed;
             steganografieGrid.Visibility = Visibility.Collapsed;
             settingsGrid.Visibility = Visibility.Collapsed;
-
         }
 
         private void exit_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)

@@ -1,24 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CryptoProgramma
 {
     class RSA
     {
+        #region properties
         private static string _private_A;
         private static string _public_A;
         private static string _private_B;
         private static string _public_B;
-       public static string public_Receiver, private_Receiver;
+        public static string public_Receiver, private_Receiver;
         private static UnicodeEncoding _encoder = new UnicodeEncoding();
-        
 
         //  private static string enc = "", dec = "";
+        #endregion
 
         public static string[] keys(string hoofdPad, string nameS, string nameR) //string pad, 
         {
@@ -83,21 +82,19 @@ namespace CryptoProgramma
             private_Receiver = returnwaarde[6];
             return returnwaarde;
         }
-
-
-
+        
         public static string Encrypt(string data)
         {
             var rsa = new RSACryptoServiceProvider();
-
-           string publicB = File.ReadAllText(@public_Receiver);
-
-            rsa.FromXmlString(publicB); //encrypteren met de publickey receiver (publicB)
+            string publicB = File.ReadAllText(@public_Receiver);
             var dataToEncrypt = _encoder.GetBytes(data);
             var encryptedByteArray = rsa.Encrypt(dataToEncrypt, false).ToArray();
             var length = encryptedByteArray.Count();
             var item = 0;
             var sb = new StringBuilder();
+
+            rsa.FromXmlString(publicB); //encrypteren met de publickey receiver (publicB)
+
             foreach (var x in encryptedByteArray)
             {
                 item++;
@@ -106,7 +103,6 @@ namespace CryptoProgramma
                 if (item < length)
                     sb.Append(",");
             }
-
             return sb.ToString();
         }
 
@@ -115,23 +111,25 @@ namespace CryptoProgramma
             var rsa = new RSACryptoServiceProvider();
             var dataArray = data.Split(new char[] { ',' });
             byte[] dataByte = new byte[dataArray.Length];
+            string priveB = File.ReadAllText(@private_Receiver);
+            var decryptedByte = rsa.Decrypt(dataByte, false);
+
             for (int i = 0; i < dataArray.Length; i++)
             {
                 dataByte[i] = Convert.ToByte(dataArray[i]);
             }
-
-            string priveB = File.ReadAllText(@private_Receiver);
-
             rsa.FromXmlString(priveB); //decryteren met de privatekey receiver (privateB)
-            var decryptedByte = rsa.Decrypt(dataByte, false);
+            
             return _encoder.GetString(decryptedByte);
         }
-
-
     }
 }
-
-
-/* BRONNEN : http://stackoverflow.com/questions/18485715/how-to-use-public-and-private-key-encryption-technique-in-c-sharp 
-, https://msdn.microsoft.com/en-us/library/8bh11f1k.aspx , https://msdn.microsoft.com/en-us/library/ezwyzy7b.aspx, https://msdn.microsoft.com/en-us/library/as2f1fez%28v=vs.110%29.aspx?f=255&MSPPError=-2147217396 */
+#region Bronnen die gebruikt zijn voor deze klasse
+/*  
+*   http://stackoverflow.com/questions/18485715/how-to-use-public-and-private-key-encryption-technique-in-c-sharp 
+*   https://msdn.microsoft.com/en-us/library/8bh11f1k.aspx
+*   https://msdn.microsoft.com/en-us/library/ezwyzy7b.aspx
+*   https://msdn.microsoft.com/en-us/library/as2f1fez%28v=vs.110%29.aspx?f=255&MSPPError=-2147217396
+*/
+#endregion
 
