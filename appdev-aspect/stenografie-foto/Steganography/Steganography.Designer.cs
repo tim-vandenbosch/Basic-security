@@ -40,7 +40,7 @@
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.Menuknop = new System.Windows.Forms.Button();
+            this.Exitknop = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imagePictureBox)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -171,18 +171,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Encryption";
             // 
-            // Menuknop
+            // Exitknop
             // 
-            this.Menuknop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(91)))), ((int)(((byte)(3)))));
-            this.Menuknop.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Menuknop.ForeColor = System.Drawing.Color.White;
-            this.Menuknop.Location = new System.Drawing.Point(12, 586);
-            this.Menuknop.Name = "Menuknop";
-            this.Menuknop.Size = new System.Drawing.Size(181, 46);
-            this.Menuknop.TabIndex = 10;
-            this.Menuknop.Text = "Menu";
-            this.Menuknop.UseVisualStyleBackColor = false;
-            this.Menuknop.Click += new System.EventHandler(this.Menuknop_Click);
+            this.Exitknop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(91)))), ((int)(((byte)(3)))));
+            this.Exitknop.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Exitknop.ForeColor = System.Drawing.Color.White;
+            this.Exitknop.Location = new System.Drawing.Point(12, 586);
+            this.Exitknop.Name = "Exitknop";
+            this.Exitknop.Size = new System.Drawing.Size(181, 46);
+            this.Exitknop.TabIndex = 10;
+            this.Exitknop.Text = "Exit";
+            this.Exitknop.UseVisualStyleBackColor = false;
+            this.Exitknop.Click += new System.EventHandler(this.ExitKnop_Click);
             // 
             // Steganography
             // 
@@ -190,7 +190,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(54)))), ((int)(((byte)(54)))));
             this.ClientSize = new System.Drawing.Size(395, 642);
-            this.Controls.Add(this.Menuknop);
+            this.Controls.Add(this.Exitknop);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.imagePictureBox);
             this.Controls.Add(this.extractButton);
@@ -226,7 +226,7 @@
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button Menuknop;
+        private System.Windows.Forms.Button Exitknop;
     }
 }
 

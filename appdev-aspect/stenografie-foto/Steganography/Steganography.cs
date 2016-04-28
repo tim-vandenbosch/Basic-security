@@ -8,24 +8,33 @@ namespace Steganography
 {
     public partial class Steganography : Form
     {
+        #region properties
         private Bitmap bmp = null;
         private string extractedText = string.Empty;
+        #endregion
 
+        /// <summary>
+        /// TODO: Default constructor
+        /// </summary>
         public Steganography()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// TODO: Verbergen van data in een afbeelding
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void hideButton_Click(object sender, EventArgs e)
         {
+            string _text = dataTextBox.Text;
+
             bmp = (Bitmap)imagePictureBox.Image;
 
-            string text = dataTextBox.Text;
-
-            if (text.Equals(""))
+            if (_text.Equals(""))
             {
                 MessageBox.Show("The text you want to hide can't be empty", "Warning");
-
                 return;
             }
 
@@ -34,16 +43,15 @@ namespace Steganography
                 if (passwordTextBox.Text.Length < 6)
                 {
                     MessageBox.Show("Please enter a password with at least 6 characters", "Warning");
-
                     return;
                 }
                 else
                 {
-                    text = Crypto.EncryptStringAES(text, passwordTextBox.Text);
+                    _text = Crypto.EncryptStringAES(_text, passwordTextBox.Text);
                 }
             }
 
-            bmp = SteganographyHelper.embedText(text, bmp);
+            bmp = SteganographyHelper.embedText(_text, bmp);
 
             MessageBox.Show("Your text was hidden in the image successfully!", "Done");
             maakLeeg();
@@ -71,6 +79,11 @@ namespace Steganography
 
         }
 
+        /// <summary>
+        /// TODO: Ophalen van verborgen data uit een afbeelding
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void extractButton_Click(object sender, EventArgs e)
         {
             bmp = (Bitmap)imagePictureBox.Image;
@@ -94,6 +107,11 @@ namespace Steganography
             dataTextBox.Text = extractedText;
         }
 
+        /// <summary>
+        /// TODO: Het kiezen van een afbeelding waar van gebruik gemaakt word
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void imageToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             OpenFileDialog open_dialog = new OpenFileDialog();
@@ -106,6 +124,9 @@ namespace Steganography
             }
         }
 
+        /// <summary>
+        /// TODO: empty fields
+        /// </summary>
         private void maakLeeg()
         {
             dataTextBox.Text = "";
@@ -113,10 +134,14 @@ namespace Steganography
             encryptCheckBox.Checked = false;
         }
 
-        private void Menuknop_Click(object sender, EventArgs e)
+        /// <summary>
+        /// TODO: Close and return to menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitKnop_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-        
     }
 }

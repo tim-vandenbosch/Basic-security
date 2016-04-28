@@ -5,133 +5,122 @@ namespace Steganography
 {
     class SteganographyHelper
     {
-        public enum State
+        public enum Opdracht
         {
-            Hiding,
-            Filling_With_Zeros
+            Verbergen,
+            Vullen_met_nullen
         };
 
-        public static Bitmap embedText(string text, Bitmap bmp)
+        /// <summary>
+        /// TODO: een regel tekst verbergen in een afbeelding dmv een kleine aanpassing van pixels
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="afbeelding"></param>
+        /// <returns></returns>
+        public static Bitmap embedText(string text, Bitmap afbeelding)
         {
-            // initially, we'll be hiding characters in the image
-            State state = State.Hiding;
-
-            // holds the index of the character that is being hidden
-            int charIndex = 0;
-
-            // holds the value of the character converted to integer
-            int charValue = 0;
-
-            // holds the index of the color element (R or G or B) that is currently being processed
-            long pixelElementIndex = 0;
-
-            // holds the number of trailing zeros that have been added when finishing the process
-            int zeros = 0;
-
-            // hold pixel elements
+            Opdracht opdracht = Opdracht.Verbergen;
+            int letterPositie = 0;
+            int letterWaarde = 0;
+            long pixelPositie = 0;
+            int nullen = 0;
+            // één pixel in rgb
             int R = 0, G = 0, B = 0;
-
-            // pass through the rows
-            for (int i = 0; i < bmp.Height; i++)
+            
+            // TODO: De gehele afbeelding afgaan
+            for (int i = 0; i < afbeelding.Height; i++)
             {
-                // pass through each row
-                for (int j = 0; j < bmp.Width; j++)
+                for (int j = 0; j < afbeelding.Width; j++)
                 {
-                    // holds the pixel that is currently being processed
-                    Color pixel = bmp.GetPixel(j, i);
-
-                    // now, clear the least significant bit (LSB) from each pixel element
+                    // TODO: De pixel nemen en de kleinste bit beschikbaar maken
+                    Color pixel = afbeelding.GetPixel(j, i);
+                    
                     R = pixel.R - pixel.R % 2;
                     G = pixel.G - pixel.G % 2;
                     B = pixel.B - pixel.B % 2;
 
-                    // for each pixel, pass through its elements (RGB)
+                    // TODO: R, G en B invullen
                     for (int n = 0; n < 3; n++)
                     {
-                        // check if new 8 bits has been processed
-                        if (pixelElementIndex % 8 == 0)
+                        if (pixelPositie % 8 == 0) // Elke rgb bestaat uit 8 bits
                         {
-                            // check if the whole process has finished
-                            // we can say that it's finished when 8 zeros are added
-                            if (state == State.Filling_With_Zeros && zeros == 8)
+                            // TODO: Als de 8 bits klaar zijn
+                            if (opdracht == Opdracht.Vullen_met_nullen && nullen == 8)
                             {
-                                // apply the last pixel on the image
-                                // even if only a part of its elements have been affected
-                                if ((pixelElementIndex - 1) % 3 < 2)
+                                //TODO: vul de laatste pixel in
+                                if ((pixelPositie-1) % 3 < 2)
                                 {
-                                    bmp.SetPixel(j, i, Color.FromArgb(R, G, B));
+                                    afbeelding.SetPixel(j, i, Color.FromArgb(R, G, B));
                                 }
-
-                                // return the bitmap with the text hidden in
-                                return bmp;
+                                return afbeelding;
                             }
 
-                            // check if all characters has been hidden
-                            if (charIndex >= text.Length)
+                            // TODO: Verberg eerst de volledige boodschap om vervolgens met nullen te vullen
+                            if (letterPositie >= text.Length)
                             {
-                                // start adding zeros to mark the end of the text
-                                state = State.Filling_With_Zeros;
+                                opdracht = Opdracht.Vullen_met_nullen;
                             }
                             else
                             {
-                                // move to the next character and process again
-                                charValue = text[charIndex++];
+                                letterWaarde = text[letterPositie++];
                             }
                         }
-
-                        // check which pixel element has the turn to hide a bit in its LSB
-                        switch (pixelElementIndex % 3)
+                        
+                        // TODO: De pixel en rgb waarde waar de data word ingestoken
+                        switch (pixelPositie % 3)
                         {
+                            // in geval van R
                             case 0:
                                 {
-                                    if (state == State.Hiding)
+                                    if (opdracht == Opdracht.Verbergen)
                                     {
                                         // the rightmost bit in the character will be (charValue % 2)
                                         // to put this value instead of the LSB of the pixel element
                                         // just add it to it
                                         // recall that the LSB of the pixel element had been cleared
                                         // before this operation
-                                        R += charValue % 2;
+                                        R += letterWaarde % 2;
 
                                         // removes the added rightmost bit of the character
                                         // such that next time we can reach the next one
-                                        charValue /= 2;
+                                        letterWaarde /= 2;
                                     }
                                 } break;
+                            // in geval van G
                             case 1:
                                 {
-                                    if (state == State.Hiding)
+                                    if (opdracht == Opdracht.Verbergen)
                                     {
-                                        G += charValue % 2;
+                                        G += letterWaarde % 2;
 
-                                        charValue /= 2;
+                                        letterWaarde /= 2;
                                     }
                                 } break;
+                            // in geval van B
                             case 2:
                                 {
-                                    if (state == State.Hiding)
+                                    if (opdracht == Opdracht.Verbergen)
                                     {
-                                        B += charValue % 2;
+                                        B += letterWaarde % 2;
 
-                                        charValue /= 2;
+                                        letterWaarde /= 2;
                                     }
 
-                                    bmp.SetPixel(j, i, Color.FromArgb(R, G, B));
+                                    afbeelding.SetPixel(j, i, Color.FromArgb(R, G, B));
                                 } break;
                         }
 
-                        pixelElementIndex++;
+                        pixelPositie++;
 
-                        if (state == State.Filling_With_Zeros)
+                        if (opdracht == Opdracht.Vullen_met_nullen)
                         {
                             // increment the value of zeros until it is 8
-                            zeros++;
+                            nullen++;
                         }
                     }
                 }
             }
-
-            return bmp;
+            return afbeelding;
         }
 
         public static string extractText(Bitmap bmp)
