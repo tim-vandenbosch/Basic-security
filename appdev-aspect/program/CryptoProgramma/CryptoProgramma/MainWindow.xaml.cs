@@ -25,12 +25,11 @@ namespace CryptoProgramma
     /// </summary>
     public partial class MainWindow : Window
     {
-        #region properties
         private static string FileForEncrypt = "";
         // static string PadRSAKeys = "C\\"; // --> Deze waarde is nooit gebruikt
         //********Daniela begin ********************
-        static string  hoofdPad = "C:\\DocumentenCrypto\\";
-        string filename = "";   
+        static string hoofdPad = "C:\\DocumentenCrypto\\";
+        string filename = "";
         string[] opgeslagenBestanden = new string[8];
         Microsoft.Win32.OpenFileDialog browseVenster = new Microsoft.Win32.OpenFileDialog();
         //********Daniela end ********************
@@ -39,14 +38,18 @@ namespace CryptoProgramma
         string encryptedFilePath;
         string encryptedFileName;
         static string sKey;
-        #endregion
+     
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-<<<<<<< HEAD
+        /// <summary>
+        /// Button to open the encrypt window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void encryptHomeButton_Click(object sender, RoutedEventArgs e)
         {            //Daniela
             //mainTabs.SelectedItem = mainTabs.FindName("encryptFile");
@@ -58,14 +61,17 @@ namespace CryptoProgramma
             //Daniela
         }
 
+
+        /// <summary>
+        /// Buton to return to the home-window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backButton_EnFileGr_Click(object sender, RoutedEventArgs e)
         {            //Daniela
             homePageGrid.Visibility = Visibility.Visible;
             encryptFileGrid.Visibility = Visibility.Collapsed;
         }
-=======
-        
->>>>>>> origin/master
 
         private void browseEnBtn_Click(object sender, RoutedEventArgs e)
         {            //Daniela
@@ -76,77 +82,9 @@ namespace CryptoProgramma
                 padEnFileLbl.Content = browseVenster.FileName;
             }
         }
-        
-        // empty
-        private void checkBox_Checked(object sender, RoutedEventArgs e)
-        {
 
-        }
 
-        private void rsaKeys_ChangeBtn_Click(object sender, RoutedEventArgs e)
-        {
-            FolderBrowserDialog browseFolder = new FolderBrowserDialog();
-            browseFolder.ShowDialog() ;
-            hoofdPad = browseFolder.SelectedPath + "\\";
-        }
-        
-        private void home_Menu_Selected(object sender, RoutedEventArgs e)
-        {
-            homePageGrid.Visibility = Visibility.Visible;
-            encryptFileGrid.Visibility = Visibility.Collapsed;
-            encryptingGrid.Visibility = Visibility.Collapsed;
-            decryptFileGrid.Visibility = Visibility.Collapsed;
-            decryptingGrid.Visibility = Visibility.Collapsed;
-            CryptoProgramWin.Height = 500;
-            CryptoProgramWin.Width = 500;
-        }
-        
-        #region settings window
 
-        /// <summary>
-        /// Button to edit the backgroundcolor of the entire program
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ClrPcker_Background_SelectedColorChanged(object sender, RoutedEventArgs e)
-        {
-            Brush brush = new SolidColorBrush(ClrPcker_Background.SelectedColor.Value);
-            SideMenu.Background = brush;
-        }
-
-        /// <summary>
-        /// Button to open the settings-window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void settings_Menu_Selected(object sender, RoutedEventArgs e)
-        {
-            CryptoProgramWin.Height = 500;
-            CryptoProgramWin.Width = 500;
-            settingsGrid.Visibility = Visibility.Visible;
-            homePageGrid.Visibility = Visibility.Collapsed;
-            encryptFileGrid.Visibility = Visibility.Collapsed;
-            encryptingGrid.Visibility = Visibility.Collapsed;
-            decryptFileGrid.Visibility = Visibility.Collapsed;
-            decryptingGrid.Visibility = Visibility.Collapsed;
-            steganografieGrid.Visibility = Visibility.Collapsed;
-            rsaKeys_lbl.Content = hoofdPad;
-        }
-        #endregion
-
-        #region encription window
-
-        /// <summary>
-        /// Button to open the encrypt window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void encryptHomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            //mainTabs.SelectedItem = mainTabs.FindName("encryptFile");
-            encryptFileGrid.Visibility = Visibility.Visible;
-            homePageGrid.Visibility = Visibility.Collapsed;
-        }
 
         /// <summary>
         /// Button to encryption the file that's given
@@ -174,14 +112,18 @@ namespace CryptoProgramma
                 //lander
 
                 //********Daniela begin ********************
+
+                //public en private keys gemaakt en gesaved
+                opgeslagenBestanden = RSA.keys(hoofdPad, senderTxt.Text, receiverTxt.Text);
+
                 //hash geencrypteert en opgeslaan
-                string encryptHash = RSA.Encrypt(md5sum);
+                string encryptHash = RSA.Encrypt(md5sum, opgeslagenBestanden[4]);
                 Directory.CreateDirectory(hoofdPad);
-               string hashfilename = System.IO.Path.GetFileNameWithoutExtension(FileForEncrypt);
-                if (!System.IO.File.Exists(hoofdPad + "Hash" + hashfilename + ".txt"))
-                {
+                string hashfilename = System.IO.Path.GetFileNameWithoutExtension(FileForEncrypt);
+                //if (!System.IO.File.Exists(hoofdPad + "Hash" + hashfilename + ".txt"))
+                //{
                     File.WriteAllText(hoofdPad + "Hash" + hashfilename + ".txt", encryptHash);
-                }
+                //}
                 nameEnHashLbl.Content = "Hash" + hashfilename + ".txt";
                 padEncryptedHash.Content = hoofdPad + "Hash" + hashfilename + ".txt";
                 checkBox7.IsChecked = true;
@@ -255,37 +197,29 @@ namespace CryptoProgramma
                     encrProgressbar.Value = 100;
                     // System.Windows.MessageBox.Show("Succesfully Encrypted!", "Info about encryption", MessageBoxButton.OK, MessageBoxImage.Information);
                     //*************************END**************************
-<<<<<<< HEAD
-
 
                     //********Daniela begin ********************
                     //opslaan en encrypteren symetrisch DES key
-                   string encryptDESSkey =  RSA.Encrypt(sKey);
+                    string encryptDESSkey = RSA.Encrypt(sKey, opgeslagenBestanden[7]);
                     Directory.CreateDirectory(hoofdPad);
                     filename = System.IO.Path.GetFileNameWithoutExtension(source);
-                    if (!System.IO.File.Exists(hoofdPad + "SymetricKeyDES" + filename + ".txt"))
-                    {
+                    //if (!System.IO.File.Exists(hoofdPad + "SymetricKeyDES" + filename + ".txt"))
+                    //{
                         File.WriteAllText(hoofdPad + "SymetricKeyDES" + filename + ".txt", encryptDESSkey);
-                    }
+                    //}
                     nameEnSymKLbl.Content = "SymetricKeyDES" + filename + ".txt";
                     padEncryptedSkey.Content = hoofdPad + "SymetricKeyDES" + filename + ".txt";
                     checkBox6.IsChecked = true;
                     //********Daniela end ********************
                 }
-=======
-                }
 
-
-                //public en private keys gemaakt en gesaved
-                opgeslagenBestanden = RSA.keys(hoofdPad, senderTxt.Text, receiverTxt.Text);
->>>>>>> origin/master
-
-                //********Daniela begin ********************
                 
+                //********Daniela begin ********************
+
 
                 namePrKeySenderLbl.Content = Convert.ToString(opgeslagenBestanden[1]);
                 padPrivateSenderLbl.Content = Convert.ToString(opgeslagenBestanden[4]);
-                checkBox1.IsChecked = true; 
+                checkBox1.IsChecked = true;
                 //toont de naam en pad van de private key zender
 
                 namePuKeySenderLbl.Content = Convert.ToString(opgeslagenBestanden[0]);
@@ -314,17 +248,7 @@ namespace CryptoProgramma
             }
         }
 
-        /// <summary>
-        /// Buton to return to the home-window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void backButton_EnFileGr_Click(object sender, RoutedEventArgs e)
-        {
-            homePageGrid.Visibility = Visibility.Visible;
-            encryptFileGrid.Visibility = Visibility.Collapsed;
-        }
-        
+
         /// <summary>
         /// Button to return to the home-window
         /// </summary>
@@ -341,9 +265,6 @@ namespace CryptoProgramma
             //********Daniela end ********************
 
         }
-        #endregion
-
-        #region decription window
 
         private void decryptHomeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -373,62 +294,9 @@ namespace CryptoProgramma
 
             homePageGrid.Visibility = Visibility.Visible;
             decryptingGrid.Visibility = Visibility.Collapsed;
-<<<<<<< HEAD
             //********Daniela end ********************
-=======
         }
-        #endregion
 
-        #region help window
->>>>>>> origin/master
-
-        /// <summary>
-        /// Button to open the help-menu
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void help_Menu_Selected(object sender, RoutedEventArgs e)
-        {
-            CryptoProgramWin.Height = 500;
-            CryptoProgramWin.Width = 500;
-            helpGrid.Visibility = Visibility.Visible;
-            homePageGrid.Visibility = Visibility.Collapsed;
-            encryptFileGrid.Visibility = Visibility.Collapsed;
-            encryptingGrid.Visibility = Visibility.Collapsed;
-            decryptFileGrid.Visibility = Visibility.Collapsed;
-            decryptingGrid.Visibility = Visibility.Collapsed;
-            steganografieGrid.Visibility = Visibility.Collapsed;
-            settingsGrid.Visibility = Visibility.Collapsed;
-        }
-        #endregion
-
-        #region stenografie window, props and actions
-
-        /// <summary>
-        /// Button to open the stenografie-options
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void stega_Menu_Selected(object sender, RoutedEventArgs e)
-        {
-<<<<<<< HEAD
-            //********Daniela begin ********************
-
-            System.Windows.Application.Current.Shutdown();
-            //********Daniela end ********************
-
-=======
-            CryptoProgramWin.Height = 500;
-            CryptoProgramWin.Width = 500;
-            steganografieGrid.Visibility = Visibility.Visible;
-            homePageGrid.Visibility = Visibility.Collapsed;
-            encryptFileGrid.Visibility = Visibility.Collapsed;
-            encryptingGrid.Visibility = Visibility.Collapsed;
-            decryptFileGrid.Visibility = Visibility.Collapsed;
-            decryptingGrid.Visibility = Visibility.Collapsed;
-            settingsGrid.Visibility = Visibility.Collapsed;
->>>>>>> origin/master
-        }
 
         /// <summary>
         /// Button to get out of the stenografie-window
@@ -446,17 +314,13 @@ namespace CryptoProgramma
             //********Daniela end ********************
 
         }
-        #endregion
 
-<<<<<<< HEAD
         private void rsaKeys_ChangeBtn_Click(object sender, RoutedEventArgs e)
         { //kevin
             FolderBrowserDialog browseFolder = new FolderBrowserDialog();
-            browseFolder.ShowDialog() ;
+            browseFolder.ShowDialog();
             hoofdPad = browseFolder.SelectedPath + "\\";
-=======
-        #region exit program
-
+        }
         /// <summary>
         /// Button to exit the program
         /// </summary>
@@ -465,17 +329,18 @@ namespace CryptoProgramma
         private void exit_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
->>>>>>> origin/master
         }
-        #endregion
 
-<<<<<<< HEAD
+        /// <summary>
+        /// Button to edit the backgroundcolor of the entire program
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClrPcker_Background_SelectedColorChanged(object sender, RoutedEventArgs e)
         {       //kevin
             Brush brush = new SolidColorBrush(ClrPcker_Background.SelectedColor.Value);
-            SideMenu.Background= brush;            
-=======
-        #region helper functions
+            SideMenu.Background = brush;
+        }
 
         /// <summary>
         /// Function to split the name of a file | 
@@ -488,7 +353,6 @@ namespace CryptoProgramma
         private static string SplitNameOfFile(string plainFilePath, string algirithme, string newSuffix)
         {
             return System.IO.Path.GetFileNameWithoutExtension(plainFilePath) + algirithme + newSuffix;
->>>>>>> origin/master
         }
 
         /**
@@ -524,7 +388,6 @@ namespace CryptoProgramma
             }
         }
 
-<<<<<<< HEAD
         private void home_Menu_Selected(object sender, RoutedEventArgs e)
         {
             //********Daniela begin ********************
@@ -540,6 +403,12 @@ namespace CryptoProgramma
 
         }
 
+
+        /// <summary>
+        /// Button to open the stenografie-options
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void stega_Menu_Selected(object sender, RoutedEventArgs e)
         {
             //********Daniela begin ********************
@@ -557,6 +426,12 @@ namespace CryptoProgramma
 
         }
 
+
+        /// <summary>
+        /// Button to open the settings-window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void settings_Menu_Selected(object sender, RoutedEventArgs e)
         {
             //********Daniela begin ********************
@@ -575,6 +450,11 @@ namespace CryptoProgramma
 
         }
 
+        /// <summary>
+        /// Button to open the help-menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void help_Menu_Selected(object sender, RoutedEventArgs e)
         {
             //********Daniela begin ********************
@@ -599,7 +479,7 @@ namespace CryptoProgramma
 
             decryptingGrid.Visibility = Visibility.Visible;
             decryptFileGrid.Visibility = Visibility.Collapsed;
-            if(fileLbl.Content.Equals("") || symkeyLbl.Content.Equals("") || hashLbl.Content.Equals("") || publicLbl.Content.Equals("") || privateLbl.Content.Equals(""))
+            if (fileLbl.Content.Equals("") || symkeyLbl.Content.Equals("") || hashLbl.Content.Equals("") || publicLbl.Content.Equals("") || privateLbl.Content.Equals(""))
             {
                 System.Windows.MessageBox.Show("Je mist een bestand, controleer of je alles heb gekozen");
             }
@@ -610,7 +490,7 @@ namespace CryptoProgramma
                 string ontcijferdeSemKey = RSA.Decrypt(inhouddecryptSemKey, privReceiv);
                 Directory.CreateDirectory(hoofdPad + "\\DecryptedFiles");
                 File.WriteAllText(hoofdPad + "\\DecryptedFiles" + "DecryptedSkey" +
-                    System.IO.Path.GetFileNameWithoutExtension(decryptFile) +".txt", ontcijferdeSemKey);
+                    System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt", ontcijferdeSemKey);
 
                 // bestand decrypteren met semetric key
 
@@ -636,7 +516,7 @@ namespace CryptoProgramma
                 decryptFile = browseVenster.FileName;
                 fileLbl.Content = browseVenster.FileName;
             }
-           
+
         }
 
         private void browseSemKeyBut_Click(object sender, RoutedEventArgs e)
@@ -647,7 +527,7 @@ namespace CryptoProgramma
                 decryptSemKey = browseVenster.FileName;
                 symkeyLbl.Content = browseVenster.FileName;
             }
-           
+
         }
 
         private void browseHashBut_Click(object sender, RoutedEventArgs e)
@@ -658,7 +538,7 @@ namespace CryptoProgramma
                 decryptHash = browseVenster.FileName;
                 hashLbl.Content = browseVenster.FileName;
             }
-           
+
         }
 
         private void browsePublicBut_Click(object sender, RoutedEventArgs e)
@@ -669,7 +549,7 @@ namespace CryptoProgramma
                 pubSender = browseVenster.FileName;
                 publicLbl.Content = browseVenster.FileName;
             }
-          
+
         }
 
         private void browsePrivateBut_Click(object sender, RoutedEventArgs e)
@@ -680,13 +560,12 @@ namespace CryptoProgramma
                 privReceiv = browseVenster.FileName;
                 privateLbl.Content = browseVenster.FileName;
             }
-           
-=======
-        /// <summary>
-        /// Generate random byte array
-        /// </summary>
-        /// <param name="length">array length</param>
-        /// <returns>Random byte array</returns>
+
+        }        /// <summary>
+                 /// Generate random byte array
+                 /// </summary>
+                 /// <param name="length">array length</param>
+                 /// <returns>Random byte array</returns>
         private static byte[] GenerateRandom(int length)
         {
             byte[] bytes = new byte[length];
@@ -695,9 +574,14 @@ namespace CryptoProgramma
                 random.GetBytes(bytes);
             }
             return bytes;
->>>>>>> origin/master
         }
-        #endregion
+
+
+
+
+
     }
 }
+
+
 /* Bronnen:  https://github.com/alicanerdogan/HamburgerMenu */

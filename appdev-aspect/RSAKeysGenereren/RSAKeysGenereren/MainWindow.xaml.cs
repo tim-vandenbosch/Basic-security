@@ -55,18 +55,20 @@ namespace RSAKeysGenereren
 
         private static void RSA()
         {
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-            _private_A = rsa.ToXmlString(true);
-            _public_A = rsa.ToXmlString(false);
-            _private_B = rsa.ToXmlString(true);
-            _public_B = rsa.ToXmlString(false);
+            RSACryptoServiceProvider rsa1 = new RSACryptoServiceProvider();
+            RSACryptoServiceProvider rsa2 = new RSACryptoServiceProvider();
+
+            _private_A = rsa1.ToXmlString(true);
+            _public_A = rsa1.ToXmlString(false);
+            _private_B = rsa2.ToXmlString(true);
+            _public_B = rsa2.ToXmlString(false);
 
             // WriteAllText creates a file, writes the specified string to the file,
             // and then closes the file.    You do NOT need to call Flush() or Close().
             File.WriteAllText(@"C:\TestCrypto\Keys_A\Private_A.txt", _private_A);
             File.WriteAllText(@"C:\TestCrypto\Keys_A\Public_A.txt", _public_A);
             File.WriteAllText(@"C:\TestCrypto\Keys_B\Private_B.txt", _private_B);
-            File.WriteAllText(@"C:\TestCrypto\Keys_B\Public_B.txt", _private_B);
+            File.WriteAllText(@"C:\TestCrypto\Keys_B\Public_B.txt", _public_B);
 
             //string file = System.IO.File.ReadAllText(@"C:\Users\DanielaCarmelina\Desktop\Blub.txt");
             // var text = "Daniela";

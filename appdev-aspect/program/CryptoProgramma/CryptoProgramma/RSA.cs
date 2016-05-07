@@ -52,49 +52,51 @@ namespace CryptoProgramma
             // DANGER: System.IO.File.Create will overwrite the file if it already exists. 
             // This could happen even with random file names, although it is unlikely. 
             returnwaarde[4] = private_Pad + returnwaarde[1];
-            if (!System.IO.File.Exists(returnwaarde[4]))
-            {
+            //if (!System.IO.File.Exists(returnwaarde[4]))
+            //{
                 _private_A = rsa1.ToXmlString(true);
                 File.WriteAllText(@returnwaarde[4], _private_A);
-            }
+            //}
 
             returnwaarde[5] = public_Pad + returnwaarde[0];
-            if (!System.IO.File.Exists(returnwaarde[5]))
-            {
+            //if (!System.IO.File.Exists(returnwaarde[5]))
+            //{
                 _public_A = rsa1.ToXmlString(false);
                 File.WriteAllText(@returnwaarde[5], _public_A);
-            }
+            //}
 
             returnwaarde[6] = private_Pad + returnwaarde[3];
-            if (!System.IO.File.Exists(returnwaarde[6]))
-            {
+            //if (!System.IO.File.Exists(returnwaarde[6]))
+            //{
                 _private_B = rsa2.ToXmlString(true);
                 File.WriteAllText(@returnwaarde[6], _private_B);
-            }
+            //}
 
             returnwaarde[7] = public_Pad + returnwaarde[2];
-            if (!System.IO.File.Exists(returnwaarde[7]))
-            {
+            //if (!System.IO.File.Exists(returnwaarde[7]))
+            //{
                 _public_B = rsa2.ToXmlString(false);
                 File.WriteAllText(@returnwaarde[7], _public_B);
-            }
+            //}
 
             public_Receiver = returnwaarde[7];
             private_Receiver = returnwaarde[6];
             return returnwaarde;
         }
         
-        public static string Encrypt(string data)
+        public static string Encrypt(string data, string key)
         {
             var rsa = new RSACryptoServiceProvider();
-            string publicB = File.ReadAllText(@public_Receiver);
+
+            string publicB = File.ReadAllText(key);
+
+            rsa.FromXmlString(publicB); //encrypteren met de publickey receiver (publicB)
             var dataToEncrypt = _encoder.GetBytes(data);
             var encryptedByteArray = rsa.Encrypt(dataToEncrypt, false).ToArray();
             var length = encryptedByteArray.Count();
             var item = 0;
             var sb = new StringBuilder();
 
-            rsa.FromXmlString(publicB); //encrypteren met de publickey receiver (publicB)
 
             foreach (var x in encryptedByteArray)
             {
@@ -119,9 +121,9 @@ namespace CryptoProgramma
             }
 
             string key = File.ReadAllText(k);
+
             rsa.FromXmlString(key); //decryteren met de privatekey receiver (privateB)
             var decryptedByte = rsa.Decrypt(dataByte, false);
-
             return _encoder.GetString(decryptedByte);
         }
     }
