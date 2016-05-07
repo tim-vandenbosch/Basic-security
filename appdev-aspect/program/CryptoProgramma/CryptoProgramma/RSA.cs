@@ -8,6 +8,7 @@ namespace CryptoProgramma
 {
     class RSA
     {
+        /* Auteur : Daniela Lupo */
         #region properties
         private static string _private_A;
         private static string _public_A;
@@ -25,8 +26,8 @@ namespace CryptoProgramma
             // WriteAllText creates a file, writes the specified string to the file,
             // and then closes the file.    You do NOT need to call Flush() or Close().
 
-            String public_Pad = hoofdPad + "\\Keys\\Public_Keys\\"; //PublicKey_" + nameS + ".txt";
-            String private_Pad = hoofdPad + "\\Keys\\Private_Keys\\"; // PrivateKey_" + nameS + ".txt";
+            String public_Pad = hoofdPad + "Keys\\Public_Keys\\"; //PublicKey_" + nameS + ".txt";
+            String private_Pad = hoofdPad + "Keys\\Private_Keys\\"; // PrivateKey_" + nameS + ".txt";
 
             //String PupadReceiver = hoofdPad + "\\Keys\\Public_Keys\\"; // PublicKey_" + nameR + ".txt";
             //string PrpadReceiver = hoofdPad + "\\Keys\\Private_Keys\\"; // PrivateKey_" +  nameR + ".txt";
@@ -106,20 +107,21 @@ namespace CryptoProgramma
             return sb.ToString();
         }
 
-        public static string Decrypt(string data)
+        public static string Decrypt(string data, string k)
         {
             var rsa = new RSACryptoServiceProvider();
             var dataArray = data.Split(new char[] { ',' });
             byte[] dataByte = new byte[dataArray.Length];
-            string priveB = File.ReadAllText(@private_Receiver);
-            var decryptedByte = rsa.Decrypt(dataByte, false);
 
             for (int i = 0; i < dataArray.Length; i++)
             {
                 dataByte[i] = Convert.ToByte(dataArray[i]);
             }
-            rsa.FromXmlString(priveB); //decryteren met de privatekey receiver (privateB)
-            
+
+            string key = File.ReadAllText(k);
+            rsa.FromXmlString(key); //decryteren met de privatekey receiver (privateB)
+            var decryptedByte = rsa.Decrypt(dataByte, false);
+
             return _encoder.GetString(decryptedByte);
         }
     }
