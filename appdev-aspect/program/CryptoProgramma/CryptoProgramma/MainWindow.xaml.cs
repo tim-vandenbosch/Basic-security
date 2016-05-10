@@ -161,7 +161,8 @@ namespace CryptoProgramma
                     //*************************END**************************
                     //********Daniela begin ********************
                     //opslaan en encrypteren symetrisch AES key
-                    //werkt nog nie
+                    //werkt nog nie (geeft errors)
+                    //keys zijn in byte en om te encrypteren heb ik een string nodig
                     //Directory.CreateDirectory(hoofdPad);
                     //string encryptAESSkey = RSA.Encrypt(encryptionKey);
                     //filename = System.IO.Path.GetFileNameWithoutExtension(plainFilePath);
