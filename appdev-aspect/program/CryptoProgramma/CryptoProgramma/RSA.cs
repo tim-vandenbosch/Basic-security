@@ -111,6 +111,7 @@ namespace CryptoProgramma
 
         public static string Decrypt(string data, string k)
         {
+            byte [] decryptedByte = new byte[500];
             var rsa = new RSACryptoServiceProvider();
             var dataArray = data.Split(new char[] { ',' });
             byte[] dataByte = new byte[dataArray.Length];
@@ -120,11 +121,22 @@ namespace CryptoProgramma
                 dataByte[i] = Convert.ToByte(dataArray[i]);
             }
 
-            string key = File.ReadAllText(k);
+           string key = File.ReadAllText(k);
 
             rsa.FromXmlString(key); //decryteren met de privatekey receiver (privateB)
-            var decryptedByte = rsa.Decrypt(dataByte, false);
+            if (System.IO.Path.GetFileNameWithoutExtension(k).StartsWith("PrivateKey_"))
+            {
+                decryptedByte = rsa.Decrypt(dataByte, false);
+
+
+            }
+            else if (System.IO.Path.GetFileNameWithoutExtension(k).StartsWith("PublicKey_"))
+            {
+                decryptedByte = rsa.Decrypt(dataByte, true);
+
+            }
             return _encoder.GetString(decryptedByte);
+
         }
     }
 }

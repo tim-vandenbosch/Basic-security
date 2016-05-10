@@ -20,7 +20,7 @@ namespace RSAKeysGenereren
         private static UnicodeEncoding _encoder = new UnicodeEncoding();
         //private static string FileForEncrypt = "";
         private static string enc = "", dec = "";
-        private static string FileForEncrypt = "";
+        private static string FileForEncrypt = "", decryptFile = "";
 
 
         public MainWindow()
@@ -33,19 +33,27 @@ namespace RSAKeysGenereren
             OpenFileDialog browseVenster = new OpenFileDialog();
             if (browseVenster.ShowDialog() == true)
             {
-                FileForEncrypt = browseVenster.FileName;
+                //FileForEncrypt = browseVenster.FileName;
+                decryptFile = browseVenster.FileName;
                 PadFileLabel.Content = browseVenster.FileName;
-                txtFile.Text = File.ReadAllText(FileForEncrypt);
+               // txtFile.Text = File.ReadAllText(FileForEncrypt);
+                txtFile.Text = File.ReadAllText(decryptFile);
+
             }
         }
 
         private void encryptButton_Click(object sender, RoutedEventArgs e)
         {
-            if (FileForEncrypt != "" && FileForEncrypt != " ")
+            //if (FileForEncrypt != "" && FileForEncrypt != " ")
+            if (decryptFile != "" && decryptFile != " ")
             {
-                RSA();
-                txtEncrypt.Text = enc;
-                txtDecrypt.Text = File.ReadAllText(dec);
+               // RSA();
+                dec = Decrypt(decryptFile);
+                //  txtEncrypt.Text = enc;
+                // txtDecrypt.Text = File.ReadAllText(dec);
+                txtDecrypt.Text = dec;
+
+
             }
             else
             {
@@ -76,6 +84,8 @@ namespace RSAKeysGenereren
             enc = Encrypt(FileForEncrypt);
             // Console.WriteLine("RSA // Encrypted Text: " + enc);
             dec = Decrypt(enc);
+            dec = Decrypt(@"‪C:\DocumentenCrypto\SymetricKeyDESBlub.txt");
+
             // Console.WriteLine("RSA // Decrypted Text: " + dec);
         }
 
@@ -85,8 +95,8 @@ namespace RSAKeysGenereren
         {
             var rsa = new RSACryptoServiceProvider();
 
-            string publicB = File.ReadAllText(@"C:\TestCrypto\Keys_B\Public_B.txt");
-
+            //string publicB = File.ReadAllText(@"C:\TestCrypto\Keys_B\Public_B.txt");
+            string publicB = File.ReadAllText(@"C:\DocumentenCrypto\Keys\Public_Keys\PublicKey_Daniela.txt");
             rsa.FromXmlString(publicB); //encrypteren met de publickey sender
             var dataToEncrypt = _encoder.GetBytes(data);
             var encryptedByteArray = rsa.Encrypt(dataToEncrypt, false).ToArray();
@@ -99,7 +109,7 @@ namespace RSAKeysGenereren
                 sb.Append(x);
 
                 if (item < length)
-                    sb.Append(",");
+                    sb.Append(", ");
             }
 
             return sb.ToString();
@@ -107,18 +117,25 @@ namespace RSAKeysGenereren
 
         public static string Decrypt(string data)
         {
+            string datat = File.ReadAllText(data);
+
             var rsa = new RSACryptoServiceProvider();
-            var dataArray = data.Split(new char[] { ',' });
+            var dataArray = datat.Split(new char[] { ',' });
             byte[] dataByte = new byte[dataArray.Length];
             for (int i = 0; i < dataArray.Length; i++)
             {
                 dataByte[i] = Convert.ToByte(dataArray[i]);
             }
 
-            string priveB = File.ReadAllText(@"C:\TestCrypto\Keys_B\Private_B.txt");
+            //string priveB = File.ReadAllText(@"C:\TestCrypto\Keys_B\Private_B.txt");
+
+          //  string priveB = File.ReadAllText(@"C:\DocumentenCrypto\Keys\Private_Keys\PrivateKey_Mamie.txt");
+           string priveB = File.ReadAllText(@"C:\DocumentenCrypto\Keys\Public_Keys\PublicKey_Danie.txt");
 
             rsa.FromXmlString(priveB); //decryteren met de privatekey sender
-            var decryptedByte = rsa.Decrypt(dataByte, false);
+            //var decryptedByte = rsa.Decrypt(dataByte, false);
+            var decryptedByte = rsa.Decrypt(dataByte, true);
+
             return _encoder.GetString(decryptedByte);
         }
 

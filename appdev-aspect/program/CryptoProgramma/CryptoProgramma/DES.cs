@@ -55,6 +55,9 @@ namespace CryptoProgramma
             //Set initialization vector.
             DES.IV = ASCIIEncoding.ASCII.GetBytes(sKey);
 
+            DES.Mode = CipherMode.CFB;
+            DES.Padding = PaddingMode.ISO10126;
+
             //Create a file stream to read the encrypted file back.
             FileStream fsread = new FileStream(source, FileMode.Open, FileAccess.Read);
             //Create a DES decryptor from the DES instance.
@@ -63,10 +66,21 @@ namespace CryptoProgramma
             //DES decryption transform on incoming bytes.
             CryptoStream cryptostreamDecr = new CryptoStream(fsread, desdecrypt, CryptoStreamMode.Read);
             //Print the contents of the decrypted file.
-            StreamWriter fsDecrypted = new StreamWriter(destination);
-            fsDecrypted.Write(new StreamReader(cryptostreamDecr).ReadToEnd());
-            fsDecrypted.Flush();
-            fsDecrypted.Close();
+
+           string text = (new StreamReader(cryptostreamDecr).ReadToEnd());
+            File.WriteAllText(destination + "DecryptedTxt" +
+                         System.IO.Path.GetFileNameWithoutExtension(source) + ".txt",text );
+
+
+            //FileStream fsDecrypted = new FileStream(destination, FileMode.Create, FileAccess.Write);
+            //cryptostreamDecr.CopyTo(fsDecrypted);
+            //fsDecrypted.Flush();
+            //fsDecrypted.Close();
+
+            //StreamWriter fsDecrypted = new StreamWriter(destination);
+            //fsDecrypted.Write(new StreamReader(cryptostreamDecr).ReadToEnd());
+            //fsDecrypted.Flush();
+            //fsDecrypted.Close();
 
         }
     }

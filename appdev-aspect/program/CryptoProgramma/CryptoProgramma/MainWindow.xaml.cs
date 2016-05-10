@@ -117,7 +117,7 @@ namespace CryptoProgramma
                 opgeslagenBestanden = RSA.keys(hoofdPad, senderTxt.Text, receiverTxt.Text);
 
                 //hash geencrypteert en opgeslaan
-                string encryptHash = RSA.Encrypt(md5sum, opgeslagenBestanden[4]);
+                string encryptHash = RSA.Encrypt(md5sum, opgeslagenBestanden[4]); //encrypteren met private key sender
                 Directory.CreateDirectory(hoofdPad);
                 string hashfilename = System.IO.Path.GetFileNameWithoutExtension(FileForEncrypt);
                 //if (!System.IO.File.Exists(hoofdPad + "Hash" + hashfilename + ".txt"))
@@ -160,7 +160,8 @@ namespace CryptoProgramma
                     // System.Windows.MessageBox.Show(string.Format(AES.CreateEncryptionInfoXml(signatureKey, encryptionKey, encryptionIV)), "Info about encryption", MessageBoxButton.OK, MessageBoxImage.Information);
                     //*************************END**************************
                     //********Daniela begin ********************
-                    //opslaan en encrypteren symetrisch DES key
+                    //opslaan en encrypteren symetrisch AES key
+                    //werkt nog nie
                     //Directory.CreateDirectory(hoofdPad);
                     //string encryptAESSkey = RSA.Encrypt(encryptionKey);
                     //filename = System.IO.Path.GetFileNameWithoutExtension(plainFilePath);
@@ -485,25 +486,32 @@ namespace CryptoProgramma
             }
             else
             {
-                //symetric decrypteren met privesleutel
+                //stap 1 : symetric decrypteren met privesleutel
                 string inhouddecryptSemKey = File.ReadAllText(decryptSemKey);
                 string ontcijferdeSemKey = RSA.Decrypt(inhouddecryptSemKey, privReceiv);
                 Directory.CreateDirectory(hoofdPad + "\\DecryptedFiles");
-                File.WriteAllText(hoofdPad + "\\DecryptedFiles" + "DecryptedSkey" +
+                File.WriteAllText(hoofdPad + "\\DecryptedFiles\\" + "DecryptedSkey" +
                     System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt", ontcijferdeSemKey);
 
-                // bestand decrypteren met semetric key
+                //stap 2:  bestand decrypteren met semetric key
 
-                //hash berekenen boodschap
+                //bij het decrypteren komt ook een error idk why
+               DES.DecryptFile(decryptFile, hoofdPad + "DecryptedFiles\\" + "DecryptedTxt" +
+                    System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt", ontcijferdeSemKey);
+                //File.WriteAllText(destination + "DecryptedTxt" +
+                //             System.IO.Path.GetFileNameWithoutExtension(source) + ".txt", (new StreamReader(cryptostreamDecr).ReadToEnd()));
+                
+            //stap 3 : hash berekenen boodschap
 
-                //hash decryperen met publiekesleutel
-                string inhouddecryptHash = File.ReadAllText(decryptHash);
-                string ontcijferdeHash = RSA.Decrypt(inhouddecryptHash, pubSender);
-                Directory.CreateDirectory(hoofdPad + "\\DecryptedFiles");
-                File.WriteAllText(hoofdPad + "\\DecryptedFiles" + "DecryptedHash" +
-                    System.IO.Path.GetFileNameWithoutExtension(decryptHash) + ".txt", ontcijferdeHash);
+            //Onderstaande code zou moeten werken maar geeft een error 
+                //stap 4 : hash decryperen met publiekesleutel
+                //string inhouddecryptHash = File.ReadAllText(decryptHash);
+                //string ontcijferdeHash = RSA.Decrypt(inhouddecryptHash, pubSender);
+                //Directory.CreateDirectory(hoofdPad + "\\DecryptedFiles");
+                //File.WriteAllText(hoofdPad + "\\DecryptedFiles\\" + "DecryptedHash" +
+                //    System.IO.Path.GetFileNameWithoutExtension(decryptHash) + ".txt", ontcijferdeHash);
 
-                //zelfberekende hash en ontcijferde hash vergelijken 
+                //stap 5 : zelfberekende hash en ontcijferde hash vergelijken 
 
             }
         }
@@ -546,7 +554,7 @@ namespace CryptoProgramma
             browseVenster.Filter = "Txt Documents|*.txt";
             if (browseVenster.ShowDialog() == true)
             {
-                pubSender = browseVenster.FileName;
+                pubSender =browseVenster.FileName;
                 publicLbl.Content = browseVenster.FileName;
             }
 
