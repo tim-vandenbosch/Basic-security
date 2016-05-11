@@ -31,6 +31,9 @@ namespace CryptoProgramma
         static string hoofdPad = "C:\\DocumentenCrypto\\";
         string filename = "";
         string[] opgeslagenBestanden = new string[8];
+        //bestandnaam (.txt) 0 publickeySender, 1 privatekeySender, 2 publickeyreceiver, 3 privatekeyreceiver
+        // 4 pad privatekeysender, 5 pad publickeySender, 6 pad privatekeyreceiver, 7 pad publickeyreceiver,
+
         Microsoft.Win32.OpenFileDialog browseVenster = new Microsoft.Win32.OpenFileDialog();
         //********Daniela end ********************
 
