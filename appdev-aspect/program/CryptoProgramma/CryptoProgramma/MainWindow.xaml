@@ -162,7 +162,7 @@
                 <HamburgerMenu:HamburgerMenuItem  Name="stega_Menu" Icon="img/steganographie.jpg" Text="Steganografie" Selected="stega_Menu_Selected"/>
                 <HamburgerMenu:HamburgerMenuItem  Name="settings_Menu" Icon="img/settings.png" Text="Settings" Selected="settings_Menu_Selected"/>
                 <HamburgerMenu:HamburgerMenuItem  Name="help_Menu" Icon="img/help.png" Text="Help" Selected="help_Menu_Selected"/>
-                <HamburgerMenu:HamburgerMenuItem  Name="exit_Menu" Icon="img/exit.png" Text="Exit" MouseDoubleClick="exit_Menu_MouseDoubleClick"/>
+                <HamburgerMenu:HamburgerMenuItem  Name="exit_Menu" Icon="img/exit.png" Text="Exit" Selected="exit_Menu_Selected"/>
             </HamburgerMenu:HamburgerMenu>
         </Grid>
         <!-- </TabItem>

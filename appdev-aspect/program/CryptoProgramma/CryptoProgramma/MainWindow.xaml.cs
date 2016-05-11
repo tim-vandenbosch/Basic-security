@@ -12,11 +12,11 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
 using Xceed.Wpf.Toolkit;
+using System.Diagnostics;
 
 namespace CryptoProgramma
 {
@@ -38,11 +38,13 @@ namespace CryptoProgramma
         string encryptedFilePath;
         string encryptedFileName;
         static string sKey;
-     
+        DES des = new DES();
+
 
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         /// <summary>
@@ -150,6 +152,7 @@ namespace CryptoProgramma
                     byte[] encryptionIV = GenerateRandom(16);
                     byte[] signatureKey = GenerateRandom(64);
 
+
                     statusLbl.Content = "Encrypting (AES) ";
                     encrProgressbar.Value = 20;
                     AES.EncryptFile(plainFilePath, encryptedFilePath, encryptionKey, encryptionIV);
@@ -163,13 +166,19 @@ namespace CryptoProgramma
                     //opslaan en encrypteren symetrisch AES key
                     //werkt nog nie (geeft errors)
                     //keys zijn in byte en om te encrypteren heb ik een string nodig
-                    //Directory.CreateDirectory(hoofdPad);
-                    //string encryptAESSkey = RSA.Encrypt(encryptionKey);
-                    //filename = System.IO.Path.GetFileNameWithoutExtension(plainFilePath);
-                    //if (!System.IO.File.Exists(hoofdPad + "SymetricKeyAES" + filename + ".txt"))
-                    //{
-                    //    File.WriteAllText(hoofdPad + "SymetricKeyAES" + filename + ".txt", encryptAESSkey);
-                    //}
+
+                    //Nasim - Nu werkt ht wel :p
+                    Directory.CreateDirectory(hoofdPad);
+                    string encryptAESSkey = RSA.Encrypt(Convert.ToString(encryptionKey), opgeslagenBestanden[7]);
+                    filename = System.IO.Path.GetFileNameWithoutExtension(plainFilePath);
+                    if (!System.IO.File.Exists(hoofdPad + "SymetricKeyAES" + filename + ".txt"))
+                    {
+                        File.WriteAllText(hoofdPad + "SymetricKeyAES" + filename + ".txt", encryptAESSkey);
+                    }
+
+                    nameEnSymKLbl.Content = "SymetricKeyAES" + filename + ".txt";
+                    padEncryptedSkey.Content = hoofdPad + "SymetricKeyAES" + filename + ".txt";
+                    checkBox6.IsChecked = true;
                     //********Daniela end ********************
 
 
@@ -181,7 +190,7 @@ namespace CryptoProgramma
                     statusLbl.Content = "Preparing (DES)";
                     encrProgressbar.Value = 10;
 
-                    sKey = DES.GenerateKey();
+                    sKey = des.GenerateKey();
 
                     string source = padEnFileLbl.Content.ToString();
                     encryptedFileName = SplitNameOfFile(source, "DES", ".txt");
@@ -193,7 +202,7 @@ namespace CryptoProgramma
                     statusLbl.Content = "Encrypting (DES)";
                     encrProgressbar.Value = 20;
 
-                    DES.EncryptFile(source, destination, sKey);
+                    des.EncryptFile(source, destination, sKey);
 
                     statusLbl.Content = "Finished (DES)";
                     encrProgressbar.Value = 100;
@@ -328,11 +337,22 @@ namespace CryptoProgramma
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void exit_Menu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void exit_Menu_Selected(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
         }
+        //Override the onClose method in the Application Main window
 
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult result = System.Windows.MessageBox.Show("Wilt u de applicatie afsluiten?", "EXIT",
+                                                  MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.Cancel)
+            {
+                e.Cancel = true;
+            }
+            base.OnClosing(e);
+        }
         /// <summary>
         /// Button to edit the backgroundcolor of the entire program
         /// </summary>
@@ -495,16 +515,19 @@ namespace CryptoProgramma
                     System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt", ontcijferdeSemKey);
 
                 //stap 2:  bestand decrypteren met semetric key
-
                 //bij het decrypteren komt ook een error idk why
-               DES.DecryptFile(decryptFile, hoofdPad + "DecryptedFiles\\" + "DecryptedTxt" +
-                    System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt", ontcijferdeSemKey);
-                //File.WriteAllText(destination + "DecryptedTxt" +
-                //             System.IO.Path.GetFileNameWithoutExtension(source) + ".txt", (new StreamReader(cryptostreamDecr).ReadToEnd()));
-                
-            //stap 3 : hash berekenen boodschap
+                                  
+                //Nasim - Nu komt geen error :p 
+                string destination = hoofdPad + "DecryptedFiles\\" + "DecryptedTxt" +
+                                     System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt";
+                des.DecryptFile(decryptFile, destination, ontcijferdeSemKey);
+                Process.Start(destination);
 
-            //Onderstaande code zou moeten werken maar geeft een error 
+
+
+                //stap 3 : hash berekenen boodschap
+
+                //Onderstaande code zou moeten werken maar geeft een error 
                 //stap 4 : hash decryperen met publiekesleutel
                 //string inhouddecryptHash = File.ReadAllText(decryptHash);
                 //string ontcijferdeHash = RSA.Decrypt(inhouddecryptHash, pubSender);
