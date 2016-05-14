@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -87,6 +88,8 @@
     <Compile Include="AES.cs" />
     <Compile Include="DES.cs" />
     <Compile Include="RSA.cs" />
+    <Compile Include="StenografieCrypto.cs" />
+    <Compile Include="StenografieHelper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -13,7 +13,8 @@
         <!--   <TabControl x:Name="mainTabs" Height="325" RenderTransformOrigin="0.236,0.452">
             <TabItem x:Name="homePage" Header="HomePage" Visibility="Collapsed"> -->
 
-        <Grid Name="homePageGrid" Background="Beige" Width="450" Visibility="Visible" d:IsHidden="False" >
+        <!--<Grid Name="homePageGrid" Background="Beige" Width="450" Visibility="Visible" d:IsHidden="False" >-->
+        <Grid Name="homePageGrid" Background="Beige" Width="450" Visibility="Collapsed" d:IsHidden="False" >
             <Label x:Name="welcomeLabel" Content="Welcome, &#xD; &#xA; Choose what you want to do" FontSize="16" Margin="0,0,0,365" HorizontalAlignment="Left" Width="347"/>
             <Button x:Name="encryptHomeButton" Content="Encrypt a file" Margin="78,249,240,178" Click="encryptHomeButton_Click" ToolTip="Click here if you want to encrypt a file"/>
             <Button x:Name="decryptHomeButton" Content="Decrypt a file" Margin="265,249,37,178" Click="decryptHomeButton_Click" ToolTip="Click here if you want to decrypt a file"/>
@@ -103,20 +104,20 @@
             <Label x:Name="Proglbl" Content="Decryption is progres...." HorizontalAlignment="Left" Margin="42,33,0,0" VerticalAlignment="Top" Width="371"/>
         </Grid>
 
-        <Grid Name="steganografieGrid" Background="Beige" Visibility="Collapsed" Height="500" Width="450">
-            <Label x:Name="label" Content="Steganografie" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Height="30" Width="131"/>
-            <Label x:Name="label_Copy" Content="Here you can hide your file into another file like an image or soundfile" HorizontalAlignment="Left" Margin="23,40,0,0" VerticalAlignment="Top" Height="30" Width="383"/>
-            <Label x:Name="label_Copy1" Content="Find your file" HorizontalAlignment="Left" Margin="20,75,0,0" VerticalAlignment="Top" Height="30" Width="94"/>
-            <Label x:Name="file_lbl" BorderBrush="Black" BorderThickness="1" Content="" HorizontalAlignment="Left" Margin="79,105,0,0" VerticalAlignment="Top" Height="20" Width="208"/>
-            <Label x:Name="label_Copy3" Content="Find your image/soundfile" HorizontalAlignment="Left" Margin="20,149,0,0" VerticalAlignment="Top" Height="27" Width="158"/>
-            <Label x:Name="image_lbl" BorderBrush="Black" BorderThickness="1" Content="" HorizontalAlignment="Left" Margin="89,176,0,0" VerticalAlignment="Top" Height="23" Width="198"/>
-            <Button x:Name="browse_btn_file" Content="Browse" HorizontalAlignment="Left" Margin="292,105,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="browse_btn_image" Content="Browse" HorizontalAlignment="Left" Margin="292,179,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="merge_btn" Content="Merge them" HorizontalAlignment="Left" Margin="175,215,0,0" VerticalAlignment="Top" Width="99" Height="27"/>
-            <ProgressBar Name="progress_steg" HorizontalAlignment="Left" Height="19" Margin="23,287,0,0" VerticalAlignment="Top" Width="404"/>
-            <Image x:Name="status_Image"  HorizontalAlignment="Left" Height="71" Margin="70,332,0,0" VerticalAlignment="Top" Width="81"/>
-            <Button x:Name="saveSteg_Btn" Content="Save the new file" HorizontalAlignment="Left" Margin="199,369,0,0" VerticalAlignment="Top" Width="136"/>
-            <Button x:Name="backSteg_Btn" Click="backSteg_Btn_Click" Content="&lt; Back to home" HorizontalAlignment="Left" Margin="315,420,0,0" VerticalAlignment="Top" Width="103"/>
+        <!-- Stenografie-layout -->
+        <!-- Editor: Tim Van Den Bosch -->
+        <!--<Grid Name="steganografieGrid" Background="Beige" Visibility="Collapsed" Height="500" Width="450">-->
+        <Grid Name="steganografieGrid" Background="Beige" Visibility="Visible" Height="500" Width="450" d:IsHidden="False">
+            <Label x:Name="label" Content="Steganografie, here you can hide your data in an image" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Height="30" />
+            <Button x:Name="browseImageButton" Content="Select the image" HorizontalAlignment="Left" Margin="20,54,0,0" VerticalAlignment="Top" Width="100" Click="browseImageButton_Click"/>
+            <Button x:Name="browsFileButton" Content="Select the file" HorizontalAlignment="Left" Margin="20,111,0,0" VerticalAlignment="Top" Width="100" Click="browsFileButton_Click"/>
+            <Button x:Name="hideButton" Content="Verbergen data" HorizontalAlignment="Left" Margin="21,388,0,0" VerticalAlignment="Top" Width="99" Height="27"/>
+            <Button x:Name="discoverButton" Content="Ophalen data" HorizontalAlignment="Left" Margin="325,388,0,0" VerticalAlignment="Top" Width="99" Height="27"/>
+            <Button x:Name="saveSteg_Btn" Content="Save the new file" HorizontalAlignment="Left" Margin="20,420,0,0" VerticalAlignment="Top" Width="99" Height="27"/>
+            <Button x:Name="backSteg_Btn" Click="backSteg_Btn_Click" Content="&lt; Back to home" HorizontalAlignment="Left" Margin="325,420,0,0" VerticalAlignment="Top" Width="99" Height="27"/>
+            <Image x:Name="selectedImage" HorizontalAlignment="Left" Height="200" Margin="240,45,0,0" VerticalAlignment="Top" Width="200" />
+            <Label x:Name="labelSelectedImage" Content="" HorizontalAlignment="Left" Margin="21,79,0,0" VerticalAlignment="Top" Width="180"/>
+            <Label x:Name="labelSelectedFile" Content="" HorizontalAlignment="Left" Margin="21,136,0,0" VerticalAlignment="Top" Width="180"/>
         </Grid>
 
         <Grid Name="settingsGrid" Background="Beige" Visibility="Collapsed" Height="500" Width="450">

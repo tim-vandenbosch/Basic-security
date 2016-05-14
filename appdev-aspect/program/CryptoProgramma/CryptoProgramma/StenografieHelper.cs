@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Steganography
+namespace CryptoProgramma
 {
-    class SteganographyHelper
+    class StenografieHelper
     {
         public enum Opdracht
         {
@@ -26,7 +26,7 @@ namespace Steganography
             int nullen = 0;
             // één pixel in rgb
             int R = 0, G = 0, B = 0;
-            
+
             // TODO: De gehele afbeelding afgaan
             for (int i = 0; i < afbeelding.Height; i++)
             {
@@ -34,7 +34,7 @@ namespace Steganography
                 {
                     // TODO: De pixel nemen en de kleinste bit beschikbaar maken
                     Color pixel = afbeelding.GetPixel(j, i);
-                    
+
                     R = pixel.R - pixel.R % 2;
                     G = pixel.G - pixel.G % 2;
                     B = pixel.B - pixel.B % 2;
@@ -48,7 +48,7 @@ namespace Steganography
                             if (opdracht == Opdracht.Vullen_met_nullen && nullen == 8)
                             {
                                 //TODO: vul de laatste pixel in
-                                if ((pixelPositie-1) % 3 < 2)
+                                if ((pixelPositie - 1) % 3 < 2)
                                 {
                                     afbeelding.SetPixel(j, i, Color.FromArgb(R, G, B));
                                 }
@@ -65,7 +65,7 @@ namespace Steganography
                                 letterWaarde = text[letterPositie++];
                             }
                         }
-                        
+
                         // TODO: De pixel en rgb waarde waar de data word ingestoken
                         switch (pixelPositie % 3)
                         {
@@ -85,7 +85,8 @@ namespace Steganography
                                         // such that next time we can reach the next one
                                         letterWaarde /= 2;
                                     }
-                                } break;
+                                }
+                                break;
                             // in geval van G
                             case 1:
                                 {
@@ -95,7 +96,8 @@ namespace Steganography
 
                                         letterWaarde /= 2;
                                     }
-                                } break;
+                                }
+                                break;
                             // in geval van B
                             case 2:
                                 {
@@ -107,7 +109,8 @@ namespace Steganography
                                     }
 
                                     afbeelding.SetPixel(j, i, Color.FromArgb(R, G, B));
-                                } break;
+                                }
+                                break;
                         }
 
                         pixelPositie++;
@@ -157,15 +160,18 @@ namespace Steganography
                                     // replace the added bit (which value is by default 0) with
                                     // the LSB of the pixel element, simply by addition
                                     charValue = charValue * 2 + pixel.R % 2;
-                                } break;
+                                }
+                                break;
                             case 1:
                                 {
                                     charValue = charValue * 2 + pixel.G % 2;
-                                } break;
+                                }
+                                break;
                             case 2:
                                 {
                                     charValue = charValue * 2 + pixel.B % 2;
-                                } break;
+                                }
+                                break;
                         }
 
                         colorUnitIndex++;

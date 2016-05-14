@@ -82,6 +82,7 @@ namespace CryptoProgramma
             homePageGrid.Visibility = Visibility.Visible;
             encryptFileGrid.Visibility = Visibility.Collapsed;
         }
+
         /// <summary>
         /// Button to browse to de file for encryption
         /// </summary>
@@ -113,6 +114,7 @@ namespace CryptoProgramma
             //********Daniela end ********************
 
         }
+
         #endregion
 
         #region encryptioncode to encrypt de file, generate RSA key & AES, DES semetric keys
@@ -551,7 +553,6 @@ namespace CryptoProgramma
         }
         #endregion
 
-
         /// <summary>
         /// Button to go to the homepage
         /// </summary>
@@ -559,8 +560,6 @@ namespace CryptoProgramma
         /// <param name="e"></param>
         private void home_Menu_Selected(object sender, RoutedEventArgs e)
         {
-            //********Daniela begin ********************
-
             homePageGrid.Visibility = Visibility.Visible;
             encryptFileGrid.Visibility = Visibility.Collapsed;
             encryptingGrid.Visibility = Visibility.Collapsed;
@@ -568,10 +567,8 @@ namespace CryptoProgramma
             decryptingGrid.Visibility = Visibility.Collapsed;
             CryptoProgramWin.Height = 500;
             CryptoProgramWin.Width = 500;
-            //********Daniela end ********************
-
         }
-
+        
         #region stenografie window, props and actions
 
         /// <summary>
@@ -582,14 +579,10 @@ namespace CryptoProgramma
         /// 
         private void backSteg_Btn_Click(object sender, RoutedEventArgs e)
         {
-            //********Daniela begin ********************
-
             CryptoProgramWin.Height = 500;
             CryptoProgramWin.Width = 500;
             steganografieGrid.Visibility = Visibility.Collapsed;
             homePageGrid.Visibility = Visibility.Visible;
-            //********Daniela end ********************
-
         }
 
         /// <summary>
@@ -599,8 +592,6 @@ namespace CryptoProgramma
         /// <param name="e"></param>
         private void stega_Menu_Selected(object sender, RoutedEventArgs e)
         {
-            //********Daniela begin ********************
-
             CryptoProgramWin.Height = 500;
             CryptoProgramWin.Width = 500;
             steganografieGrid.Visibility = Visibility.Visible;
@@ -610,21 +601,29 @@ namespace CryptoProgramma
             decryptFileGrid.Visibility = Visibility.Collapsed;
             decryptingGrid.Visibility = Visibility.Collapsed;
             settingsGrid.Visibility = Visibility.Collapsed;
-            //********Daniela end ********************
-
         }
 
+        /// <summary>
+        /// Selecting the image that will be used for the stenography
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void browseImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
 
-        /*  HIERIN KAN JE JE CODE ZETTEN TIM  ***********************************    */
+        /// <summary>
+        /// Selecting the file that will be used for the stenography
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void browsFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
 
         #endregion
-
-
-
-
- 
-
-    
 
         #region settings window
 
@@ -650,6 +649,7 @@ namespace CryptoProgramma
             //********Daniela end ********************
 
         }
+
         /// <summary>
         /// Button to edit the path to save the rsakeys
         /// </summary>
@@ -661,7 +661,7 @@ namespace CryptoProgramma
             browseFolder.ShowDialog();
             hoofdPad = browseFolder.SelectedPath + "\\";
         }
-
+        
         /// <summary>
         /// Button to edit the backgroundcolor of the entire program
         /// </summary>
@@ -672,6 +672,7 @@ namespace CryptoProgramma
             Brush brush = new SolidColorBrush(ClrPcker_Background.SelectedColor.Value);
             SideMenu.Background = brush;
         }
+
         #endregion
 
         #region help window
@@ -699,8 +700,7 @@ namespace CryptoProgramma
         }
         #endregion
        
-
-    #region exit program
+        #region exit program
         /// <summary>
         /// Button to exit the program
         /// </summary>
@@ -723,13 +723,6 @@ namespace CryptoProgramma
             base.OnClosing(e);
         }
         #endregion
-
-
-
-
-
     }
 }
-
-
 /* Bronnen:  https://github.com/alicanerdogan/HamburgerMenu */
