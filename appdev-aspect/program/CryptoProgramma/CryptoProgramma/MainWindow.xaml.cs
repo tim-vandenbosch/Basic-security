@@ -25,6 +25,8 @@ namespace CryptoProgramma
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region properties encrypteren
+
         private static string FileForEncrypt = "";
         // static string PadRSAKeys = "C\\"; // --> Deze waarde is nooit gebruikt
         //********Daniela begin ********************
@@ -42,13 +44,17 @@ namespace CryptoProgramma
         string encryptedFileName;
         static string sKey;
         DES des = new DES();
-
+        #endregion
 
         public MainWindow()
         {
             InitializeComponent();
             
         }
+
+        #region encription window
+
+        #region home-back-browsebuttons encryption windows
 
         /// <summary>
         /// Button to open the encrypt window
@@ -66,9 +72,8 @@ namespace CryptoProgramma
             //Daniela
         }
 
-
         /// <summary>
-        /// Buton to return to the home-window
+        /// Buton to return to the home-window from the encryptwindow
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -77,7 +82,11 @@ namespace CryptoProgramma
             homePageGrid.Visibility = Visibility.Visible;
             encryptFileGrid.Visibility = Visibility.Collapsed;
         }
-
+        /// <summary>
+        /// Button to browse to de file for encryption
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void browseEnBtn_Click(object sender, RoutedEventArgs e)
         {            //Daniela
             browseVenster.Filter = "Txt Documents|*.txt";
@@ -88,9 +97,25 @@ namespace CryptoProgramma
             }
         }
 
+        /// <summary>
+        /// Button to return to the home-window after encrypting a file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void backBtn_EnGr_Click(object sender, RoutedEventArgs e)
+        {
+            //********Daniela begin ********************
 
+            homePageGrid.Visibility = Visibility.Visible;
+            encryptingGrid.Visibility = Visibility.Collapsed;
+            CryptoProgramWin.Height = 500;
+            CryptoProgramWin.Width = 500;
+            //********Daniela end ********************
 
+        }
+        #endregion
 
+        #region encryptioncode to encrypt de file, generate RSA key & AES, DES semetric keys
         /// <summary>
         /// Button to encryption the file that's given
         /// </summary>
@@ -262,24 +287,19 @@ namespace CryptoProgramma
             }
         }
 
+        #endregion
 
+
+        #endregion
+
+        #region decription window
+
+        #region home-back-browsebuttons decryption windows
         /// <summary>
-        /// Button to return to the home-window
+        /// Button to go to the decryptionpage from the homepage
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void backBtn_EnGr_Click(object sender, RoutedEventArgs e)
-        {
-            //********Daniela begin ********************
-
-            homePageGrid.Visibility = Visibility.Visible;
-            encryptingGrid.Visibility = Visibility.Collapsed;
-            CryptoProgramWin.Height = 500;
-            CryptoProgramWin.Width = 500;
-            //********Daniela end ********************
-
-        }
-
         private void decryptHomeButton_Click(object sender, RoutedEventArgs e)
         {
             //********Daniela begin ********************
@@ -291,6 +311,11 @@ namespace CryptoProgramma
 
         }
 
+        /// <summary>
+        /// Button to go to the homepage from de decyptionpage
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backButton_DeFileGr_Click(object sender, RoutedEventArgs e)
         {
             //********Daniela begin ********************
@@ -301,7 +326,11 @@ namespace CryptoProgramma
 
         }
 
-
+        /// <summary>
+        /// Button to go to the homepage after decrypting a file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void backBtn_DeGr_Click(object sender, RoutedEventArgs e)
         {
             //********Daniela begin ********************
@@ -311,60 +340,168 @@ namespace CryptoProgramma
             //********Daniela end ********************
         }
 
-
+        #region browse buttons
         /// <summary>
-        /// Button to get out of the stenografie-window
+        /// Button to go to browse to the file to decrypt
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void backSteg_Btn_Click(object sender, RoutedEventArgs e)
+        private void browseFileBut_Click(object sender, RoutedEventArgs e)
         {
-            //********Daniela begin ********************
-
-            CryptoProgramWin.Height = 500;
-            CryptoProgramWin.Width = 500;
-            steganografieGrid.Visibility = Visibility.Collapsed;
-            homePageGrid.Visibility = Visibility.Visible;
-            //********Daniela end ********************
-
-        }
-
-        private void rsaKeys_ChangeBtn_Click(object sender, RoutedEventArgs e)
-        { //kevin
-            FolderBrowserDialog browseFolder = new FolderBrowserDialog();
-            browseFolder.ShowDialog();
-            hoofdPad = browseFolder.SelectedPath + "\\";
-        }
-        /// <summary>
-        /// Button to exit the program
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void exit_Menu_Selected(object sender, RoutedEventArgs e)
-        {
-            System.Windows.Application.Current.Shutdown();
-        }
-        //Override the onClose method in the Application Main window
-
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-        {
-            MessageBoxResult result = System.Windows.MessageBox.Show("Wilt u de applicatie afsluiten?", "EXIT",
-                                                  MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.Cancel)
+            browseVenster.Filter = "Txt Documents|*.txt";
+            if (browseVenster.ShowDialog() == true)
             {
-                e.Cancel = true;
+                decryptFile = browseVenster.FileName;
+                fileLbl.Content = browseVenster.FileName;
             }
-            base.OnClosing(e);
+
         }
+
         /// <summary>
-        /// Button to edit the backgroundcolor of the entire program
+        /// Button to go to browse to the encrypted symetric key file
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ClrPcker_Background_SelectedColorChanged(object sender, RoutedEventArgs e)
-        {       //kevin
-            Brush brush = new SolidColorBrush(ClrPcker_Background.SelectedColor.Value);
-            SideMenu.Background = brush;
+        private void browseSemKeyBut_Click(object sender, RoutedEventArgs e)
+        {
+            browseVenster.Filter = "Txt Documents|*.txt";
+            if (browseVenster.ShowDialog() == true)
+            {
+                decryptSemKey = browseVenster.FileName;
+                symkeyLbl.Content = browseVenster.FileName;
+            }
+
+        }
+
+        /// <summary>
+        /// Button to go to browse to the encrypted hashfile
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void browseHashBut_Click(object sender, RoutedEventArgs e)
+        {
+            browseVenster.Filter = "Txt Documents|*.txt";
+            if (browseVenster.ShowDialog() == true)
+            {
+                decryptHash = browseVenster.FileName;
+                hashLbl.Content = browseVenster.FileName;
+            }
+
+        }
+
+        /// <summary>
+        /// Button to go to browse to the public key file of the sender
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void browsePublicBut_Click(object sender, RoutedEventArgs e)
+        {
+            browseVenster.Filter = "Txt Documents|*.txt";
+            if (browseVenster.ShowDialog() == true)
+            {
+                pubSender = browseVenster.FileName;
+                publicLbl.Content = browseVenster.FileName;
+            }
+
+        }
+
+        /// <summary>
+        /// Button to go to browse to the private key file of the receiver
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void browsePrivateBut_Click(object sender, RoutedEventArgs e)
+        {
+            browseVenster.Filter = "Txt Documents|*.txt";
+            if (browseVenster.ShowDialog() == true)
+            {
+                privReceiv = browseVenster.FileName;
+                privateLbl.Content = browseVenster.FileName;
+            }
+
+        }
+        #endregion
+
+        #endregion
+
+
+        #region decryptioncode to decrypt the file. And use of the RSA keys & AES, DES semetric keys
+
+        #region properties decrypteren 
+        string decryptFile, decryptSemKey, decryptHash, pubSender, privReceiv;
+        //properties decrypteren
+
+        #endregion
+
+        /// <summary>
+        /// Button to go decrypt all given files
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void decryptButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            decryptingGrid.Visibility = Visibility.Visible;
+            decryptFileGrid.Visibility = Visibility.Collapsed;
+            if (fileLbl.Content.Equals("") || symkeyLbl.Content.Equals("") || hashLbl.Content.Equals("") || publicLbl.Content.Equals("") || privateLbl.Content.Equals(""))
+            {
+                System.Windows.MessageBox.Show("Je mist een bestand, controleer of je alles heb gekozen");
+            }
+            else
+            {
+                //stap 1 : symetric decrypteren met privesleutel
+                string inhouddecryptSemKey = File.ReadAllText(decryptSemKey);
+                string ontcijferdeSemKey = RSA.Decrypt(inhouddecryptSemKey, privReceiv);
+                Directory.CreateDirectory(hoofdPad + "\\DecryptedFiles");
+                File.WriteAllText(hoofdPad + "\\DecryptedFiles\\" + "DecryptedSkey" +
+                    System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt", ontcijferdeSemKey);
+
+                //stap 2:  bestand decrypteren met semetric key
+                //bij het decrypteren komt ook een error idk why
+
+                //Nasim - Nu komt geen error :p 
+                string destination = hoofdPad + "DecryptedFiles\\" + "DecryptedTxt" +
+                                     System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt";
+                des.DecryptFile(decryptFile, destination, ontcijferdeSemKey);
+                Process.Start(destination);
+
+
+
+                //stap 3 : hash berekenen boodschap
+
+                //Onderstaande code zou moeten werken maar geeft een error 
+                //stap 4 : hash decryperen met publiekesleutel
+                //string inhouddecryptHash = File.ReadAllText(decryptHash);
+                //string ontcijferdeHash = RSA.Decrypt(inhouddecryptHash, pubSender);
+                //Directory.CreateDirectory(hoofdPad + "\\DecryptedFiles");
+                //File.WriteAllText(hoofdPad + "\\DecryptedFiles\\" + "DecryptedHash" +
+                //    System.IO.Path.GetFileNameWithoutExtension(decryptHash) + ".txt", ontcijferdeHash);
+
+                //stap 5 : zelfberekende hash en ontcijferde hash vergelijken 
+
+            }
+        }
+
+        #endregion
+
+
+        #endregion
+
+        #region helper functions
+
+        /// <summary>
+        /// Generate random byte array
+        /// </summary>
+        /// <param name="length">array length</param>
+        /// <returns>Random byte array</returns>
+        private static byte[] GenerateRandom(int length)
+        {
+            byte[] bytes = new byte[length];
+            using (RNGCryptoServiceProvider random = new RNGCryptoServiceProvider())
+            {
+                random.GetBytes(bytes);
+            }
+            return bytes;
         }
 
         /// <summary>
@@ -412,7 +549,14 @@ namespace CryptoProgramma
                 }
             }
         }
+        #endregion
 
+
+        /// <summary>
+        /// Button to go to the homepage
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void home_Menu_Selected(object sender, RoutedEventArgs e)
         {
             //********Daniela begin ********************
@@ -428,6 +572,25 @@ namespace CryptoProgramma
 
         }
 
+        #region stenografie window, props and actions
+
+        /// <summary>
+        /// Button to get out of the stenografie-window and go to the homepage
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// 
+        private void backSteg_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            //********Daniela begin ********************
+
+            CryptoProgramWin.Height = 500;
+            CryptoProgramWin.Width = 500;
+            steganografieGrid.Visibility = Visibility.Collapsed;
+            homePageGrid.Visibility = Visibility.Visible;
+            //********Daniela end ********************
+
+        }
 
         /// <summary>
         /// Button to open the stenografie-options
@@ -452,6 +615,19 @@ namespace CryptoProgramma
         }
 
 
+        /*  HIERIN KAN JE JE CODE ZETTEN TIM  ***********************************    */
+
+        #endregion
+
+
+
+
+ 
+
+    
+
+        #region settings window
+
         /// <summary>
         /// Button to open the settings-window
         /// </summary>
@@ -474,6 +650,31 @@ namespace CryptoProgramma
             //********Daniela end ********************
 
         }
+        /// <summary>
+        /// Button to edit the path to save the rsakeys
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void rsaKeys_ChangeBtn_Click(object sender, RoutedEventArgs e)
+        { //kevin
+            FolderBrowserDialog browseFolder = new FolderBrowserDialog();
+            browseFolder.ShowDialog();
+            hoofdPad = browseFolder.SelectedPath + "\\";
+        }
+
+        /// <summary>
+        /// Button to edit the backgroundcolor of the entire program
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClrPcker_Background_SelectedColorChanged(object sender, RoutedEventArgs e)
+        {       //kevin
+            Brush brush = new SolidColorBrush(ClrPcker_Background.SelectedColor.Value);
+            SideMenu.Background = brush;
+        }
+        #endregion
+
+        #region help window
 
         /// <summary>
         /// Button to open the help-menu
@@ -496,120 +697,32 @@ namespace CryptoProgramma
             //********Daniela end ********************
 
         }
-        //properties decrypteren
-        string decryptFile, decryptSemKey, decryptHash, pubSender, privReceiv;
+        #endregion
+       
 
-        private void decryptButton_Click(object sender, RoutedEventArgs e)
+    #region exit program
+        /// <summary>
+        /// Button to exit the program
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void exit_Menu_Selected(object sender, RoutedEventArgs e)
         {
-
-            decryptingGrid.Visibility = Visibility.Visible;
-            decryptFileGrid.Visibility = Visibility.Collapsed;
-            if (fileLbl.Content.Equals("") || symkeyLbl.Content.Equals("") || hashLbl.Content.Equals("") || publicLbl.Content.Equals("") || privateLbl.Content.Equals(""))
-            {
-                System.Windows.MessageBox.Show("Je mist een bestand, controleer of je alles heb gekozen");
-            }
-            else
-            {
-                //stap 1 : symetric decrypteren met privesleutel
-                string inhouddecryptSemKey = File.ReadAllText(decryptSemKey);
-                string ontcijferdeSemKey = RSA.Decrypt(inhouddecryptSemKey, privReceiv);
-                Directory.CreateDirectory(hoofdPad + "\\DecryptedFiles");
-                File.WriteAllText(hoofdPad + "\\DecryptedFiles\\" + "DecryptedSkey" +
-                    System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt", ontcijferdeSemKey);
-
-                //stap 2:  bestand decrypteren met semetric key
-                //bij het decrypteren komt ook een error idk why
-                                  
-                //Nasim - Nu komt geen error :p 
-                string destination = hoofdPad + "DecryptedFiles\\" + "DecryptedTxt" +
-                                     System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt";
-                des.DecryptFile(decryptFile, destination, ontcijferdeSemKey);
-                Process.Start(destination);
-
-
-
-                //stap 3 : hash berekenen boodschap
-
-                //Onderstaande code zou moeten werken maar geeft een error 
-                //stap 4 : hash decryperen met publiekesleutel
-                //string inhouddecryptHash = File.ReadAllText(decryptHash);
-                //string ontcijferdeHash = RSA.Decrypt(inhouddecryptHash, pubSender);
-                //Directory.CreateDirectory(hoofdPad + "\\DecryptedFiles");
-                //File.WriteAllText(hoofdPad + "\\DecryptedFiles\\" + "DecryptedHash" +
-                //    System.IO.Path.GetFileNameWithoutExtension(decryptHash) + ".txt", ontcijferdeHash);
-
-                //stap 5 : zelfberekende hash en ontcijferde hash vergelijken 
-
-            }
+            System.Windows.Application.Current.Shutdown();
         }
 
-        private void browseFileBut_Click(object sender, RoutedEventArgs e)
+        //Override the onClose method in the Application Main window
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            browseVenster.Filter = "Txt Documents|*.txt";
-            if (browseVenster.ShowDialog() == true)
+            MessageBoxResult result = System.Windows.MessageBox.Show("Wilt u de applicatie afsluiten?", "EXIT",
+                                                  MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.Cancel)
             {
-                decryptFile = browseVenster.FileName;
-                fileLbl.Content = browseVenster.FileName;
+                e.Cancel = true;
             }
-
+            base.OnClosing(e);
         }
-
-        private void browseSemKeyBut_Click(object sender, RoutedEventArgs e)
-        {
-            browseVenster.Filter = "Txt Documents|*.txt";
-            if (browseVenster.ShowDialog() == true)
-            {
-                decryptSemKey = browseVenster.FileName;
-                symkeyLbl.Content = browseVenster.FileName;
-            }
-
-        }
-
-        private void browseHashBut_Click(object sender, RoutedEventArgs e)
-        {
-            browseVenster.Filter = "Txt Documents|*.txt";
-            if (browseVenster.ShowDialog() == true)
-            {
-                decryptHash = browseVenster.FileName;
-                hashLbl.Content = browseVenster.FileName;
-            }
-
-        }
-
-        private void browsePublicBut_Click(object sender, RoutedEventArgs e)
-        {
-            browseVenster.Filter = "Txt Documents|*.txt";
-            if (browseVenster.ShowDialog() == true)
-            {
-                pubSender =browseVenster.FileName;
-                publicLbl.Content = browseVenster.FileName;
-            }
-
-        }
-
-        private void browsePrivateBut_Click(object sender, RoutedEventArgs e)
-        {
-            browseVenster.Filter = "Txt Documents|*.txt";
-            if (browseVenster.ShowDialog() == true)
-            {
-                privReceiv = browseVenster.FileName;
-                privateLbl.Content = browseVenster.FileName;
-            }
-
-        }        /// <summary>
-                 /// Generate random byte array
-                 /// </summary>
-                 /// <param name="length">array length</param>
-                 /// <returns>Random byte array</returns>
-        private static byte[] GenerateRandom(int length)
-        {
-            byte[] bytes = new byte[length];
-            using (RNGCryptoServiceProvider random = new RNGCryptoServiceProvider())
-            {
-                random.GetBytes(bytes);
-            }
-            return bytes;
-        }
+        #endregion
 
 
 
