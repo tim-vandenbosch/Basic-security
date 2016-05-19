@@ -121,22 +121,12 @@
         </Grid>
 
         <Grid Name="settingsGrid" Background="Beige" Visibility="Collapsed" Height="500" Width="450">
-            <Label x:Name="label2" Content="Edit your preferences" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="146"/>
-            <Label x:Name="label2_Copy" Content="Locations" HorizontalAlignment="Left" Margin="163,51,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.883,0.654"/>
-            <Label x:Name="label2_Copy1" Content="RsaKeys" HorizontalAlignment="Left" Margin="24,82,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label2" Content="Edit your preferences" HorizontalAlignment="Left" Margin="24,20,0,0" VerticalAlignment="Top" Width="146"/>
+            <Label x:Name="label2_Copy1" Content="Choose where you want to save your files." HorizontalAlignment="Left" Margin="24,82,0,0" VerticalAlignment="Top"/>
             <Label x:Name="rsaKeys_lbl" Content="C:\" HorizontalAlignment="Left" Margin="73,113,0,0" VerticalAlignment="Top" Width="246"/>
-            <Label x:Name="label2_Copy5" Content="Encrypted file" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="encryptedFile_lbl" Content="C:/Documents/Secret/" HorizontalAlignment="Left" Margin="73,202,0,0" VerticalAlignment="Top" Width="246"/>
-            <Label x:Name="label2_Copy7" Content="Encrypted symetric key" HorizontalAlignment="Left" Margin="10,244,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="encryptedSkey_lbl" Content="C:/Documents/Secret/" HorizontalAlignment="Left" Margin="73,287,0,0" VerticalAlignment="Top" Width="232"/>
-            <Label x:Name="label2_Copy9" Content="Encrypted hash" HorizontalAlignment="Left" Margin="10,327,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="encryptedHash_lbl" Content="C:/Documents/Secret" HorizontalAlignment="Left" Margin="73,358,0,0" VerticalAlignment="Top" Width="232"/>
-            <Label x:Name="label2_Copy11" Content="Change the color of the program" HorizontalAlignment="Left" Margin="10,411,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="rsaKeys_ChangeBtn" Click="rsaKeys_ChangeBtn_Click" Content="Change" HorizontalAlignment="Left" Margin="325,116,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="encrypted_FileChangeBtn" Content="Change" HorizontalAlignment="Left" Margin="325,205,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="encrypted_SkeyChangeBtn" Content="Change" HorizontalAlignment="Left" Margin="325,290,0,0" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="encrypted_HashChangeBtn" Content="Change" HorizontalAlignment="Left" Margin="325,358,0,0" VerticalAlignment="Top" Width="75"/>
-            <xctk:ColorPicker Name="ClrPcker_Background" SelectedColorChanged="ClrPcker_Background_SelectedColorChanged" HorizontalAlignment="Left" Margin="200,415,0,0" VerticalAlignment="Top"></xctk:ColorPicker>
+            <Label x:Name="label2_Copy11" Content="Change the color of the program" HorizontalAlignment="Left" Margin="22,150,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="rsaKeys_ChangeBtn" Click="rsaKeys_ChangeBtn_Click" Content="Change" HorizontalAlignment="Left" Margin="300,116,0,0" VerticalAlignment="Top" Width="75"/>
+            <xctk:ColorPicker Name="ClrPcker_Background" SelectedColorChanged="ClrPcker_Background_SelectedColorChanged" HorizontalAlignment="Left" Margin="300,150,0,0" VerticalAlignment="Top"></xctk:ColorPicker>
         </Grid>
 
         <Grid Name="helpGrid"  Background="Beige" Visibility="Collapsed" Height="500" Width="450">
