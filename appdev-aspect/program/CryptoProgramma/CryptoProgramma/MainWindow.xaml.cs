@@ -624,10 +624,17 @@ namespace CryptoProgramma
             browseVenster.Filter = "Image Files (*.jpeg; *.png; *.bmp)| *.jpg; *.png; *.bmp";
             if (browseVenster.ShowDialog() == true)
             {
-               
+
+                string padFoto = browseVenster.FileName;
+                //FileNameLabel.Content = selectedFileName;
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(padFoto);
+                bitmap.EndInit();
+                selectedImage.Source = bitmap;
                 /*System.IO.Path.GetFullPath(browseVenster.FileName);*/
-                labelSelectedImage.Content = browseVenster.FileName;
-                selectedImage_Loaded(null,null);
+               // labelSelectedImage.Content = browseVenster.FileName;
+                ///selectedImage_Loaded(null,null);
                 //labelSelectedImage.Content = bi3;
 
             }
@@ -637,13 +644,16 @@ namespace CryptoProgramma
 
         private void selectedImage_Loaded(object sender, RoutedEventArgs e)
         {
-            Image myImage3 = new Image();
-            BitmapImage bi3 = new BitmapImage();
-            bi3.BeginInit();
-            bi3.UriSource = new Uri(browseVenster.FileName, UriKind.Relative);
-            bi3.EndInit();
-            myImage3.Stretch = Stretch.Fill;
-            selectedImage.Source = bi3;
+            
+
+
+            //Image myImage3 = new Image();
+            //BitmapImage bi3 = new BitmapImage();
+            //bi3.BeginInit();
+            //bi3.UriSource = new Uri(browseVenster.FileName, UriKind.Relative);
+            //bi3.EndInit();
+            //myImage3.Stretch = Stretch.Fill;
+           // selectedImage.Source = bi3;
         }
         //bronn : http://www.dotnetperls.com/image-wpf
         /// <summary>
