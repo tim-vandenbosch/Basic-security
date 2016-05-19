@@ -610,7 +610,22 @@ namespace CryptoProgramma
         /// <param name="e"></param>
         private void browseImageButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            //OpenFileDialog open_dialog = new OpenFileDialog();
+            //open_dialog.Filter = "Image Files (*.jpeg; *.png; *.bmp)|*.jpg; *.png; *.bmp";
+
+            //if (open_dialog.ShowDialog() == DialogResult.OK)
+            //{
+            //    selectedImage.Image = Image.FromFile(open_dialog.FileName);
+            //    maakLeeg();
+            //}
+
+
+            browseVenster.Filter = "Image Files (*.jpeg; *.png; *.bmp)| *.jpg; *.png; *.bmp";
+            if (browseVenster.ShowDialog() == true)
+            {
+                selectedImage.Source = Convert.ToString(browseVenster.FileName);
+                labelSelectedImage.Content = browseVenster.FileName;
+            }
         }
 
         /// <summary>
