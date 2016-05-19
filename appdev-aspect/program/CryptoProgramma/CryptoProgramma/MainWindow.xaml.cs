@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Windows.Forms;
 using Xceed.Wpf.Toolkit;
 using System.Diagnostics;
+using System.Windows.Media.Imaging;
 
 namespace CryptoProgramma
 {
@@ -623,11 +624,28 @@ namespace CryptoProgramma
             browseVenster.Filter = "Image Files (*.jpeg; *.png; *.bmp)| *.jpg; *.png; *.bmp";
             if (browseVenster.ShowDialog() == true)
             {
-                selectedImage.Source = Convert.ToString(browseVenster.FileName);
+               
+                /*System.IO.Path.GetFullPath(browseVenster.FileName);*/
                 labelSelectedImage.Content = browseVenster.FileName;
+                selectedImage_Loaded(null,null);
+                //labelSelectedImage.Content = bi3;
+
             }
         }
 
+        //bron https://msdn.microsoft.com/en-us/library/system.windows.controls.image.source%28v=vs.110%29.aspx?f=255&MSPPError=-2147217396
+
+        private void selectedImage_Loaded(object sender, RoutedEventArgs e)
+        {
+            Image myImage3 = new Image();
+            BitmapImage bi3 = new BitmapImage();
+            bi3.BeginInit();
+            bi3.UriSource = new Uri(browseVenster.FileName, UriKind.Relative);
+            bi3.EndInit();
+            myImage3.Stretch = Stretch.Fill;
+            selectedImage.Source = bi3;
+        }
+        //bronn : http://www.dotnetperls.com/image-wpf
         /// <summary>
         /// Selecting the file that will be used for the stenography
         /// </summary>
@@ -676,7 +694,9 @@ namespace CryptoProgramma
             browseFolder.ShowDialog();
             hoofdPad = browseFolder.SelectedPath + "\\";
         }
-        
+
+
+
         /// <summary>
         /// Button to edit the backgroundcolor of the entire program
         /// </summary>
