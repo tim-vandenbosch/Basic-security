@@ -16,8 +16,6 @@ namespace CryptoProgramma
         private static string _public_B;
         public static string public_Receiver, private_Receiver;
         private static UnicodeEncoding _encoder = new UnicodeEncoding();
-
-        //  private static string enc = "", dec = "";
         #endregion
 
         public static string[] keys(string hoofdPad, string nameS, string nameR) //string pad, 
@@ -29,13 +27,9 @@ namespace CryptoProgramma
             String public_Pad = hoofdPad + "Keys\\Public_Keys\\"; //PublicKey_" + nameS + ".txt";
             String private_Pad = hoofdPad + "Keys\\Private_Keys\\"; // PrivateKey_" + nameS + ".txt";
 
-            //String PupadReceiver = hoofdPad + "\\Keys\\Public_Keys\\"; // PublicKey_" + nameR + ".txt";
-            //string PrpadReceiver = hoofdPad + "\\Keys\\Private_Keys\\"; // PrivateKey_" +  nameR + ".txt";
-
             Directory.CreateDirectory(public_Pad);
             Directory.CreateDirectory(private_Pad);
-            //Directory.CreateDirectory(PupadReceiver);
-            //Directory.CreateDirectory(PrpadReceiver);
+
              string[] returnwaarde = new string[8];
             returnwaarde[0] = "PublicKey_" + nameS + ".txt";
             returnwaarde[1] = "PrivateKey_" + nameS + ".txt";
@@ -138,6 +132,75 @@ namespace CryptoProgramma
             return _encoder.GetString(decryptedByte);
 
         }
+   
+
+        public static string SignData(string message, string privateKey)
+        {
+            //// The array to store the signed message in bytes
+            byte[] signedBytes;
+            using (var rsa = new RSACryptoServiceProvider())
+            {
+                //// Write the message to a byte array using UTF8 as the encoding.
+                var encoder = new UTF8Encoding();
+                byte[] originalData = encoder.GetBytes(message);
+
+                try
+                {
+                    //// Import the private key used for signing the message
+                    rsa.FromXmlString(File.ReadAllText(privateKey));
+
+                    //// Sign the data, using SHA512 as the hashing algorithm 
+                    signedBytes = rsa.SignData(originalData, CryptoConfig.MapNameToOID("SHA512"));
+                }
+                catch (CryptographicException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return null;
+                }
+                finally
+                {
+                    //// Set the keycontainer to be cleared when rsa is garbage collected.
+                    rsa.PersistKeyInCsp = false;
+                }
+            }
+            //// Convert the a base64 string before returning
+            return Convert.ToBase64String(signedBytes);
+        }
+
+
+        public static bool VerifyData(string originalMessage, string signedMessage, string publicKey)
+        {
+            bool success = false;
+            using (var rsa = new RSACryptoServiceProvider())
+            {
+                var encoder = new UTF8Encoding();
+                byte[] bytesToVerify = encoder.GetBytes(originalMessage);
+
+                byte[] signedBytes = Convert.FromBase64String(signedMessage);
+                try
+                {
+                    rsa.FromXmlString(File.ReadAllText(publicKey));
+
+                    SHA512Managed Hash = new SHA512Managed();
+
+                    byte[] hashedData = Hash.ComputeHash(signedBytes);
+
+                    success = rsa.VerifyData(bytesToVerify, CryptoConfig.MapNameToOID("SHA512"), signedBytes);
+                }
+                catch (CryptographicException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                finally
+                {
+                    rsa.PersistKeyInCsp = false;
+                }
+            }
+            return success;
+        }
+
+
+
     }
 }
 #region Bronnen die gebruikt zijn voor deze klasse
@@ -145,7 +208,11 @@ namespace CryptoProgramma
 *   http://stackoverflow.com/questions/18485715/how-to-use-public-and-private-key-encryption-technique-in-c-sharp 
 *   https://msdn.microsoft.com/en-us/library/8bh11f1k.aspx
 *   https://msdn.microsoft.com/en-us/library/ezwyzy7b.aspx
-*   https://msdn.microsoft.com/en-us/library/as2f1fez%28v=vs.110%29.aspx?f=255&MSPPError=-2147217396
+*   https://msdn.microsoft.com/en-us/library/as2f1fez%28v=vs.110%29.aspx?f=255&MSPPError=-2147217396    
+// Bron : Sing en verify 
+ //http://stackoverflow.com/questions/8437288/signing-and-verifying-signatures-with-rsa-c-sharp
+ https://blogs.msdn.microsoft.com/nicold/2007/09/03/how-to-digitally-sign-a-string/
+
 */
 #endregion
 
