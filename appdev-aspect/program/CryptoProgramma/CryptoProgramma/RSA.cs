@@ -184,7 +184,7 @@ namespace CryptoProgramma
                     SHA512Managed Hash = new SHA512Managed();
 
                     byte[] hashedData = Hash.ComputeHash(signedBytes);
-
+                    
                     success = rsa.VerifyData(bytesToVerify, CryptoConfig.MapNameToOID("SHA512"), signedBytes);
                 }
                 catch (CryptographicException e)
@@ -216,3 +216,81 @@ namespace CryptoProgramma
 */
 #endregion
 
+/* onderstaande moet ik nog toevoegen aan de MainWindows.xaml.cs
+lijn 143 - 154 (ENCRYPTEREN)
+ string md5sum = hash(filetext, "MD5");
+                // Console.WriteLine(md5sum);
+                //lander
+
+                //********Daniela begin ********************
+
+                //public en private keys gemaakt en gesaved !!!! DEZE MOET DAAR WEG
+                 
+            opgeslagenBestanden = RSA.keys(hoofdPad, senderTxt.Text, receiverTxt.Text);
+
+            //hash geencrypteert en opgeslaan
+            //string encryptHash = RSA.Encrypt(md5sum, opgeslagenBestanden[4]); 
+            string encryptHash = RSA.SignData(md5sum, opgeslagenBestanden[4]);//singen met private key sender
+
+     by decryptbutton
+      private void decryptButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            decryptingGrid.Visibility = Visibility.Visible;
+            decryptFileGrid.Visibility = Visibility.Collapsed;
+            if (fileLbl.Content.Equals("") || symkeyLbl.Content.Equals("") || hashLbl.Content.Equals("") || publicLbl.Content.Equals("") || privateLbl.Content.Equals(""))
+            {
+                System.Windows.MessageBox.Show("Je mist een bestand, controleer of je alles heb gekozen");
+            }
+            else
+            {
+                //stap 1 : symetric decrypteren met privesleutel
+                string inhouddecryptSemKey = File.ReadAllText(decryptSemKey);
+                string ontcijferdeSemKey = "";
+                ontcijferdeSemKey = RSA.Decrypt(inhouddecryptSemKey, privReceiv);
+                Directory.CreateDirectory(hoofdPad + "\\DecryptedFiles");
+                File.WriteAllText(hoofdPad + "\\DecryptedFiles\\" + "DecryptedSkey" +
+                    System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt", ontcijferdeSemKey);
+
+                //stap 2:  bestand decrypteren met semetric key
+                //bij het decrypteren komt ook een error idk why
+
+                //Nasim - Nu komt geen error :p 
+                string destination = hoofdPad + "DecryptedFiles\\" + "DecryptedTxt" +
+                                   System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt";
+
+                if (decryptSemKey.Contains("DES"))
+                {
+                    des.DecryptFile(decryptFile, destination, ontcijferdeSemKey);
+                    Process.Start(destination);
+                }
+                else if (decryptSemKey.Contains("AES"))
+                {
+
+                }
+              
+                //stap 3 : hash berekenen boodschap
+                string berekendeNieuweHAsh = hash(File.ReadAllText(destination), "MD5");
+
+                //Onderstaande code zou moeten werken maar geeft een error 
+                //stap 4 & 5: hash verify met publiekesleutel, zelfberekende hash en ontcijferde hash vergelijken 
+                string inhouddecryptHash = File.ReadAllText(decryptHash);
+                //string ontcijferdeHash = RSA.Decrypt(inhouddecryptHash, pubSender);
+                bool ontcijferdeHash = RSA.VerifyData(berekendeNieuweHAsh, inhouddecryptHash, pubSender);
+                string resultaatHash="";
+                if (ontcijferdeHash)
+                {
+                    resultaatHash = "De gesignde hash, en de zelf berekende hash komen overeen";
+                }else if (!ontcijferdeHash)
+                {
+                    resultaatHash = "De gesignde hash, en de zelf berekende hash komen NIET overeen";
+                }
+                System.Windows.MessageBox.Show(resultaatHash);
+                Directory.CreateDirectory(hoofdPad + "\\DecryptedFiles");
+                File.WriteAllText(hoofdPad + "\\DecryptedFiles\\" + "ResultaatHash" +
+              System.IO.Path.GetFileNameWithoutExtension(decryptHash) + ".txt", resultaatHash);
+            }
+        }
+
+
+*/
