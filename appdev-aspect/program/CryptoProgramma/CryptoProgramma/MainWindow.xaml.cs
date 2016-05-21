@@ -618,7 +618,7 @@ namespace CryptoProgramma
             //{
             //    selectedImage.Image = Image.FromFile(open_dialog.FileName);
             //    maakLeeg();
-            //}
+            //} // oude code mag weg :) 
 
 
             browseVenster.Filter = "Image Files (*.jpeg; *.png; *.bmp)| *.jpg; *.png; *.bmp";
@@ -632,38 +632,30 @@ namespace CryptoProgramma
                 bitmap.UriSource = new Uri(padFoto);
                 bitmap.EndInit();
                 selectedImage.Source = bitmap;
-                /*System.IO.Path.GetFullPath(browseVenster.FileName);*/
-               // labelSelectedImage.Content = browseVenster.FileName;
-                ///selectedImage_Loaded(null,null);
-                //labelSelectedImage.Content = bi3;
+               labelSelectedImage.Content = padFoto;
 
             }
         }
 
-        //bron https://msdn.microsoft.com/en-us/library/system.windows.controls.image.source%28v=vs.110%29.aspx?f=255&MSPPError=-2147217396
+        //bron :
+        // http://www.c-sharpcorner.com/UploadFile/mahesh/using-xaml-image-in-wpf/
 
-        private void selectedImage_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-
-
-            //Image myImage3 = new Image();
-            //BitmapImage bi3 = new BitmapImage();
-            //bi3.BeginInit();
-            //bi3.UriSource = new Uri(browseVenster.FileName, UriKind.Relative);
-            //bi3.EndInit();
-            //myImage3.Stretch = Stretch.Fill;
-           // selectedImage.Source = bi3;
-        }
-        //bronn : http://www.dotnetperls.com/image-wpf
         /// <summary>
         /// Selecting the file that will be used for the stenography
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+
+        string filesteg; 
         private void browsFileButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
+            browseVenster.Filter = "Txt Documents|*.txt";
+            if (browseVenster.ShowDialog() == true)
+            {
+                filesteg = browseVenster.FileName;
+                labelSelectedFile.Content = browseVenster.FileName;
+            }
         }
 
         #endregion
