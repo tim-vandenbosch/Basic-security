@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Windows.Forms;
 using Xceed.Wpf.Toolkit;
 using System.Diagnostics;
+using System.Windows.Media.Imaging;
 
 namespace CryptoProgramma
 {
@@ -617,25 +618,44 @@ namespace CryptoProgramma
             //{
             //    selectedImage.Image = Image.FromFile(open_dialog.FileName);
             //    maakLeeg();
-            //}
+            //} // oude code mag weg :) 
 
 
             browseVenster.Filter = "Image Files (*.jpeg; *.png; *.bmp)| *.jpg; *.png; *.bmp";
             if (browseVenster.ShowDialog() == true)
             {
-                selectedImage.Source = Convert.ToString(browseVenster.FileName);
-                labelSelectedImage.Content = browseVenster.FileName;
+
+                string padFoto = browseVenster.FileName;
+                //FileNameLabel.Content = selectedFileName;
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(padFoto);
+                bitmap.EndInit();
+                selectedImage.Source = bitmap;
+               labelSelectedImage.Content = padFoto;
+
             }
         }
+
+        //bron :
+        // http://www.c-sharpcorner.com/UploadFile/mahesh/using-xaml-image-in-wpf/
 
         /// <summary>
         /// Selecting the file that will be used for the stenography
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+
+        string filesteg; 
         private void browsFileButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
+            browseVenster.Filter = "Txt Documents|*.txt";
+            if (browseVenster.ShowDialog() == true)
+            {
+                filesteg = browseVenster.FileName;
+                labelSelectedFile.Content = browseVenster.FileName;
+            }
         }
 
         #endregion
@@ -676,7 +696,9 @@ namespace CryptoProgramma
             browseFolder.ShowDialog();
             hoofdPad = browseFolder.SelectedPath + "\\";
         }
-        
+
+
+
         /// <summary>
         /// Button to edit the backgroundcolor of the entire program
         /// </summary>
