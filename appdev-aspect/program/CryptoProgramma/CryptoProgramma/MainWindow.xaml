@@ -115,7 +115,7 @@
             <Button x:Name="discoverButton" Content="Ophalen data" HorizontalAlignment="Left" Margin="325,388,0,0" VerticalAlignment="Top" Width="99" Height="27"/>
             <Button x:Name="saveSteg_Btn" Content="Save the new file" HorizontalAlignment="Left" Margin="20,420,0,0" VerticalAlignment="Top" Width="99" Height="27"/>
             <Button x:Name="backSteg_Btn" Click="backSteg_Btn_Click" Content="&lt; Back to home" HorizontalAlignment="Left" Margin="325,420,0,0" VerticalAlignment="Top" Width="99" Height="27"/>
-            <Image x:Name="selectedImage" Source="C:\Users\tim_v\Documents\GitHub\Basic-security\appdev-aspect\program\CryptoProgramma\CryptoProgramma\img\decrypt.jpg" HorizontalAlignment="Left" Height="200" Margin="240,45,0,0" VerticalAlignment="Top" Width="200" />
+            <Image x:Name="selectedImage" Source="img/decrypt.jpg" HorizontalAlignment="Left" Height="200" Margin="240,45,0,0" VerticalAlignment="Top" Width="200" />
             <Label x:Name="labelSelectedImage" Content="" HorizontalAlignment="Left" Margin="21,79,0,0" VerticalAlignment="Top" Width="180"/>
             <Label x:Name="labelSelectedFile" Content="" HorizontalAlignment="Left" Margin="21,136,0,0" VerticalAlignment="Top" Width="180"/>
         </Grid>
