@@ -455,7 +455,10 @@ namespace CryptoProgramma
                 }
 
                 //stap 3 : hash berekenen boodschap
-                string berekendeNieuweHAsh = hash(File.ReadAllText(destination), "MD5");
+                string text = File.ReadAllText(destination);
+                if (!text[text.Length-1].Equals('\n')) ;
+                    text += '\n';
+                string berekendeNieuweHAsh = hash(text, "MD5");
 
                 //Onderstaande code zou moeten werken maar geeft een false trg ipv true 
                 //stap 4 & 5: hash verify met publiekesleutel, zelfberekende hash en gesignde hash vergelijken 
