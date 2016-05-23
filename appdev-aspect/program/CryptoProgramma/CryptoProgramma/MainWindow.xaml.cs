@@ -283,12 +283,15 @@ namespace CryptoProgramma
         /// <param name="e"></param>
         private void decryptHomeButton_Click(object sender, RoutedEventArgs e)
         {
-            //********Daniela begin ********************
 
             //mainTabs.SelectedItem = mainTabs.FindName("decryptFile");
             decryptFileGrid.Visibility = Visibility.Visible;
             homePageGrid.Visibility = Visibility.Collapsed;
-            //********Daniela end ********************
+            fileLbl.Content = "";
+            symkeyLbl.Content = "";
+            hashLbl.Content = "";
+            publicLbl.Content = "";
+            privateLbl.Content = "";
 
         }
 
@@ -299,11 +302,9 @@ namespace CryptoProgramma
         /// <param name="e"></param>
         private void backButton_DeFileGr_Click(object sender, RoutedEventArgs e)
         {
-            //********Daniela begin ********************
 
             homePageGrid.Visibility = Visibility.Visible;
             decryptFileGrid.Visibility = Visibility.Collapsed;
-            //********Daniela end ********************
 
         }
 
@@ -314,11 +315,9 @@ namespace CryptoProgramma
         /// <param name="e"></param>
         private void backBtn_DeGr_Click(object sender, RoutedEventArgs e)
         {
-            //********Daniela begin ********************
 
             homePageGrid.Visibility = Visibility.Visible;
             decryptingGrid.Visibility = Visibility.Collapsed;
-            //********Daniela end ********************
         }
 
         #region browse buttons
