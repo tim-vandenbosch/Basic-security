@@ -13,8 +13,8 @@
         <!--   <TabControl x:Name="mainTabs" Height="325" RenderTransformOrigin="0.236,0.452">
             <TabItem x:Name="homePage" Header="HomePage" Visibility="Collapsed"> -->
 
-        <!--<Grid Name="homePageGrid" Background="Beige" Width="450" Visibility="Visible" d:IsHidden="False" >-->
-        <Grid Name="homePageGrid" Background="Beige" Width="450" Visibility="Collapsed" d:IsHidden="False" >
+        <Grid Name="homePageGrid" Background="Beige" Width="450" Visibility="Visible" d:IsHidden="False" >
+        <!--<Grid Name="homePageGrid" Background="Beige" Width="450" Visibility="Collapsed" d:IsHidden="False" >-->
             <Label x:Name="welcomeLabel" Content="Welcome, &#xD; &#xA; Choose what you want to do" FontSize="16" Margin="0,0,0,365" HorizontalAlignment="Left" Width="347"/>
             <Button x:Name="encryptHomeButton" Content="Encrypt a file" Margin="78,249,240,178" Click="encryptHomeButton_Click" ToolTip="Click here if you want to encrypt a file"/>
             <Button x:Name="decryptHomeButton" Content="Decrypt a file" Margin="265,249,37,178" Click="decryptHomeButton_Click" ToolTip="Click here if you want to decrypt a file"/>
@@ -106,8 +106,8 @@
 
         <!-- Stenografie-layout -->
         <!-- Editor: Tim Van Den Bosch -->
-        <!--<Grid Name="steganografieGrid" Background="Beige" Visibility="Collapsed" Height="500" Width="450">-->
-        <Grid Name="steganografieGrid" Background="Beige" Visibility="Visible" Height="500" Width="450" d:IsHidden="False">
+        <Grid Name="steganografieGrid" Background="Beige" Visibility="Collapsed" Height="500" Width="450">
+        <!--<Grid Name="steganografieGrid" Background="Beige" Visibility="Visible" Height="500" Width="450" d:IsHidden="False">-->
             <Label x:Name="label" Content="Steganografie, here you can hide your data in an image" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Height="30" />
             <Button x:Name="browseImageButton" Content="Select the image" HorizontalAlignment="Left" Margin="20,54,0,0" VerticalAlignment="Top" Width="100" Click="browseImageButton_Click"/>
             <Button x:Name="hideButton" Content="Verbergen data" HorizontalAlignment="Left" Margin="21,388,0,0" VerticalAlignment="Top" Width="99" Height="27" Click="hideButton_Click"/>
