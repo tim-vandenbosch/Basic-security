@@ -31,8 +31,6 @@ namespace CryptoProgramma
         #region properties encrypteren
 
         private static string FileForEncrypt = "";
-        // static string PadRSAKeys = "C\\"; // --> Deze waarde is nooit gebruikt
-        //********Daniela begin ********************
         static string hoofdPad = "C:\\DocumentenCrypto\\";
         string filename = "";
         string[] opgeslagenBestanden = new string[8];
@@ -40,9 +38,6 @@ namespace CryptoProgramma
         // 4 pad privatekeysender, 5 pad publickeySender, 6 pad privatekeyreceiver, 7 pad publickeyreceiver,
 
         Microsoft.Win32.OpenFileDialog browseVenster = new Microsoft.Win32.OpenFileDialog();
-        //********Daniela end ********************
-
-        // edit by nasim
         string encryptedFilePath;
         string encryptedFileName;
         static string sKey;
@@ -67,14 +62,13 @@ namespace CryptoProgramma
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void encryptHomeButton_Click(object sender, RoutedEventArgs e)
-        {            //Daniela
-            //mainTabs.SelectedItem = mainTabs.FindName("encryptFile");
+        {            
             encryptFileGrid.Visibility = Visibility.Visible;
             homePageGrid.Visibility = Visibility.Collapsed;
             padEnFileLbl.Content = "";
             senderTxt.Text = "";
             receiverTxt.Text = "";
-            //Daniela
+           
         }
 
         /// <summary>
@@ -83,7 +77,7 @@ namespace CryptoProgramma
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void backButton_EnFileGr_Click(object sender, RoutedEventArgs e)
-        {            //Daniela
+        {           
             homePageGrid.Visibility = Visibility.Visible;
             encryptFileGrid.Visibility = Visibility.Collapsed;
         }
@@ -94,7 +88,7 @@ namespace CryptoProgramma
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void browseEnBtn_Click(object sender, RoutedEventArgs e)
-        {            //Daniela
+        {           
             browseVenster.Filter = "Txt Documents|*.txt";
             if (browseVenster.ShowDialog() == true)
             {
@@ -110,13 +104,13 @@ namespace CryptoProgramma
         /// <param name="e"></param>
         private void backBtn_EnGr_Click(object sender, RoutedEventArgs e)
         {
-            //********Daniela begin ********************
+            
 
             homePageGrid.Visibility = Visibility.Visible;
             encryptingGrid.Visibility = Visibility.Collapsed;
             CryptoProgramWin.Height = 500;
             CryptoProgramWin.Width = 500;
-            //********Daniela end ********************
+           
 
         }
 
@@ -131,24 +125,16 @@ namespace CryptoProgramma
         private void encryptButton_Click(object sender, RoutedEventArgs e)
         {
             //public en private keys gemaakt en gesaved
-            //Daniela
             opgeslagenBestanden = RSA.keys(hoofdPad, senderTxt.Text, receiverTxt.Text);
-            //de publieke en private sleutel worden gegenereerd en opgeslagen
 
 
             if (FileForEncrypt != "" && FileForEncrypt != " ")
             {
-                //Hier word de symetric AESkey genereert 
                 string filetext = File.ReadAllText(FileForEncrypt);
-                //lander
                 //hash gemaakt van bestand
                 statusLbl.Content = "Hashing file (MD5)";
                 encrProgressbar.Value = 0;
                 string md5sum = hash(filetext, "MD5");
-                // Console.WriteLine(md5sum);
-                //lander
-
-                //********Daniela begin ********************
 
                 //hash signen en opgeslaan
                 string signHash = RSA.SignData(md5sum, opgeslagenBestanden[4]);//singen met private key sender
@@ -162,22 +148,21 @@ namespace CryptoProgramma
                 padEncryptedHash.Content = hoofdPad + "Hash" + hashfilename + ".txt";
                 checkBox7.IsChecked = true;
 
-
                 encryptingGrid.Visibility = Visibility.Visible;
                 encryptFileGrid.Visibility = Visibility.Collapsed;
                 CryptoProgramWin.Height = 700;
                 CryptoProgramWin.Width = 550;
-                //********Daniela end ********************
 
                 if (sKeySlider.Value == 2)
+                //Hier word de symetric AESkey genereert 
                 {
                     statusLbl.Content = "Preparing (AES)";
                     encrProgressbar.Value = 10;
-                    //****************door Nasim toegevoed*******************
+
                     sKey = des.GenerateKey();
                     string plainFilePath = padEnFileLbl.Content.ToString();
                     encryptedFileName = SplitNameOfFile(plainFilePath, "AES", ".txt");
-                    //Krijg anders error als ik Keys map verwijder? Maakt deze gewoon aan indien deze nog niet bestaat
+
                     System.IO.Directory.CreateDirectory(hoofdPad);
                     encryptedFilePath = hoofdPad + encryptedFileName;
                     string destination = encryptedFilePath;
@@ -195,14 +180,10 @@ namespace CryptoProgramma
 
                     // tonen meer info over encrypteren
                     // System.Windows.MessageBox.Show(string.Format(AES.CreateEncryptionInfoXml(signatureKey, encryptionKey, encryptionIV)), "Info about encryption", MessageBoxButton.OK, MessageBoxImage.Information);
-                    //*************************END**************************
-                    //********Daniela begin ********************
-                    //opslaan en encrypteren symetrisch AES key
-                    //werkt nog nie (geeft errors)
-                    //keys zijn in byte en om te encrypteren heb ik een string nodig
 
-                    //Nasim - Nu werkt ht wel :p
-                    Directory.CreateDirectory(hoofdPad);
+
+                    //opslaan en encrypteren symetrisch AES key
+                   Directory.CreateDirectory(hoofdPad);
                     string encryptAESSkey = RSA.Encrypt(sKey, opgeslagenBestanden[7]);
                     filename = System.IO.Path.GetFileNameWithoutExtension(plainFilePath);
                     if (!System.IO.File.Exists(hoofdPad + "SymetricKeyAES" + filename + ".txt"))
@@ -214,13 +195,13 @@ namespace CryptoProgramma
                     nameEnSymKLbl.Content = "SymetricKeyAES" + filename + ".txt";
                     padEncryptedSkey.Content = hoofdPad + "SymetricKeyAES" + filename + ".txt";
                     checkBox6.IsChecked = true;
-                    //********Daniela end ********************
 
 
                 }
                 else if (sKeySlider.Value == 1)
                 {
-                    //****************door Nasim toegevoed*******************
+                    //Hier word de symetric DESkey genereert 
+
 
                     statusLbl.Content = "Preparing (DES)";
                     encrProgressbar.Value = 10;
@@ -229,7 +210,7 @@ namespace CryptoProgramma
 
                     string source = padEnFileLbl.Content.ToString();
                     encryptedFileName = SplitNameOfFile(source, "DES", ".txt");
-                    //Krijg anders error als ik Keys map verwijder? Maakt deze gewoon aan indien deze nog niet bestaat
+
                     System.IO.Directory.CreateDirectory(hoofdPad);
                     encryptedFilePath = hoofdPad + encryptedFileName;
                     string destination = encryptedFilePath;
@@ -242,9 +223,7 @@ namespace CryptoProgramma
                     statusLbl.Content = "Finished (DES)";
                     encrProgressbar.Value = 100;
                     // System.Windows.MessageBox.Show("Succesfully Encrypted!", "Info about encryption", MessageBoxButton.OK, MessageBoxImage.Information);
-                    //*************************END**************************
 
-                    //********Daniela begin ********************
                     //opslaan en encrypteren symetrisch DES key
                     string encryptDESSkey = RSA.Encrypt(sKey, opgeslagenBestanden[7]);
                     Directory.CreateDirectory(hoofdPad);
@@ -256,11 +235,7 @@ namespace CryptoProgramma
                     nameEnSymKLbl.Content = "SymetricKeyDES" + filename + ".txt";
                     padEncryptedSkey.Content = hoofdPad + "SymetricKeyDES" + filename + ".txt";
                     checkBox6.IsChecked = true;
-                    //********Daniela end ********************
                 }
-
-                
-                //********Daniela begin ********************
 
 
                 namePrKeySenderLbl.Content = Convert.ToString(opgeslagenBestanden[1]);
@@ -282,7 +257,6 @@ namespace CryptoProgramma
                 padPublicReceiverLbl.Content = Convert.ToString(opgeslagenBestanden[7]);
                 checkBox4.IsChecked = true;
                 //toont de naam en pad van de private key ontvanger
-                //******Daniela einde*****
 
                 padEncryptedFile.Content = encryptedFilePath;
                 nameEnFileLbl.Content = encryptedFileName;
@@ -381,7 +355,7 @@ namespace CryptoProgramma
         }
 
         /// <summary>
-        /// Button to go to browse to the encrypted hashfile
+        /// Button to go to browse to the sigened hashfile
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -766,7 +740,6 @@ namespace CryptoProgramma
         /// <param name="e"></param>
         private void settings_Menu_Selected(object sender, RoutedEventArgs e)
         {
-            //********Daniela begin ********************
 
             CryptoProgramWin.Height = 500;
             CryptoProgramWin.Width = 500;
@@ -778,7 +751,6 @@ namespace CryptoProgramma
             decryptingGrid.Visibility = Visibility.Collapsed;
             steganografieGrid.Visibility = Visibility.Collapsed;
             rsaKeys_lbl.Content = hoofdPad;
-            //********Daniela end ********************
 
         }
 
@@ -788,7 +760,7 @@ namespace CryptoProgramma
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void rsaKeys_ChangeBtn_Click(object sender, RoutedEventArgs e)
-        { //kevin
+        { 
             FolderBrowserDialog browseFolder = new FolderBrowserDialog();
             browseFolder.ShowDialog();
             hoofdPad = browseFolder.SelectedPath + "\\";
@@ -801,7 +773,7 @@ namespace CryptoProgramma
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ClrPcker_Background_SelectedColorChanged(object sender, RoutedEventArgs e)
-        {       //kevin
+        {      
             System.Windows.Media.Brush brush = new SolidColorBrush(ClrPcker_Background.SelectedColor.Value);
             SideMenu.Background = brush;
         }
@@ -817,7 +789,6 @@ namespace CryptoProgramma
         /// <param name="e"></param>
         private void help_Menu_Selected(object sender, RoutedEventArgs e)
         {
-            //********Daniela begin ********************
             CryptoProgramWin.Height = 500;
             CryptoProgramWin.Width = 500;
             helpGrid.Visibility = Visibility.Visible;
@@ -828,7 +799,6 @@ namespace CryptoProgramma
             decryptingGrid.Visibility = Visibility.Collapsed;
             steganografieGrid.Visibility = Visibility.Collapsed;
             settingsGrid.Visibility = Visibility.Collapsed;
-            //********Daniela end ********************
 
         }
         #endregion
