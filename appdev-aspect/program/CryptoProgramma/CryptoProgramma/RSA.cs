@@ -209,7 +209,7 @@ namespace CryptoProgramma
 *   https://msdn.microsoft.com/en-us/library/8bh11f1k.aspx
 *   https://msdn.microsoft.com/en-us/library/ezwyzy7b.aspx
 *   https://msdn.microsoft.com/en-us/library/as2f1fez%28v=vs.110%29.aspx?f=255&MSPPError=-2147217396    
-// Bron : Sing en verify 
+// Bron : Sign en verify 
  //http://stackoverflow.com/questions/8437288/signing-and-verifying-signatures-with-rsa-c-sharp
  https://blogs.msdn.microsoft.com/nicold/2007/09/03/how-to-digitally-sign-a-string/
 

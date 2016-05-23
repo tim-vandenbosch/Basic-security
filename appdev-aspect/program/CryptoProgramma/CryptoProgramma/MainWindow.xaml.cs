@@ -42,11 +42,13 @@ namespace CryptoProgramma
         Microsoft.Win32.OpenFileDialog browseVenster = new Microsoft.Win32.OpenFileDialog();
         //********Daniela end ********************
 
-        // edit nasim
+        // edit by nasim
         string encryptedFilePath;
         string encryptedFileName;
         static string sKey;
         DES des = new DES();
+        AES aes = new AES();
+        
         #endregion
 
         public MainWindow()
@@ -152,7 +154,7 @@ namespace CryptoProgramma
                 opgeslagenBestanden = RSA.keys(hoofdPad, senderTxt.Text, receiverTxt.Text);
 
                 //hash geencrypteert en opgeslaan
-                string encryptHash = RSA.Encrypt(md5sum, opgeslagenBestanden[4]); //encrypteren met private key sender
+                string encryptHash = RSA.SignData(md5sum, opgeslagenBestanden[4]);//singen met private key sender
                 Directory.CreateDirectory(hoofdPad);
                 string hashfilename = System.IO.Path.GetFileNameWithoutExtension(FileForEncrypt);
                 //if (!System.IO.File.Exists(hoofdPad + "Hash" + hashfilename + ".txt"))
@@ -175,20 +177,22 @@ namespace CryptoProgramma
                     statusLbl.Content = "Preparing (AES)";
                     encrProgressbar.Value = 10;
                     //****************door Nasim toegevoed*******************
+                    sKey = des.GenerateKey();
                     string plainFilePath = padEnFileLbl.Content.ToString();
                     encryptedFileName = SplitNameOfFile(plainFilePath, "AES", ".txt");
                     //Krijg anders error als ik Keys map verwijder? Maakt deze gewoon aan indien deze nog niet bestaat
                     System.IO.Directory.CreateDirectory(hoofdPad);
                     encryptedFilePath = hoofdPad + encryptedFileName;
+                    string destination = encryptedFilePath;
 
-                    byte[] encryptionKey = GenerateRandom(16);
-                    byte[] encryptionIV = GenerateRandom(16);
-                    byte[] signatureKey = GenerateRandom(64);
+                    //byte[] encryptionKey = GenerateRandom(16);
+                    //byte[] encryptionIV = GenerateRandom(16);
+                    //byte[] signatureKey = GenerateRandom(64);
 
 
                     statusLbl.Content = "Encrypting (AES) ";
                     encrProgressbar.Value = 20;
-                    AES.EncryptFile(plainFilePath, encryptedFilePath, encryptionKey, encryptionIV);
+                    aes.EncryptFile(plainFilePath, destination, sKey);
                     statusLbl.Content = "Finished (AES)";
                     encrProgressbar.Value = 100;
 
@@ -202,10 +206,11 @@ namespace CryptoProgramma
 
                     //Nasim - Nu werkt ht wel :p
                     Directory.CreateDirectory(hoofdPad);
-                    string encryptAESSkey = RSA.Encrypt(Convert.ToString(encryptionKey), opgeslagenBestanden[7]);
+                    string encryptAESSkey = RSA.Encrypt(sKey, opgeslagenBestanden[7]);
                     filename = System.IO.Path.GetFileNameWithoutExtension(plainFilePath);
                     if (!System.IO.File.Exists(hoofdPad + "SymetricKeyAES" + filename + ".txt"))
                     {
+
                         File.WriteAllText(hoofdPad + "SymetricKeyAES" + filename + ".txt", encryptAESSkey);
                     }
 
@@ -456,7 +461,8 @@ namespace CryptoProgramma
             {
                 //stap 1 : symetric decrypteren met privesleutel
                 string inhouddecryptSemKey = File.ReadAllText(decryptSemKey);
-                string ontcijferdeSemKey = RSA.Decrypt(inhouddecryptSemKey, privReceiv);
+                string ontcijferdeSemKey = "";
+                ontcijferdeSemKey = RSA.Decrypt(inhouddecryptSemKey, privReceiv);
                 Directory.CreateDirectory(hoofdPad + "\\DecryptedFiles");
                 File.WriteAllText(hoofdPad + "\\DecryptedFiles\\" + "DecryptedSkey" +
                     System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt", ontcijferdeSemKey);
@@ -466,23 +472,46 @@ namespace CryptoProgramma
 
                 //Nasim - Nu komt geen error :p 
                 string destination = hoofdPad + "DecryptedFiles\\" + "DecryptedTxt" +
-                                     System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt";
-                des.DecryptFile(decryptFile, destination, ontcijferdeSemKey);
-                Process.Start(destination);
+                                   System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt";
+
+                if (decryptSemKey.Contains("DES"))
+                {
+                    des.DecryptFile(decryptFile, destination, ontcijferdeSemKey);
+                    Process.Start(destination);
+                }
+                else if (decryptSemKey.Contains("AES"))
+                {
+                    ////hier code nasnas
+
+                    aes.DecryptFile(decryptFile, destination, ontcijferdeSemKey);
+                    Process.Start(destination);
+                }
+
 
 
 
                 //stap 3 : hash berekenen boodschap
+                string berekendeNieuweHAsh = hash(File.ReadAllText(destination), "MD5");
 
                 //Onderstaande code zou moeten werken maar geeft een error 
-                //stap 4 : hash decryperen met publiekesleutel
-                //string inhouddecryptHash = File.ReadAllText(decryptHash);
-                //string ontcijferdeHash = RSA.Decrypt(inhouddecryptHash, pubSender);
-                //Directory.CreateDirectory(hoofdPad + "\\DecryptedFiles");
-                //File.WriteAllText(hoofdPad + "\\DecryptedFiles\\" + "DecryptedHash" +
-                //    System.IO.Path.GetFileNameWithoutExtension(decryptHash) + ".txt", ontcijferdeHash);
+                //stap 4 & 5: hash verify met publiekesleutel, zelfberekende hash en ontcijferde hash vergelijken 
+                string inhouddecryptHash = File.ReadAllText(decryptHash);
 
-                //stap 5 : zelfberekende hash en ontcijferde hash vergelijken 
+                //string ontcijferdeHash = RSA.Decrypt(inhouddecryptHash, pubSender);
+                bool ontcijferdeHash = RSA.VerifyData(berekendeNieuweHAsh, inhouddecryptHash, pubSender);
+                string resultaatHash = "";
+                if (ontcijferdeHash)
+                {
+                    resultaatHash = "De gesignde hash, en de zelf berekende hash komen overeen";
+                }
+                else if (!ontcijferdeHash)
+                {
+                    resultaatHash = "De gesignde hash, en de zelf berekende hash komen NIET overeen";
+                }
+                System.Windows.MessageBox.Show(resultaatHash);
+                Directory.CreateDirectory(hoofdPad + "\\DecryptedFiles");
+                File.WriteAllText(hoofdPad + "\\DecryptedFiles\\" + "ResultaatHash" +
+                                 System.IO.Path.GetFileNameWithoutExtension(decryptHash) + ".txt", resultaatHash);
 
             }
         }

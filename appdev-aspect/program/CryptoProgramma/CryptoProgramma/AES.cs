@@ -10,90 +10,90 @@ using System.Xml.Linq;
 
 namespace CryptoProgramma
 {
-    /// <summary>
-    /// This class uses a symmetric key algorithm (Rijndael/AES) to encrypt and 
-    /// decrypt data. As long as encryption and decryption routines use the same
-    /// parameters to generate the keys, the keys are guaranteed to be the same.
-    /// The class uses static functions with duplicate code to make it easier to
-    /// demonstrate encryption and decryption logic. In a real-life application, 
-    /// this may not be the most efficient way of handling encryption, so - as
-    /// soon as you feel comfortable with it - you may want to redesign this class.
-    /// </summary>
+
     public class AES
     {
-        /// <summary>
-        /// Encrypt a file with AES
-        /// </summary>
-        /// <param name="plainFilePath">Full path of the file to be encrypted</param>
-        /// <param name="encryptedFilePath">Full path of the encrypted file</param>
-        /// <param name="key">AES key</param>
-        /// <param name="iv">AES IV</param>
-        public static void EncryptFile(string plainFilePath, string encryptedFilePath, byte[] key, byte[] iv)
-        {
-            using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
-            {
-                aes.KeySize = 128;
-                aes.Key = key;
-                aes.IV = iv;
-                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
-                using (FileStream plain = File.Open(plainFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
-                    using (FileStream encrypted = File.Open(encryptedFilePath, FileMode.Create, FileAccess.Write, FileShare.None))
-                    {
-                        using (CryptoStream cs = new CryptoStream(encrypted, encryptor, CryptoStreamMode.Write))
-                        {
-                            plain.CopyTo(cs);
-                        }
-                    }
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Create encryption information in the form of xml string
-        /// </summary>
-        /// <param name="signatureKey">Signature Key</param>
-        /// <param name="encryptionKey">AES Encryption key</param>
-        /// <param name="encryptionIV">AES Encryption key IV</param>
-        /// <returns>xml string containing key informations</returns>
-        public static string CreateEncryptionInfoXml(byte[] signatureKey, byte[] encryptionKey, byte[] encryptionIV)
-        {
-            string template = "<EncryptionInfo>" + "<AESKeyValue>" + "<Key/>" + "<IV/>" + "</AESKeyValue>" + "<HMACSHAKeyValue/>" + "</EncryptionInfo>";
-            XDocument doc = XDocument.Parse(template);
 
-            doc.Descendants("AESKeyValue").Single().Descendants("Key").Single().Value = Convert.ToBase64String(encryptionKey);
-            doc.Descendants("AESKeyValue").Single().Descendants("IV").Single().Value = Convert.ToBase64String(encryptionIV);
-            doc.Descendants("HMACSHAKeyValue").Single().Value = Convert.ToBase64String(signatureKey);
-
-            return doc.ToString();
-        }
-        
-        /// <summary>
-        /// Encrypt a file with AES
-        /// </summary>
-        /// <param name="plainFilePath">Full path of the encrypted file</param>
-        /// <param name="encryptedFilePath">Full path of the file to be decrypted</param>
-        /// <param name="key">AES key</param>
-        /// <param name="iv">AES IV</param>
-        public static void DecryptFile(string plainFilePath, string encryptedFilePath, byte[] key, byte[] iv)
+        public void EncryptFile(string inputFile, string outputFile, string key)
         {
-            using (AesCryptoServiceProvider _aes = new AesCryptoServiceProvider())
+            try
             {
-                _aes.KeySize = 128;
-                _aes.Key = key;
-                _aes.IV = iv;
-                ICryptoTransform decryptor = _aes.CreateDecryptor(_aes.Key, _aes.IV);
-                using (FileStream plain = File.Open(plainFilePath, FileMode.Create, FileAccess.Write, FileShare.None))
-                {
-                    using (FileStream encrypted = File.Open(encryptedFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
-                    {
-                        using (CryptoStream cs = new CryptoStream(plain, decryptor, CryptoStreamMode.Write))
-                        {
-                            encrypted.CopyTo(cs);
-                        }
-                    }
-                }
+                byte[] keyBytes;
+                keyBytes = Encoding.Unicode.GetBytes(key);
+
+                Rfc2898DeriveBytes derivedKey = new Rfc2898DeriveBytes(key, keyBytes);
+
+                RijndaelManaged rijndaelCSP = new RijndaelManaged();
+                rijndaelCSP.Key = derivedKey.GetBytes(rijndaelCSP.KeySize / 8);
+                rijndaelCSP.IV = derivedKey.GetBytes(rijndaelCSP.BlockSize / 8);
+
+                ICryptoTransform encryptor = rijndaelCSP.CreateEncryptor();
+
+                FileStream inputFileStream = new FileStream(inputFile, FileMode.Open, FileAccess.Read);
+
+                byte[] inputFileData = new byte[(int)inputFileStream.Length];
+                inputFileStream.Read(inputFileData, 0, (int)inputFileStream.Length);
+
+                FileStream outputFileStream = new FileStream(outputFile, FileMode.Create, FileAccess.Write);
+
+                CryptoStream encryptStream = new CryptoStream(outputFileStream, encryptor, CryptoStreamMode.Write);
+                encryptStream.Write(inputFileData, 0, (int)inputFileStream.Length);
+                encryptStream.FlushFinalBlock();
+
+                rijndaelCSP.Clear();
+                encryptStream.Close();
+                inputFileStream.Close();
+                outputFileStream.Close();
             }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message, "Encryption Failed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            MessageBox.Show("File Encryption Complete!");
+
         }
+
+        public void DecryptFile(string inputFile, string outputFile, string key)
+        {
+            try
+            {
+                byte[] keyBytes = Encoding.Unicode.GetBytes(key);
+
+                Rfc2898DeriveBytes derivedKey = new Rfc2898DeriveBytes(key, keyBytes);
+
+                RijndaelManaged rijndaelCSP = new RijndaelManaged();
+                rijndaelCSP.Key = derivedKey.GetBytes(rijndaelCSP.KeySize / 8);
+                rijndaelCSP.IV = derivedKey.GetBytes(rijndaelCSP.BlockSize / 8);
+                ICryptoTransform decryptor = rijndaelCSP.CreateDecryptor();
+
+                FileStream inputFileStream = new FileStream(inputFile, FileMode.Open, FileAccess.Read);
+
+                CryptoStream decryptStream = new CryptoStream(inputFileStream, decryptor, CryptoStreamMode.Read);
+
+                byte[] inputFileData = new byte[(int)inputFileStream.Length];
+                decryptStream.Read(inputFileData, 0, (int)inputFileStream.Length);
+
+                FileStream outputFileStream = new FileStream(outputFile, FileMode.Create, FileAccess.Write);
+                outputFileStream.Write(inputFileData, 0, inputFileData.Length);
+                outputFileStream.Flush();
+
+                rijndaelCSP.Clear();
+
+                decryptStream.Close();
+                inputFileStream.Close();
+                outputFileStream.Close();
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message, "Decryption Failed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            MessageBox.Show("File Decryption Complete!");
+        }
+
+
     }
 }
