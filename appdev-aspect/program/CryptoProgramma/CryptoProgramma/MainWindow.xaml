@@ -79,7 +79,7 @@
             <Button x:Name="decryptButton" Content="Decrypt"  Margin="48,398,324,50" Click="decryptButton_Click" FontSize="15"/>
             <Label x:Name="label_2" Content="Encrypted symetric key" HorizontalAlignment="Left" Margin="14,159,0,0" VerticalAlignment="Top"/>
             <Label x:Name="privateLbl" Content=""  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="20,358,0,0" VerticalAlignment="Top" Width="280" Height="20"/>
-            <Label x:Name="label_3" Content="Encrypted hash" HorizontalAlignment="Left" Margin="20,219,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label_3" Content="Signed hash" HorizontalAlignment="Left" Margin="20,219,0,0" VerticalAlignment="Top"/>
             <Label x:Name="publicLbl" Content=""  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="20,302,0,0" VerticalAlignment="Top" Width="280" Height="20"/>
             <Label x:Name="hashLbl" Content=""  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="20,250,0,0" VerticalAlignment="Top" Width="280" Height="20"/>
             <Label x:Name="symkeyLbl" Content=""  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="20,194,0,0" VerticalAlignment="Top" Width="280" Height="20"/>
