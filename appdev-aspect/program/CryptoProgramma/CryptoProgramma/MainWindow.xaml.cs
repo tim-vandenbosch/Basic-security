@@ -18,6 +18,8 @@ using System.Windows.Forms;
 using Xceed.Wpf.Toolkit;
 using System.Diagnostics;
 using System.Windows.Media.Imaging;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace CryptoProgramma
 {
@@ -611,20 +613,9 @@ namespace CryptoProgramma
         /// <param name="e"></param>
         private void browseImageButton_Click(object sender, RoutedEventArgs e)
         {
-            //OpenFileDialog open_dialog = new OpenFileDialog();
-            //open_dialog.Filter = "Image Files (*.jpeg; *.png; *.bmp)|*.jpg; *.png; *.bmp";
-
-            //if (open_dialog.ShowDialog() == DialogResult.OK)
-            //{
-            //    selectedImage.Image = Image.FromFile(open_dialog.FileName);
-            //    maakLeeg();
-            //} // oude code mag weg :) 
-
-
             browseVenster.Filter = "Image Files (*.jpeg; *.png; *.bmp)| *.jpg; *.png; *.bmp";
             if (browseVenster.ShowDialog() == true)
             {
-
                 string padFoto = browseVenster.FileName;
                 //FileNameLabel.Content = selectedFileName;
                 BitmapImage bitmap = new BitmapImage();
@@ -632,11 +623,9 @@ namespace CryptoProgramma
                 bitmap.UriSource = new Uri(padFoto);
                 bitmap.EndInit();
                 selectedImage.Source = bitmap;
-               labelSelectedImage.Content = padFoto;
-
+                labelSelectedImage.Content = padFoto;
             }
         }
-
         //bron :
         // http://www.c-sharpcorner.com/UploadFile/mahesh/using-xaml-image-in-wpf/
 
@@ -645,7 +634,6 @@ namespace CryptoProgramma
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
         string filesteg; 
         private void browsFileButton_Click(object sender, RoutedEventArgs e)
         {
@@ -654,10 +642,101 @@ namespace CryptoProgramma
             if (browseVenster.ShowDialog() == true)
             {
                 filesteg = browseVenster.FileName;
-                labelSelectedFile.Content = browseVenster.FileName;
             }
         }
+        
+        /// <summary>
+        /// Button for hiding the data in the picture
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void hideButton_Click(object sender, RoutedEventArgs e)
+        {
+            string _text = richTextBox.ToString();
 
+            string padFoto = labelSelectedImage.Content.ToString();
+            Bitmap bitmap = new Bitmap(padFoto);
+
+            if (_text.Equals(""))
+            {
+                System.Windows.MessageBox.Show("The text you want to hide can't be empty", "Warning");
+                return;
+            }
+
+            if (encrypedCheckBox.IsChecked == true)
+            {
+                if (passwordTextBox.Text.Length < 6)
+                {
+                    System.Windows.MessageBox.Show("Please enter a password with at least 6 characters", "Warning");
+                    return;
+                }
+                else
+                {
+                    _text = StenografieCrypto.EncryptStringAES(_text, passwordTextBox.Text);
+                }
+            }
+
+            bitmap = StenografieHelper.embedText(_text, bitmap);
+
+            System.Windows.MessageBox.Show("Your text was hidden in the image successfully!", "Done");
+            maakLeeg();
+
+            Microsoft.Win32.SaveFileDialog save_dialog = new Microsoft.Win32.SaveFileDialog();
+            save_dialog.Filter = "Png Image|*.png|Bitmap Image|*.bmp";
+
+            if (save_dialog.ShowDialog() == true)
+            {
+                switch (save_dialog.FilterIndex)
+                {
+                    case 0:
+                        {
+                            bitmap.Save(save_dialog.FileName, ImageFormat.Png);
+                        }
+                        break;
+                    case 1:
+                        {
+                            bitmap.Save(save_dialog.FileName, ImageFormat.Bmp);
+                        }
+                        break;
+                }
+
+
+            }
+        }
+        
+        private void discoverButton_Click(object sender, RoutedEventArgs e)
+        {
+            string padFoto = browseVenster.FileName;
+            Bitmap bitmap = new Bitmap(padFoto);
+
+            string extractedText = StenografieHelper.extractText(bitmap);
+
+            if (encrypedCheckBox.IsChecked == true)
+            {
+                try
+                {
+                    extractedText = StenografieCrypto.DecryptStringAES(extractedText, passwordTextBox.Text);
+                }
+                catch
+                {
+                    System.Windows.MessageBox.Show("Wrong password", "Error");
+
+                    return;
+                }
+            }
+
+            richTextBox.Document.Blocks.Add(new Paragraph(new Run(extractedText)));
+        }
+
+        /// <summary>
+        /// Maar de invoervelden leeg
+        /// </summary>
+        private void maakLeeg()
+        {
+            richTextBox.Document.Blocks.Clear();
+            passwordTextBox.Text = "";
+            encrypedCheckBox.IsChecked = false;
+        }
         #endregion
 
         #region settings window
@@ -698,7 +777,6 @@ namespace CryptoProgramma
         }
 
 
-
         /// <summary>
         /// Button to edit the backgroundcolor of the entire program
         /// </summary>
@@ -706,7 +784,7 @@ namespace CryptoProgramma
         /// <param name="e"></param>
         private void ClrPcker_Background_SelectedColorChanged(object sender, RoutedEventArgs e)
         {       //kevin
-            Brush brush = new SolidColorBrush(ClrPcker_Background.SelectedColor.Value);
+            System.Windows.Media.Brush brush = new SolidColorBrush(ClrPcker_Background.SelectedColor.Value);
             SideMenu.Background = brush;
         }
 
