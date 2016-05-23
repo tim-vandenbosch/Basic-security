@@ -144,22 +144,19 @@ namespace CryptoProgramma
                 //hash gemaakt van bestand
                 statusLbl.Content = "Hashing file (MD5)";
                 encrProgressbar.Value = 0;
-                string md5sum = hash(FileForEncrypt);
+                string md5sum = hash(filetext, "MD5");
                 // Console.WriteLine(md5sum);
                 //lander
 
                 //********Daniela begin ********************
 
-                //public en private keys gemaakt en gesaved
-                opgeslagenBestanden = RSA.keys(hoofdPad, senderTxt.Text, receiverTxt.Text);
-
-                //hash geencrypteert en opgeslaan
-                string encryptHash = RSA.SignData(md5sum, opgeslagenBestanden[4]);//singen met private key sender
+                //hash signen en opgeslaan
+                string signHash = RSA.SignData(md5sum, opgeslagenBestanden[4]);//singen met private key sender
                 Directory.CreateDirectory(hoofdPad);
                 string hashfilename = System.IO.Path.GetFileNameWithoutExtension(FileForEncrypt);
                 //if (!System.IO.File.Exists(hoofdPad + "Hash" + hashfilename + ".txt"))
                 //{
-                    File.WriteAllText(hoofdPad + "Hash" + hashfilename + ".txt", encryptHash);
+                    File.WriteAllText(hoofdPad + "Hash" + hashfilename + ".txt", signHash);
                 //}
                 nameEnHashLbl.Content = "Hash" + hashfilename + ".txt";
                 padEncryptedHash.Content = hoofdPad + "Hash" + hashfilename + ".txt";
@@ -393,7 +390,7 @@ namespace CryptoProgramma
             browseVenster.Filter = "Txt Documents|*.txt";
             if (browseVenster.ShowDialog() == true)
             {
-                decryptHash = browseVenster.FileName;
+                singedHash = browseVenster.FileName;
                 hashLbl.Content = browseVenster.FileName;
             }
 
@@ -438,7 +435,7 @@ namespace CryptoProgramma
         #region decryptioncode to decrypt the file. And use of the RSA keys & AES, DES semetric keys
 
         #region properties decrypteren 
-        string decryptFile, decryptSemKey, decryptHash, pubSender, privReceiv;
+        string decryptFile, decryptSemKey, singedHash, pubSender, privReceiv;
         //properties decrypteren
 
         #endregion
@@ -468,9 +465,6 @@ namespace CryptoProgramma
                     System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt", ontcijferdeSemKey);
 
                 //stap 2:  bestand decrypteren met semetric key
-                //bij het decrypteren komt ook een error idk why
-
-                //Nasim - Nu komt geen error :p 
                 string destination = hoofdPad + "DecryptedFiles\\" + "DecryptedTxt" +
                                    System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt";
 
@@ -481,37 +475,32 @@ namespace CryptoProgramma
                 }
                 else if (decryptSemKey.Contains("AES"))
                 {
-                    ////hier code nasnas
 
                     aes.DecryptFile(decryptFile, destination, ontcijferdeSemKey);
                     Process.Start(destination);
                 }
 
-
-
-
                 //stap 3 : hash berekenen boodschap
                 string berekendeNieuweHAsh = hash(File.ReadAllText(destination), "MD5");
 
-                //Onderstaande code zou moeten werken maar geeft een error 
-                //stap 4 & 5: hash verify met publiekesleutel, zelfberekende hash en ontcijferde hash vergelijken 
-                string inhouddecryptHash = File.ReadAllText(decryptHash);
+                //Onderstaande code zou moeten werken maar geeft een false trg ipv true 
+                //stap 4 & 5: hash verify met publiekesleutel, zelfberekende hash en gesignde hash vergelijken 
+                string inhoudSingedHash = File.ReadAllText(singedHash);
 
-                //string ontcijferdeHash = RSA.Decrypt(inhouddecryptHash, pubSender);
-                bool ontcijferdeHash = RSA.VerifyData(berekendeNieuweHAsh, inhouddecryptHash, pubSender);
+                bool verifyHash = RSA.VerifyData(berekendeNieuweHAsh, inhoudSingedHash, pubSender);
                 string resultaatHash = "";
-                if (ontcijferdeHash)
+                if (verifyHash)
                 {
                     resultaatHash = "De gesignde hash, en de zelf berekende hash komen overeen";
                 }
-                else if (!ontcijferdeHash)
+                else if (!verifyHash)
                 {
                     resultaatHash = "De gesignde hash, en de zelf berekende hash komen NIET overeen";
                 }
                 System.Windows.MessageBox.Show(resultaatHash);
                 Directory.CreateDirectory(hoofdPad + "\\DecryptedFiles");
                 File.WriteAllText(hoofdPad + "\\DecryptedFiles\\" + "ResultaatHash" +
-                                 System.IO.Path.GetFileNameWithoutExtension(decryptHash) + ".txt", resultaatHash);
+                                 System.IO.Path.GetFileNameWithoutExtension(singedHash) + ".txt", resultaatHash);
 
             }
         }
