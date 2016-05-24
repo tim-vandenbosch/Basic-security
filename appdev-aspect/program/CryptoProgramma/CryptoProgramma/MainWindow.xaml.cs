@@ -781,6 +781,7 @@ namespace CryptoProgramma
             FolderBrowserDialog browseFolder = new FolderBrowserDialog();
             browseFolder.ShowDialog();
             hoofdPad = browseFolder.SelectedPath + "\\";
+            rsaKeys_lbl.Content = hoofdPad;
         }
 
 
