@@ -110,15 +110,15 @@
             <!--<Grid Name="steganografieGrid" Background="Beige" Visibility="Visible" Height="500" Width="450" d:IsHidden="False">-->
             <Label x:Name="label" Content="Steganografie, here you can hide your data in an image" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Height="30" />
             <Button x:Name="browseImageButton" Content="Select the image" HorizontalAlignment="Left" Margin="20,54,0,0" VerticalAlignment="Top" Width="100" Click="browseImageButton_Click"/>
-            <Button x:Name="hideButton" Content="Verbergen data" HorizontalAlignment="Left" Margin="21,388,0,0" VerticalAlignment="Top" Width="99" Height="27" Click="hideButton_Click"/>
-            <Button x:Name="discoverButton" Content="Ophalen data" HorizontalAlignment="Left" Margin="325,388,0,0" VerticalAlignment="Top" Width="99" Height="27" Click="discoverButton_Click"/>
+            <Button x:Name="hideButton" Content="Hide data" HorizontalAlignment="Left" Margin="21,388,0,0" VerticalAlignment="Top" Width="99" Height="27" Click="hideButton_Click"/>
+            <Button x:Name="discoverButton" Content="Retrieve data" HorizontalAlignment="Left" Margin="325,388,0,0" VerticalAlignment="Top" Width="99" Height="27" Click="discoverButton_Click"/>
             <Button x:Name="backSteg_Btn" Click="backSteg_Btn_Click" Content="&lt; Back to home" HorizontalAlignment="Left" Margin="325,420,0,0" VerticalAlignment="Top" Width="99" Height="27"/>
             <Image x:Name="selectedImage" Source="img/decrypt.jpg" HorizontalAlignment="Left" Height="180" Margin="240,45,0,0" VerticalAlignment="Top" Width="180" />
             <Label x:Name="labelSelectedImage" Content="" HorizontalAlignment="Left" Margin="21,79,0,0" VerticalAlignment="Top" Width="205"/>
             <TextBox x:Name="richTextBox" HorizontalAlignment="Left" Height="160" Margin="10,167,0,0" VerticalAlignment="Top" Width="216" />
             <CheckBox x:Name="encrypedCheckBox" Content="Password" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="passwordTextBox" HorizontalAlignment="Left" Height="23" Margin="85,333,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="141"/>
-            <Label x:Name="label10" Content="Typ hier je gewenste tekst:" HorizontalAlignment="Left" Margin="10,136,0,0" VerticalAlignment="Top" Width="216"/>
+            <TextBox x:Name="passwordTextBox" HorizontalAlignment="Left" Height="23" Margin="85,333,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="141"/>
+            <Label x:Name="label10" Content="Your input here:" HorizontalAlignment="Left" Margin="10,136,0,0" VerticalAlignment="Top" Width="216"/>
         </Grid>
 
         <Grid Name="settingsGrid" Background="Beige" Visibility="Collapsed" Height="500" Width="450">
