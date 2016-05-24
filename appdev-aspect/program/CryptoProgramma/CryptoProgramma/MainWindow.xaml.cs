@@ -834,7 +834,7 @@ namespace CryptoProgramma
         //Override the onClose method in the Application Main window
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            MessageBoxResult result = System.Windows.MessageBox.Show("Wilt u de applicatie afsluiten?", "EXIT",
+            MessageBoxResult result = System.Windows.MessageBox.Show("Do you want to quit the application?", "EXIT",
                                                   MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.Cancel)
             {
