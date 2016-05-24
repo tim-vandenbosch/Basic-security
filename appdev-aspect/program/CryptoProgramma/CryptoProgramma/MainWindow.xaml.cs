@@ -427,14 +427,17 @@ namespace CryptoProgramma
         private void decryptButton_Click(object sender, RoutedEventArgs e)
         {
 
-            decryptingGrid.Visibility = Visibility.Visible;
-            decryptFileGrid.Visibility = Visibility.Collapsed;
+           
             if (fileLbl.Content.Equals("") || symkeyLbl.Content.Equals("") || hashLbl.Content.Equals("") || publicLbl.Content.Equals("") || privateLbl.Content.Equals(""))
             {
-                System.Windows.MessageBox.Show("Je mist een bestand, controleer of je alles heb gekozen");
+                System.Windows.MessageBox.Show("You miss a file. Check if you have browsed to all your files");
             }
             else
             {
+                try
+                {
+
+                
                 //stap 1 : symetric decrypteren met privesleutel
                 string inhouddecryptSemKey = File.ReadAllText(decryptSemKey);
                 string ontcijferdeSemKey = "";
@@ -483,7 +486,13 @@ namespace CryptoProgramma
                 Directory.CreateDirectory(hoofdPad + "\\DecryptedFiles");
                 File.WriteAllText(hoofdPad + "\\DecryptedFiles\\" + "ResultaatHash" +
                                  System.IO.Path.GetFileNameWithoutExtension(singedHash) + ".txt", resultaatHash);
-
+                    decryptingGrid.Visibility = Visibility.Visible;
+                    decryptFileGrid.Visibility = Visibility.Collapsed;
+                }
+                catch(Exception ex)
+                {
+                    System.Windows.MessageBox.Show("Wrong file. Check all uploaded files");
+                }
             }
         }
 
