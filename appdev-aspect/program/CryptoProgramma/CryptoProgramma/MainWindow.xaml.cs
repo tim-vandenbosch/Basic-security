@@ -127,7 +127,7 @@ namespace CryptoProgramma
             //public en private keys gemaakt en gesaved
             opgeslagenBestanden = RSA.keys(hoofdPad, senderTxt.Text, receiverTxt.Text);
 
-            if(senderTxt.Text != "" && receiverTxt.Text != "") {
+            if(senderTxt.Text != "" && receiverTxt.Text != "" && senderTxt.Text != receiverTxt.Text) {
 
             if (FileForEncrypt != "" && FileForEncrypt != " ")
             {
@@ -270,7 +270,7 @@ namespace CryptoProgramma
             }
             else
             {
-                System.Windows.MessageBox.Show("You need to fill in all namefields");
+                System.Windows.MessageBox.Show("You need to fill in all namefields and they need to be different from eachother");
             }
         }
 
