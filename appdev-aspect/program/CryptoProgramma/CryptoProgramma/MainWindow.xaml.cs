@@ -661,7 +661,7 @@ namespace CryptoProgramma
         /// <param name="e"></param>
         private void hideButton_Click(object sender, RoutedEventArgs e)
         {
-            string _text = richTextBox.ToString();
+            string _text = richTextBox.Text;
 
             string padFoto = labelSelectedImage.Content.ToString();
             Bitmap bitmap = new Bitmap(padFoto);
@@ -733,8 +733,7 @@ namespace CryptoProgramma
                     return;
                 }
             }
-
-            richTextBox.Document.Blocks.Add(new Paragraph(new Run(extractedText)));
+            richTextBox.Text = extractedText;
         }
 
         /// <summary>
@@ -742,7 +741,7 @@ namespace CryptoProgramma
         /// </summary>
         private void maakLeeg()
         {
-            richTextBox.Document.Blocks.Clear();
+            richTextBox.Text = "";
             passwordTextBox.Text = "";
             encrypedCheckBox.IsChecked = false;
         }
