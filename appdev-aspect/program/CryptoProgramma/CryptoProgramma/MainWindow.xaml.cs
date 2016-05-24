@@ -127,6 +127,7 @@ namespace CryptoProgramma
             //public en private keys gemaakt en gesaved
             opgeslagenBestanden = RSA.keys(hoofdPad, senderTxt.Text, receiverTxt.Text);
 
+            if(senderTxt.Text != "" && receiverTxt.Text != "") {
 
             if (FileForEncrypt != "" && FileForEncrypt != " ")
             {
@@ -264,7 +265,12 @@ namespace CryptoProgramma
             }
             else
             {
-                System.Windows.MessageBox.Show("Je heb nog geen bestand gekozen");
+                System.Windows.MessageBox.Show("You didn't choose a file");
+            }
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("You need to fill in all namefields");
             }
         }
 
