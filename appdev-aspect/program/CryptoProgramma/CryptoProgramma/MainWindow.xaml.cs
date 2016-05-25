@@ -49,7 +49,7 @@ namespace CryptoProgramma
         public MainWindow()
         {
             InitializeComponent();
-            
+
         }
 
         #region encription window
