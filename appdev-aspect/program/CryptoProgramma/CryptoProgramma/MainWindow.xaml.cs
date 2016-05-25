@@ -450,22 +450,40 @@ namespace CryptoProgramma
                 string destination = hoofdPad + "DecryptedFiles\\" + "DecryptedTxt" +
                                    System.IO.Path.GetFileNameWithoutExtension(decryptFile) + ".txt";
 
+                string method = "";
                 if (decryptSemKey.Contains("DES"))
                 {
+                    method = "DES";
                     des.DecryptFile(decryptFile, destination, ontcijferdeSemKey);
                     Process.Start(destination);
                 }
                 else if (decryptSemKey.Contains("AES"))
                 {
-
+                    method = "AES";
                     aes.DecryptFile(decryptFile, destination, ontcijferdeSemKey);
                     Process.Start(destination);
                 }
 
                 //stap 3 : hash berekenen boodschap
                 string text = File.ReadAllText(destination);
-                if (!text[text.Length-1].Equals('\n')) ;
-                    text += '\n';
+
+                switch (method)
+                {
+                    case "DES":
+                        if (!text[text.Length-1].Equals('\n'))
+                            text += '\n';
+                        break;
+                    case "AES":
+                        while (text[text.Length - 1].Equals('\0'))
+                        {
+                            text = text.Substring(0, text.Length - 1);
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Impossible");
+                        break;
+
+                }
                 string berekendeNieuweHAsh = hash(text, "MD5");
 
                 //Onderstaande code zou moeten werken maar geeft een false trg ipv true 
