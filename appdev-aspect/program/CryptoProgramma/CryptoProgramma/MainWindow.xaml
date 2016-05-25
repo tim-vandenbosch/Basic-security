@@ -133,16 +133,32 @@
         <Grid Name="helpGrid"  Background="Beige" Visibility="Collapsed" Height="500" Width="450">
             <Label x:Name="label3" Content="Help" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
             <Expander x:Name="expander" Header="Stegonografie" HorizontalAlignment="Left" Margin="47,169,0,0" VerticalAlignment="Top" IsExpanded="True">
-                <Label x:Name="label9" Content="Uitleg"/>
+                <TextBlock TextWrapping="WrapWithOverflow">
+                    Selecting an image and entering a text allows you to hide a message inside the image.
+                    It's optional to use a password.
+                    To get the message out of the file you have to select the image you just saved.
+                </TextBlock >
             </Expander>
             <Expander x:Name="expander1" Header="Encryption" HorizontalAlignment="Left" Margin="47,58,0,0" VerticalAlignment="Top" IsExpanded="True">
-                <Label x:Name="label7" Content="Wat informatie"/>
+                <TextBlock TextWrapping="WrapWithOverflow">
+                For you to encrypt a file, you need to insert your name and the name of the receiver, and a text (*.txt) file to encrypt.
+                The key making process should happen individually in a real life situation.
+                In matter of which algorithm to use, AES is safer to use than DES.
+                </TextBlock >
             </Expander>
             <Expander x:Name="expander2" Header="Decryption" HorizontalAlignment="Left" Margin="45,115,0,0" VerticalAlignment="Top" IsExpanded="True">
-                <Label x:Name="label8" Content="Info"/>
+                <TextBlock TextWrapping="WrapWithOverflow">
+                For a user to de-crypt a file, they need to select the encrypted file, symmetric key and signed hash.
+                These should reside in "C:\DocumentenCrypto" by default. The generated keys reside in the "keys" sub-directory.
+                The file names are indicated with what you need.
+                </TextBlock >
+
             </Expander>
-            <Expander x:Name="expander3" Header="Settings" HorizontalAlignment="Left" Margin="45,225,0,0" VerticalAlignment="Top" IsExpanded="True">
-                <Label x:Name="label6" Content="Uitleg"/>
+            <Expander x:Name="expander3" Header="Prefences" HorizontalAlignment="Left" Margin="45,225,0,0" VerticalAlignment="Top" IsExpanded="True">
+                <TextBlock TextWrapping="WrapWithOverflow">
+                    Here you can change the location of the encrypted files and keys.
+                    Also the colour of the menu can be changed to your linking.
+                </TextBlock >
 
             </Expander>
 
