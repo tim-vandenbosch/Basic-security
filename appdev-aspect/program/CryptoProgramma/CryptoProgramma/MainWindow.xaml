@@ -8,20 +8,36 @@
         xmlns:local="clr-namespace:CryptoProgramma"
         
         mc:Ignorable="d"
-        Title="Crypto Program" Name="CryptoProgramWin" Height="500" Width="500" MaxWidth="500" MaxHeight="500">
+        Title="Crypto Program" Name="CryptoProgramWin" Height="600" Width="700" MinWidth="700" MinHeight="600">
     <DockPanel>
         <!--   <TabControl x:Name="mainTabs" Height="325" RenderTransformOrigin="0.236,0.452">
             <TabItem x:Name="homePage" Header="HomePage" Visibility="Collapsed"> -->
 
-        <Grid Name="homePageGrid" Background="Beige" Width="450" Visibility="Visible" d:IsHidden="False" >
+        <Grid Name="homePageGrid" Background="#dfdfde" Width="700" Visibility="Visible" d:IsHidden="False">
             <!--<Grid Name="homePageGrid" Background="Beige" Width="450" Visibility="Collapsed" d:IsHidden="False" >-->
-            <Label x:Name="welcomeLabel" Content="Welcome, &#xD; &#xA; Choose what you want to do" FontSize="16" Margin="0,0,0,365" HorizontalAlignment="Left" Width="347"/>
-            <Button x:Name="encryptHomeButton" Content="Encrypt a file" Margin="78,249,240,178" Click="encryptHomeButton_Click" ToolTip="Click here if you want to encrypt a file"/>
-            <Button x:Name="decryptHomeButton" Content="Decrypt a file" Margin="265,249,37,178" Click="decryptHomeButton_Click" ToolTip="Click here if you want to decrypt a file"/>
+
+
+            <Button x:Name="encryptHomeButton" Foreground="#eeefee" Background="#b8aca9" BorderBrush="#eeefee" BorderThickness="2" Margin="210,268,194,229.667" Click="encryptHomeButton_Click" ToolTip="Click here if you want to encrypt a file" FontFamily="Lucida Sans Unicode" FontSize="18.667">
+                <StackPanel Orientation="Horizontal" Width="265" >
+                    <Image Source="img/key.png" Width="42" Height="42" Margin="0,0,10,0"/>
+                    <TextBlock Margin="8">Encrypt a file</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="decryptHomeButton" Foreground="#eeefee" Background="#b8aca9" BorderBrush="#eeefee" BorderThickness="2" Margin="210,355,194,142.667" Click="decryptHomeButton_Click" ToolTip="Click here if you want to decrypt a file" FontFamily="Lucida Sans Unicode" FontSize="18.667">
+                <StackPanel Orientation="Horizontal" Width="265" >
+                    <Image Source="img/decrypt.png" Width="42" Height="42" Margin="0,0,10,0"/>
+                    <TextBlock Margin="8">Decrypt a file</TextBlock>
+                </StackPanel>
+            </Button>
+            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="86" Margin="210,132,0,0" VerticalAlignment="Top" Width="296"/>
+            <Label x:Name="welcomeLabel" Content="Welcome" Foreground="#00a650" FontSize="26.667" Margin="294,136,0,385.667" HorizontalAlignment="Left" Width="143" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
+            <Label x:Name="welcomeLabel_Copy" Foreground="White" Content=" What you want to do ?" FontSize="21.333" Margin="235,165,0,358.667" HorizontalAlignment="Left" Width="253" FontFamily="Lucida Sans Unicode"/>
+            <Image x:Name="triangleImg" Source="img/triangle.png" HorizontalAlignment="Left" Height="34" Margin="347,215,0,0" VerticalAlignment="Top" Width="29" Stretch="Fill"/>
         </Grid>
         <!--  </TabItem>
             <TabItem x:Name="encryptFile" Header="encryptFile"  Visibility="Collapsed"> -->
-        <Grid Name="encryptFileGrid" Background="Beige" Visibility="Collapsed" Height="500" Width="450" >
+        <Grid Name="encryptFileGrid" Background="Beige" Visibility="Collapsed" Height="600" Width="700" >
             <Label Name="encryptlbl" Content="Encrypt a file here" Margin="21,10,297,461" />
             <Label Content="Please enter the name of the sender and receiver" Margin="92,44,79,424" />
             <Label Content="Sender" Margin="34,94,367,382"/>
@@ -38,7 +54,7 @@
             <Button x:Name="encryptButton" Content="Encrypt"  Margin="46,377,297,65" Click="encryptButton_Click" FontSize="16"/>
             <Button x:Name="backButton_EnFileGr" Content="&lt; Back" Click="backButton_EnFileGr_Click" HorizontalAlignment="Left" Margin="281,415,0,0" VerticalAlignment="Top" Width="75"/>
         </Grid>
-        <Grid Name="encryptingGrid" Background="Beige" Visibility="Collapsed" Height="700" Width="750" >
+        <Grid Name="encryptingGrid" Background="Beige" Visibility="Collapsed" Height="600" Width="700" >
             <Label x:Name="labelPrS" Content="Private key sender saved as" HorizontalAlignment="Left" Margin="21,18,0,0" VerticalAlignment="Top" Width="179"/>
             <Label x:Name="padPrivateSenderLbl" Content="C:\" HorizontalAlignment="Left" Margin="43,54,0,0" VerticalAlignment="Top" Width="350"/>
             <Label x:Name="labelPuS" Content="Public key sender saved as" HorizontalAlignment="Left" Margin="21,80,0,0" VerticalAlignment="Top" Width="179"/>
@@ -75,7 +91,7 @@
         <!--   </TabItem>
             <TabItem x:Name="decryptFile" Header="decryptFile" Visibility="Collapsed"> -->
 
-        <Grid Name="decryptFileGrid" Background="Beige"  Visibility="Collapsed" Height="500" Width="450" >
+        <Grid Name="decryptFileGrid" Background="Beige"  Visibility="Collapsed" Height="600" Width="700" >
             <Button x:Name="decryptButton" Content="Decrypt"  Margin="48,398,324,50" Click="decryptButton_Click" FontSize="15"/>
             <Label x:Name="label_2" Content="Encrypted symetric key" HorizontalAlignment="Left" Margin="14,159,0,0" VerticalAlignment="Top"/>
             <Label x:Name="privateLbl" Content=""  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="20,358,0,0" VerticalAlignment="Top" Width="280" Height="20"/>
@@ -96,7 +112,7 @@
             <Button x:Name="backButton_DeFileGr" Content="&lt; Back" Click="backButton_DeFileGr_Click" HorizontalAlignment="Left" Margin="330,430,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.533,4.733"/>
         </Grid>
 
-        <Grid Name="decryptingGrid" Background="Beige" Visibility="Collapsed" Height="500" Width="450" >
+        <Grid Name="decryptingGrid" Background="Beige" Visibility="Collapsed" Height="600" Width="700" >
             <ProgressBar Name="ProgresDecryption"  HorizontalAlignment="Left" Height="22" Margin="11,83,0,0" VerticalAlignment="Top" Width="385"/>
             <Label x:Name="statusDecrLabel" Content="Status decryption = " HorizontalAlignment="Left" Margin="61,131,0,0" VerticalAlignment="Top" Width="154"/>
             <Button x:Name="SaveFileBtn" Content="Save this file" HorizontalAlignment="Left" Margin="170,272,0,0" VerticalAlignment="Top" Width="128" Height="39"/>
@@ -106,7 +122,7 @@
 
         <!-- Stenografie-layout -->
         <!-- Editor: Tim Van Den Bosch -->
-        <Grid Name="steganografieGrid" Background="Beige" Visibility="Collapsed" Height="500" Width="450">
+        <Grid Name="steganografieGrid" Background="Beige" Visibility="Collapsed" Height="600" Width="700">
             <!--<Grid Name="steganografieGrid" Background="Beige" Visibility="Visible" Height="500" Width="450" d:IsHidden="False">-->
             <Label x:Name="label" Content="Steganografie, here you can hide your data in an image" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Height="30" />
             <Button x:Name="browseImageButton" Content="Select the image" HorizontalAlignment="Left" Margin="20,54,0,0" VerticalAlignment="Top" Width="100" Click="browseImageButton_Click"/>
@@ -121,7 +137,7 @@
             <Label x:Name="label10" Content="Your input here:" HorizontalAlignment="Left" Margin="10,136,0,0" VerticalAlignment="Top" Width="216"/>
         </Grid>
 
-        <Grid Name="settingsGrid" Background="Beige" Visibility="Collapsed" Height="500" Width="450">
+        <Grid Name="settingsGrid" Background="Beige" Visibility="Collapsed" Height="600" Width="700">
             <Label x:Name="label2" Content="Edit your preferences" HorizontalAlignment="Left" Margin="24,20,0,0" VerticalAlignment="Top" Width="146"/>
             <Label x:Name="label2_Copy1" Content="Choose where you want to save your files." HorizontalAlignment="Left" Margin="24,82,0,0" VerticalAlignment="Top"/>
             <Label x:Name="rsaKeys_lbl" Content="C:\" HorizontalAlignment="Left" Margin="73,113,0,0" VerticalAlignment="Top" Width="246"/>
@@ -130,7 +146,7 @@
             <xctk:ColorPicker Name="ClrPcker_Background" SelectedColorChanged="ClrPcker_Background_SelectedColorChanged" HorizontalAlignment="Left" Margin="300,150,0,0" VerticalAlignment="Top"></xctk:ColorPicker>
         </Grid>
 
-        <Grid Name="helpGrid"  Background="Beige" Visibility="Collapsed" Height="500" Width="450">
+        <Grid Name="helpGrid"  Background="Beige" Visibility="Collapsed" Height="600" Width="700">
             <Label x:Name="label3" Content="Help" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
             <Expander x:Name="expander" Header="Stegonografie" HorizontalAlignment="Left" Margin="47,169,0,0" VerticalAlignment="Top" IsExpanded="True">
                 <TextBlock TextWrapping="WrapWithOverflow">
@@ -165,8 +181,8 @@
         </Grid>
 
         <Grid Visibility="Visible">
-            <HamburgerMenu:HamburgerMenu x:Name="SideMenu" Background="Bisque" MenuIconColor="Black" SelectionIndicatorColor="Black" MenuItemForeground="Black" HorizontalAlignment="Right" Margin="-300,0,0,0" Width="50" Grid.RowSpan="1">
-                <HamburgerMenu:HamburgerMenuItem Name="home_Menu" Icon="img/home.jpg" Text="Home" SelectionCommand="{Binding ElementName=this_}" Selected="home_Menu_Selected" />
+            <HamburgerMenu:HamburgerMenu x:Name="SideMenu" Background="#d4cdca" MenuIconColor="#0d0807" SelectionIndicatorColor="Black" MenuItemForeground="Black" HorizontalAlignment="Left" Margin="-694,0,0,-0.333" Width="50" Grid.RowSpan="1">
+                <HamburgerMenu:HamburgerMenuItem  Name="home_Menu" Icon="img/home.jpg" Text="Home" SelectionCommand="{Binding ElementName=this_}" Selected="home_Menu_Selected" />
                 <HamburgerMenu:HamburgerMenuItem  Name="stega_Menu" Icon="img/steganographie.jpg" Text="Steganografie" Selected="stega_Menu_Selected"/>
                 <HamburgerMenu:HamburgerMenuItem  Name="settings_Menu" Icon="img/settings.png" Text="Settings" Selected="settings_Menu_Selected"/>
                 <HamburgerMenu:HamburgerMenuItem  Name="help_Menu" Icon="img/help.png" Text="Help" Selected="help_Menu_Selected"/>
