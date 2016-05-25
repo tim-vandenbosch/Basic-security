@@ -52,6 +52,16 @@ namespace CryptoProgramma
 
         }
 
+        public void TextBox_Sender_GotFocus(object sender, RoutedEventArgs e)
+        {
+            senderTxt.Text = senderTxt.Text == "Sender" ? string.Empty : senderTxt.Text;
+        }
+        public void TextBox_Receiver_GotFocus(object sender, RoutedEventArgs e)
+        {
+            receiverTxt.Text = receiverTxt.Text == "Receiver" ? string.Empty : receiverTxt.Text;
+        }
+
+
         #region encription window
 
         #region home-back-browsebuttons encryption windows
@@ -65,9 +75,9 @@ namespace CryptoProgramma
         {            
             encryptFileGrid.Visibility = Visibility.Visible;
             homePageGrid.Visibility = Visibility.Collapsed;
-            padEnFileLbl.Content = "";
-            senderTxt.Text = "";
-            receiverTxt.Text = "";
+            padEnFileLbl.Content = "Find your file, Eg. C:\\" ;
+            senderTxt.Text = "Sender";
+            receiverTxt.Text = "Receiver";
            
         }
 
