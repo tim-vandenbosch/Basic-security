@@ -13,33 +13,36 @@
 
         <Grid Name="homePageGrid" Background="#dfdfde" Width="700" Visibility="Visible" d:IsHidden="False">
 
-            <Button x:Name="encryptHomeButton" Cursor="Hand" Foreground="#eeefee" Background="#a3ca39" BorderBrush="#efefef" BorderThickness="5" Margin="210,268,194,229.667" Click="encryptHomeButton_Click" ToolTip="Click here if you want to encrypt a file" FontFamily="Lucida Sans Unicode" FontSize="18.667">
-                <StackPanel Orientation="Horizontal" Width="265" >
+            <Button x:Name="encryptHomeButton" Cursor="Hand" Foreground="#eeefee" Background="#a3ca39" BorderBrush="#efefef" BorderThickness="5" Margin="205,358,205,150.667" Click="encryptHomeButton_Click" ToolTip="Click here if you want to encrypt a file" FontFamily="Lucida Sans Unicode" FontSize="18.667">
+                <StackPanel Orientation="Horizontal" Width="230" >
                     <Image Source="img/key.png" Width="42" Height="42" Margin="0,0,10,0"/>
-                    <TextBlock Margin="8" FontWeight="Bold" FontSize="21.333">ENCRYPT A FILE</TextBlock>
+                    <TextBlock Margin="8" FontWeight="Bold" FontSize="18">ENCRYPT A FILE</TextBlock>
                 </StackPanel>
             </Button>
 
-            <Button x:Name="decryptHomeButton" Cursor="Hand" Foreground="#eeefee" Background="#b8aca9" BorderBrush="#efefef" BorderThickness="5" Margin="210,355,194,142.667" Click="decryptHomeButton_Click" ToolTip="Click here if you want to decrypt a file" FontFamily="Lucida Sans Unicode" FontSize="18.667">
-                <StackPanel Orientation="Horizontal" Width="265" >
+            <Button x:Name="decryptHomeButton" Cursor="Hand" Foreground="#eeefee" Background="#b8aca9" BorderBrush="#efefef" BorderThickness="5" Margin="205,430,205,80.667" Click="decryptHomeButton_Click" ToolTip="Click here if you want to decrypt a file" FontFamily="Lucida Sans Unicode" FontSize="18.667">
+                <StackPanel Orientation="Horizontal" Width="230" >
                     <Image Source="img/decrypt.png" Width="42" Height="42" Margin="0,0,10,0"/>
-                    <TextBlock Margin="8" FontSize="21.333" FontWeight="Bold">DECRYPT A FILE</TextBlock>
+                    <TextBlock Margin="8" FontSize="18" FontWeight="Bold">DECRYPT A FILE</TextBlock>
                 </StackPanel>
             </Button>
-                
-            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="86" Margin="210,132,0,0" VerticalAlignment="Top" Width="296"/>
-            <Label Content="Welcome" Foreground="#a3ca39" FontSize="26.667" Margin="294,136,0,385.667" HorizontalAlignment="Left" Width="143" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
-            <Label  Foreground="White" Content=" What you want to do ?" FontSize="21.333" Margin="235,165,0,358.667" HorizontalAlignment="Left" Width="253" FontFamily="Lucida Sans Unicode"/>
-            <Image  Source="img/triangle.png" HorizontalAlignment="Left" Height="34" Margin="347,215,0,0" VerticalAlignment="Top" Width="29" Stretch="Fill"/>
-        
-            </Grid>
+
+            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="75" Margin="210,235,0,0" VerticalAlignment="Top" Width="280"/>
+            <Label Content="Welcome" Foreground="#a0daf7" FontSize="23" Margin="296,240,0,281.667" HorizontalAlignment="Left" Width="143" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
+            <Label  Foreground="White" Content=" What you want to do ?" FontSize="18" Margin="253,270,0,253.667" HorizontalAlignment="Left" Width="253" FontFamily="Lucida Sans Unicode"/>
+            <Image  Source="img/triangle.png" HorizontalAlignment="Left" Height="34" Margin="341,305,0,0" VerticalAlignment="Top" Width="29" Stretch="Fill"/>
+            <Image  Source="img/welcome.png" HorizontalAlignment="Left" Height="42" Margin="261,239,0,0" VerticalAlignment="Top" Width="39" Stretch="Fill"/>
+            <Image Source="img/bg.png" Width="350" Height="160" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="175,75,0,0" />
+
+        </Grid>
 
         <Grid Name="encryptFileGrid" Background="#dfdfde" Visibility="Collapsed" Height="600" Width="700" >
 
             <Rectangle Fill="Black" HorizontalAlignment="Left" Height="86" Margin="146,20,0,0" VerticalAlignment="Top" Width="425"/>
-            <Label Content="Encrypt a file here" Foreground="#a3ca39" FontSize="24" Margin="246,24,0,498" HorizontalAlignment="Left" Width="238" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
-            <Label Foreground="White" Content="Please enter the name of the sender and receiver." FontSize="16" Margin="163,53,0,493" HorizontalAlignment="Left" Width="394" FontFamily="Lucida Sans Unicode"/>
+            <Label Content="Encrypt a file here" Foreground="#a3ca39" FontSize="24" Margin="270,24,0,498" HorizontalAlignment="Left" Width="238" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
+            <Label Foreground="White" Content="Please enter the name of the sender and receiver." FontSize="16" Margin="163,59,0,487" HorizontalAlignment="Left" Width="394" FontFamily="Lucida Sans Unicode"/>
             <Image Source="img/triangle.png" HorizontalAlignment="Left" Height="34" Margin="347,103,0,0" VerticalAlignment="Top" Width="29" Stretch="Fill"/>
+            <Image Source="img/keyH.png" HorizontalAlignment="Left" Height="35" Margin="220,28,0,0" VerticalAlignment="Top" Width="45" Stretch="Fill"/>
 
             <Grid Background="White" Margin="123,192,330,364" FocusManager.FocusedElement="{Binding ElementName=senderTxt}">
                 <Grid.ColumnDefinitions>
@@ -158,12 +161,13 @@
         <!--   </TabItem>
             <TabItem x:Name="decryptFile" Header="decryptFile" Visibility="Collapsed"> -->
 
-        <Grid Name="decryptFileGrid" Background="#dfdfde" Visibility="Collapsed" Width="700" Height="600" Margin="0,0,0,0.667" >
+        <Grid Name="decryptFileGrid" Background="#dfdfde" Visibility="Collapsed" Width="700" Height="600" Margin="0,2,0,-31.333" >
 
             <Rectangle Fill="Black" HorizontalAlignment="Left" Height="86" Margin="146,20,0,0" VerticalAlignment="Top" Width="425"/>
-            <Label Content="Decrypt your file here" Foreground="#b8aca9" FontSize="24" Margin="235,24,0,498" HorizontalAlignment="Left" Width="285" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
-            <Label Foreground="White" Content="Browse to these files to decrypt." FontSize="16" Margin="241,53,0,493" HorizontalAlignment="Left" Width="282" FontFamily="Lucida Sans Unicode"/>
+            <Label Content="Decrypt your file here" Foreground="#b8aca9" FontSize="24" Margin="233,24,0,498" HorizontalAlignment="Left" Width="285" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
+            <Label Foreground="White" Content="Browse to these files to decrypt." FontSize="16" Margin="245,55,0,491" HorizontalAlignment="Left" Width="282" FontFamily="Lucida Sans Unicode"/>
             <Image Source="img/triangle.png" HorizontalAlignment="Left" Height="34" Margin="347,103,0,0" VerticalAlignment="Top" Width="29" Stretch="Fill"/>
+            <Image Source="img/decryptH2.png" HorizontalAlignment="Left" Height="37" Margin="186,40,0,0" VerticalAlignment="Top" Width="44" Stretch="Fill"/>
 
             <Label x:Name="label_2"  FontFamily="Lucida Sans Unicode" FontSize="12" Content="Encrypted symetric key" HorizontalAlignment="Left" Margin="148,203,0,0" VerticalAlignment="Top"/>
             <Label x:Name="privateLbl"  FontFamily="Lucida Sans Unicode" FontSize="10" Content="" Background="White" HorizontalAlignment="Left" Margin="152,414,0,0" VerticalAlignment="Top" Width="335" Height="30"/>
@@ -202,9 +206,11 @@
         <Grid Name="decryptingGrid" Background="#dfdfde" Visibility="Collapsed" Height="600" Width="700" >
 
             <Rectangle Fill="Black" HorizontalAlignment="Left" Height="125" Margin="146,140,0,0" VerticalAlignment="Top" Width="425"/>
-            <Label x:Name="statusDecrLabel" Content="Status decryption" Foreground="#ea7f23" FontSize="24" Margin="235,144,0,378" HorizontalAlignment="Left" Width="285" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
+            <Label x:Name="statusDecrLabel" Content="Status decryption" Foreground="#ea7f23" FontSize="24" Margin="258,144,0,378" HorizontalAlignment="Left" Width="285" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
             <Label Foreground="White" Content="Decryption is progres...." FontSize="16" Margin="249,183,0,363" HorizontalAlignment="Left" Width="282" FontFamily="Lucida Sans Unicode"/>
             <Image Source="img/triangle.png" HorizontalAlignment="Left" Height="34" Margin="345,261,0,0" VerticalAlignment="Top" Width="29" Stretch="Fill"/>
+            <Image Source="img/decryptH.png" HorizontalAlignment="Left" Height="37" Margin="208,150,0,0" VerticalAlignment="Top" Width="44" Stretch="Fill"/>
+
             <ProgressBar Name="ProgresDecryption"  HorizontalAlignment="Left" Height="13" Margin="181,217,0,0" VerticalAlignment="Top" Width="352"/>
             <Button x:Name="SaveFileBtn" Cursor="Hand" Foreground="#eeefee" Background="#ea7f23" BorderBrush="#eee" BorderThickness="2" Margin="284,332,268,215" ToolTip="Save your decrypted file" FontFamily="Lucida Sans Unicode">
                 <StackPanel Orientation="Horizontal" Width="129" >
@@ -228,10 +234,12 @@
         <!-- Editor: Tim Van Den Bosch -->
         <Grid Name="steganografieGrid" Background="#dfdfde" Visibility="Collapsed" Height="600" Width="700">
             <!--<Grid Name="steganografieGrid" Background="Beige" Visibility="Visible" Height="500" Width="450" d:IsHidden="False">-->
-            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="105" Margin="210,25,0,0" VerticalAlignment="Top" Width="296"/>
-            <Label x:Name="SteganografieLbl" Content="Steganografie" Foreground="#eac223" FontSize="26.667" Margin="260,27,0,495" HorizontalAlignment="Left" Width="auto" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
-            <Label Foreground="White" Content="Here you can hide your data&#xA;              in an image." FontSize="16" Margin="235,69,0,469" HorizontalAlignment="Left" Width="253" FontFamily="Lucida Sans Unicode" VerticalAlignment="Center" Height="62"/>
+            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="105" Margin="198,25,0,0" VerticalAlignment="Top" Width="320"/>
+            <Label x:Name="SteganografieLbl" Content="Steganografie" Foreground="#eac223" FontSize="26.667" Margin="284,29,0,493" HorizontalAlignment="Left" Width="auto" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
+            <Label Foreground="White" Content="Here you can hide your data in &#xA;              an image." FontSize="16" Margin="235,69,0,469" HorizontalAlignment="Left" Width="253" FontFamily="Lucida Sans Unicode" VerticalAlignment="Center" Height="62"/>
             <Image Source="img/triangle.png" HorizontalAlignment="Left" Height="34" Margin="347,125,0,0" VerticalAlignment="Top" Width="29" Stretch="Fill"/>
+            <Image Source="img/steganographieH.png" HorizontalAlignment="Left" Height="50" Margin="240,26,0,0" VerticalAlignment="Top" Width="49" Stretch="Fill"/>
+
             <Button x:Name="browseImageButton" Cursor="Hand" Foreground="#000" Background="#eac223" BorderBrush="#eee" BorderThickness="2" Margin="101,199,410,358" Click="browseImageButton_Click" ToolTip="Select the image" FontFamily="Lucida Sans Unicode">
                 <StackPanel Orientation="Horizontal" Width="174" >
                     <Image Source="img/img.png" Width="32" Height="32" Margin="0,0,10,0"/>
@@ -270,46 +278,76 @@
             <Label x:Name="label10" FontFamily="Lucida Sans Unicode" FontSize="14" Content="Your input here:" HorizontalAlignment="Left" Margin="364,175,0,0" VerticalAlignment="Top" Width="216"/>
         </Grid>
 
-        <Grid Name="settingsGrid" Background="Beige" Visibility="Collapsed" Height="600" Width="700">
-            <Label x:Name="label2" Content="Edit your preferences" HorizontalAlignment="Left" Margin="24,20,0,0" VerticalAlignment="Top" Width="146"/>
-            <Label x:Name="label2_Copy1" Content="Choose where you want to save your files." HorizontalAlignment="Left" Margin="24,82,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="rsaKeys_lbl" Content="C:\" HorizontalAlignment="Left" Margin="73,113,0,0" VerticalAlignment="Top" Width="246"/>
-            <Label x:Name="label2_Copy11" Content="Change the color of the program" HorizontalAlignment="Left" Margin="22,150,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="rsaKeys_ChangeBtn" Click="rsaKeys_ChangeBtn_Click" Content="Change" HorizontalAlignment="Left" Margin="300,116,0,0" VerticalAlignment="Top" Width="75"/>
-            <xctk:ColorPicker Name="ClrPcker_Background" SelectedColorChanged="ClrPcker_Background_SelectedColorChanged" HorizontalAlignment="Left" Margin="300,150,0,0" VerticalAlignment="Top"></xctk:ColorPicker>
+        <Grid Name="settingsGrid" Background="#dfdfde" Visibility="Collapsed" Height="600" Width="700">
+
+            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="105" Margin="200,104,0,0" VerticalAlignment="Top" Width="315"/>
+            <Label Content="Setting" Foreground="#a47130" FontSize="26.667" Margin="315,112,0,410" HorizontalAlignment="Left" Width="auto" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
+            <Label Foreground="White" Content="Here you can edit your preferences." FontSize="16" Margin="214,152,0,402" HorizontalAlignment="Left" Width="286" FontFamily="Lucida Sans Unicode" VerticalAlignment="Center" Height="46"/>
+            <Image Source="img/triangle.png" HorizontalAlignment="Left" Height="34" Margin="347,204,0,0" VerticalAlignment="Top" Width="29" Stretch="Fill"/>
+            <Image Source="img/settingsH.png" HorizontalAlignment="Left" Height="33" Margin="283,119,0,0" VerticalAlignment="Top" Width="31" Stretch="Fill"/>
+
+
+            <Label x:Name="label2_Copy1" FontFamily="Lucida Sans Unicode" FontSize="12" Content="Choose where you want to save your files." HorizontalAlignment="Left" Margin="204,272,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="rsaKeys_lbl" FontFamily="Lucida Sans Unicode" FontSize="10" Background="White" BorderBrush="Transparent" Content="C:\" HorizontalAlignment="Left" Margin="208,300,0,0" VerticalAlignment="Top" Width="302" Height="34"/>
+            <Label x:Name="label2_Copy11" Content="Change the color of the program" HorizontalAlignment="Left" Margin="202,405,0,0" VerticalAlignment="Top"/>
+
+            <Button x:Name="rsaKeys_ChangeBtn" Cursor="Hand" Foreground="#fff" Background="#a47130" BorderBrush="#eee" BorderThickness="2" Margin="391,339,190,220" Click="rsaKeys_ChangeBtn_Click" ToolTip="Change" FontFamily="Lucida Sans Unicode">
+                <StackPanel Orientation="Horizontal" Width="104" >
+                    <Image Source="img/changeAddress.png" Width="32" Height="32" Margin="0,0,10,0"/>
+                    <TextBlock Margin="8"  FontSize="14" Width="61" Height="24">Change</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <xctk:ColorPicker Name="ClrPcker_Background" Background="#a47130" SelectedColorChanged="ClrPcker_Background_SelectedColorChanged" HorizontalAlignment="Left" Margin="458,409,0,0" VerticalAlignment="Top" Height="25" Width="45"></xctk:ColorPicker>
+            <Rectangle Fill="#a47130" HorizontalAlignment="Left" Height="1" VerticalAlignment="Top" Width="315" Margin="200,396,0,0"/>
+            <Rectangle Fill="#a47130" HorizontalAlignment="Left" Height="1" VerticalAlignment="Top" Width="315" Margin="200,445,0,0"/>
+
         </Grid>
 
-        <Grid Name="helpGrid"  Background="Beige" Visibility="Collapsed" Height="600" Width="700">
-            <Label x:Name="label3" Content="Help" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-            <Expander x:Name="expander" Header="Stegonografie" HorizontalAlignment="Left" Margin="47,169,0,0" VerticalAlignment="Top" IsExpanded="True">
-                <TextBlock TextWrapping="WrapWithOverflow">
+        <Grid Name="helpGrid"  Background="#dfdfde" Visibility="Collapsed" Height="600" Width="700">
+
+            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="105" Margin="210,25,0,0" VerticalAlignment="Top" Width="296"/>
+            <Label Content="Help" Foreground="#2291d0" FontSize="26.667" Margin="339,29,0,493" HorizontalAlignment="Left" Width="auto" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
+            <Label Foreground="White" Content="Here you can see more info&#xA;              about our app." FontSize="16" Margin="235,69,0,469" HorizontalAlignment="Left" Width="253" FontFamily="Lucida Sans Unicode" VerticalAlignment="Center" Height="62"/>
+            <Image Source="img/triangle.png" HorizontalAlignment="Left" Height="34" Margin="347,125,0,0" VerticalAlignment="Top" Width="29" Stretch="Fill"/>
+            <Image Source="img/helpH.png" HorizontalAlignment="Left" Height="40" Margin="301,30,0,0" VerticalAlignment="Top" Width="39" Stretch="Fill"/>
+
+            <Expander x:Name="expander" Width="480" FontFamily="Lucida Sans Unicode" FontWeight="Bold" FontSize="14" Header="Stegonografie" HorizontalAlignment="Left" Margin="122,360,0,0" VerticalAlignment="Top" IsExpanded="True">
+                <TextBlock TextWrapping="WrapWithOverflow" FontWeight="Normal" FontSize="11">
                     Selecting an image and entering a text allows you to hide a message inside the image.
                     It's optional to use a password.
                     To get the message out of the file you have to select the image you just saved.
                 </TextBlock >
             </Expander>
-            <Expander x:Name="expander1" Header="Encryption" HorizontalAlignment="Left" Margin="47,58,0,0" VerticalAlignment="Top" IsExpanded="True">
-                <TextBlock TextWrapping="WrapWithOverflow">
+            <Rectangle Fill="#2291d0" HorizontalAlignment="Left" Height="1" VerticalAlignment="Top" Width="471" Margin="120,253,0,0"/>
+
+            <Expander x:Name="expander1" Width="480" FontFamily="Lucida Sans Unicode" FontWeight="Bold" FontSize="14" Header="Encryption" HorizontalAlignment="Left" Margin="122,163,0,0" VerticalAlignment="Top" IsExpanded="True">
+                <TextBlock TextWrapping="WrapWithOverflow" FontWeight="Normal" FontSize="11">
                 For you to encrypt a file, you need to insert your name and the name of the receiver, and a text (*.txt) file to encrypt.
                 The key making process should happen individually in a real life situation.
                 In matter of which algorithm to use, AES is safer to use than DES.
                 </TextBlock >
             </Expander>
-            <Expander x:Name="expander2" Header="Decryption" HorizontalAlignment="Left" Margin="45,115,0,0" VerticalAlignment="Top" IsExpanded="True">
-                <TextBlock TextWrapping="WrapWithOverflow">
+            <Rectangle Fill="#2291d0" HorizontalAlignment="Left" Height="1" VerticalAlignment="Top" Width="471" Margin="120,349,0,0"/>
+
+            <Expander x:Name="expander2" Width="480" FontFamily="Lucida Sans Unicode" FontWeight="Bold" FontSize="14" Header="Decryption" HorizontalAlignment="Left" Margin="120,263,0,0" VerticalAlignment="Top" IsExpanded="True">
+                <TextBlock TextWrapping="WrapWithOverflow"  FontWeight="Normal" FontSize="11">
                 For a user to de-crypt a file, they need to select the encrypted file, symmetric key and signed hash.
                 These should reside in "C:\DocumentenCrypto" by default. The generated keys reside in the "keys" sub-directory.
                 The file names are indicated with what you need.
                 </TextBlock >
 
             </Expander>
-            <Expander x:Name="expander3" Header="Prefences" HorizontalAlignment="Left" Margin="45,225,0,0" VerticalAlignment="Top" IsExpanded="True">
-                <TextBlock TextWrapping="WrapWithOverflow">
+            <Rectangle Fill="#2291d0" HorizontalAlignment="Left" Height="1" VerticalAlignment="Top" Width="471" Margin="120,447,0,0"/>
+
+            <Expander x:Name="expander3" Width="480" Header="Prefences" FontFamily="Lucida Sans Unicode" FontWeight="Bold" FontSize="14" HorizontalAlignment="Left" Margin="120,458,0,0" VerticalAlignment="Top" IsExpanded="True">
+                <TextBlock TextWrapping="WrapWithOverflow" FontWeight="Normal" FontSize="11">
                     Here you can change the location of the encrypted files and keys.
                     Also the colour of the menu can be changed to your linking.
                 </TextBlock >
 
             </Expander>
+            <Rectangle Fill="#2291d0" HorizontalAlignment="Left" Height="1" VerticalAlignment="Top" Width="471" Margin="120,537,0,0"/>
 
         </Grid>
 
