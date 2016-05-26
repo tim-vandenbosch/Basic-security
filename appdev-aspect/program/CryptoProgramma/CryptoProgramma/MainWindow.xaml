@@ -186,7 +186,7 @@
             <Label x:Name="symkeyLbl"  FontFamily="Lucida Sans Unicode" FontSize="10" Content="" Background="White" HorizontalAlignment="Left" Margin="152,230,0,0" VerticalAlignment="Top" Width="335" Height="30"/>
             <Label x:Name="label4"  FontFamily="Lucida Sans Unicode" FontSize="12" Content="Public key sender" HorizontalAlignment="Left" Margin="149,324,0,0" VerticalAlignment="Top"/>
             <Label x:Name="fileLbl" Content="" FontFamily="Lucida Sans Unicode" FontSize="10" Background="white" HorizontalAlignment="Left" Margin="151,167,0,0" VerticalAlignment="Top" Width="335" Height="30"/>
-            <Label x:Name="label5"  FontFamily="Lucida Sans Unicode" FontSize="10" Content="Private key receiver" HorizontalAlignment="Left" Margin="148,387,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label5"  FontFamily="Lucida Sans Unicode" FontSize="12" Content="Private key receiver" HorizontalAlignment="Left" Margin="148,387,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label_1" FontFamily="Lucida Sans Unicode" FontSize="12" Content="Encrypted file" HorizontalAlignment="Left" Margin="147,141,0,0" VerticalAlignment="Top"/>
             <Button x:Name="browseFileBut" Content="Browse" HorizontalAlignment="Left" Margin="500,168,0,0" VerticalAlignment="Top" Cursor="Hand" Foreground="#fff" Background="#a3ca39" BorderBrush="#fff" BorderThickness="2" FontFamily="Lucida Sans Unicode" Click="browseFileBut_Click" Height="29" Width="71"/>
             <Button x:Name="browseSemKeyBut" Content="Browse" HorizontalAlignment="Left" Margin="500,230,0,0" VerticalAlignment="Top" Click="browseSemKeyBut_Click"  Cursor="Hand" Foreground="#fff" Background="#a3ca39" BorderBrush="#fff" BorderThickness="2" FontFamily="Lucida Sans Unicode" Height="29" Width="71"/>
@@ -212,7 +212,7 @@
 
         </Grid>
 
-        <Grid Name="decryptingGrid" Background="#dfdfde" Visibility="Visible" Height="600" Width="700" >
+        <Grid Name="decryptingGrid" Background="#dfdfde" Visibility="Collapsed" Height="600" Width="700" >
 
             <Rectangle Fill="Black" HorizontalAlignment="Left" Height="125" Margin="146,140,0,0" VerticalAlignment="Top" Width="425"/>
             <Label x:Name="statusDecrLabel" Content="Status decryption" Foreground="#ea7f23" FontSize="24" Margin="258,144,0,378" HorizontalAlignment="Left" Width="285" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
