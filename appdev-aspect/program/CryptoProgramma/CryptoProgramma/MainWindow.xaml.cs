@@ -56,6 +56,7 @@ namespace CryptoProgramma
         {
             senderTxt.Text = senderTxt.Text == "Sender" ? string.Empty : senderTxt.Text;
         }
+
         public void TextBox_Receiver_GotFocus(object sender, RoutedEventArgs e)
         {
             receiverTxt.Text = receiverTxt.Text == "Receiver" ? string.Empty : receiverTxt.Text;

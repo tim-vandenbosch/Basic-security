@@ -51,7 +51,7 @@ namespace CryptoProgramma
                 return;
             }
 
-            MessageBox.Show("File Encryption Complete!");
+            //MessageBox.Show("File Encryption Complete!");
 
         }
 
@@ -91,7 +91,7 @@ namespace CryptoProgramma
                 return;
             }
 
-            MessageBox.Show("File Decryption Complete!");
+         //   MessageBox.Show("File Decryption Complete!");
         }
 
 

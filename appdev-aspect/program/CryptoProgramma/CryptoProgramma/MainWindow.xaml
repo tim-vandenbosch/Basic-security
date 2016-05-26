@@ -103,9 +103,9 @@
         </Grid>
 
         <Grid Name="encryptingGrid" Background="#dfdfde" Visibility="Collapsed" Width="700" Height="600" Margin="0,0,0,0.667" >
-            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="55" Margin="146,20,0,0" VerticalAlignment="Top" Width="425"/>
-            <Label x:Name="statusLbl" Content="Status" Foreground="#a3ca39" FontSize="24" Margin="155,23,0,499" HorizontalAlignment="Left" Width="auto" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
-            <ProgressBar x:Name="encrProgressbar" HorizontalAlignment="Left" Height="11" Margin="390,39,0,0" VerticalAlignment="Top" Width="159"/>
+            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="55" Margin="72,14,0,0" VerticalAlignment="Top" Width="425"/>
+            <Label x:Name="statusLbl" Content="Status" Foreground="#a3ca39" FontSize="24" Margin="103,17,0,505" HorizontalAlignment="Left" Width="auto" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
+            <ProgressBar x:Name="encrProgressbar" HorizontalAlignment="Left" Height="13" Margin="287,34,0,0" VerticalAlignment="Top" Width="202"/>
             <Image Source="img/triangle.png" HorizontalAlignment="Left" Height="34" Margin="347,61,0,0" VerticalAlignment="Top" Width="29" Stretch="Fill"/>
 
 
@@ -151,11 +151,20 @@
             <Label x:Name="padEncryptedSkey"  FontFamily="Lucida Sans Unicode" FontSize="9.333" Content="C:\" HorizontalAlignment="Left" Margin="82,437,0,0" VerticalAlignment="Top" Width="auto" />
 
             <Rectangle Fill="#ededeb" Width="564" Margin="79,485,57,35"/>
-            <Label Background="#958884" Foreground="#fff" Content="Info about encrypted hash saved as" FontFamily="Lucida Sans Unicode" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,476,0,0" Height="26" />
+            <Label Background="#958884" Foreground="#fff" Content="Info about Signed Hash" FontFamily="Lucida Sans Unicode" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,476,0,0" Height="26" />
             <Label Content="Saved as" FontFamily="Lucida Sans Unicode" FontSize="10.667" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="auto" Margin="103,507,0,0" />
             <Label x:Name="nameEnHashLbl" Content=""  FontFamily="Lucida Sans Unicode" FontSize="10.667" FontWeight="Bold" HorizontalAlignment="Left" Margin="159,506,0,0" Width="auto" Height="27" VerticalAlignment="Top"/>
             <CheckBox x:Name="checkBox7" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="86,512,0,0" VerticalAlignment="Top" Width="24" />
             <Label x:Name="padEncryptedHash"  FontFamily="Lucida Sans Unicode" FontSize="9.333" Content="C:\" HorizontalAlignment="Left" Margin="82,531,0,0" VerticalAlignment="Top" Width="auto" />
+
+            <Button x:Name="backButton_ToHome" Cursor="Hand" Foreground="#454545" Background="#dfdfde" BorderBrush="Transparent" Margin="547,25,40,539" Click="backButton_EnFileGr_Click" ToolTip="Back to home" FontFamily="Lucida Sans Unicode">
+                <StackPanel Orientation="Horizontal" Width="113" >
+                    <TextBlock FontSize="10" Margin="8">
+                        Back to home
+                    </TextBlock>
+                    <Image Source="img/back.png" Width="22" Height="22" Margin="0,0,10,0"/>
+                </StackPanel>
+            </Button>
         </Grid>
 
         <!--   </TabItem>
