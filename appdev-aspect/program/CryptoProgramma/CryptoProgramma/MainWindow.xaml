@@ -11,7 +11,7 @@
         Title="Crypto Program" Name="CryptoProgramWin" Height="600" Width="700" MinWidth="700" MinHeight="600"  MaxWidth="700" MaxHeight="600">
     <DockPanel>
 
-        <Grid Name="homePageGrid" Background="#dfdfde" Width="700" Visibility="Collapsed" d:IsHidden="False">
+        <Grid Name="homePageGrid" Background="#dfdfde" Width="700" Visibility="Visible" d:IsHidden="False">
 
             <Button x:Name="encryptHomeButton" Cursor="Hand" Foreground="#eeefee" Background="#a3ca39" BorderBrush="#efefef" BorderThickness="5" Margin="205,358,205,150.667" Click="encryptHomeButton_Click" ToolTip="Click here if you want to encrypt a file" FontFamily="Lucida Sans Unicode" FontSize="18.667">
                 <StackPanel Orientation="Horizontal" Width="230" >
