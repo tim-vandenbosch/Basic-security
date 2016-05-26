@@ -860,17 +860,6 @@ namespace CryptoProgramma
             System.Windows.Application.Current.Shutdown();
         }
 
-        //Override the onClose method in the Application Main window
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-        {
-            MessageBoxResult result = System.Windows.MessageBox.Show("Do you want to quit the application?", "EXIT",
-                                                  MessageBoxButton.OKCancel);
-            if (result == MessageBoxResult.Cancel)
-            {
-                e.Cancel = true;
-            }
-            base.OnClosing(e);
-        }
         #endregion
     }
 }
