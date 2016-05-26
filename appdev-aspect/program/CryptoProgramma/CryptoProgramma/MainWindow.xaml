@@ -8,8 +8,8 @@
         xmlns:local="clr-namespace:CryptoProgramma"
         
         mc:Ignorable="d"
-        Title="Crypto Program" Name="CryptoProgramWin" Height="451" Width="700" MinWidth="700" MinHeight="600">
-    <DockPanel >
+        Title="Crypto Program" Name="CryptoProgramWin" Height="600" Width="700" MinWidth="700" MinHeight="600"  MaxWidth="700" MaxHeight="600">
+    <DockPanel>
 
         <Grid Name="homePageGrid" Background="#dfdfde" Width="700" Visibility="Visible" d:IsHidden="False">
 
