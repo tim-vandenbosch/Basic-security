@@ -8,12 +8,10 @@
         xmlns:local="clr-namespace:CryptoProgramma"
         
         mc:Ignorable="d"
-        Title="Crypto Program" Name="CryptoProgramWin" Height="600" Width="700" MinWidth="700" MinHeight="600">
-    <DockPanel>
-        <!--   <TabControl x:Name="mainTabs" Height="325" RenderTransformOrigin="0.236,0.452">
-            <TabItem x:Name="homePage" Header="HomePage" Visibility="Collapsed"> -->
+        Title="Crypto Program" Name="CryptoProgramWin" Height="451" Width="700" MinWidth="700" MinHeight="600">
+    <DockPanel >
 
-            <Grid Name="homePageGrid" Background="#dfdfde" Width="700" Visibility="Visible" d:IsHidden="False">
+        <Grid Name="homePageGrid" Background="#dfdfde" Width="700" Visibility="Visible" d:IsHidden="False">
 
             <Button x:Name="encryptHomeButton" Cursor="Hand" Foreground="#eeefee" Background="#a3ca39" BorderBrush="#efefef" BorderThickness="5" Margin="210,268,194,229.667" Click="encryptHomeButton_Click" ToolTip="Click here if you want to encrypt a file" FontFamily="Lucida Sans Unicode" FontSize="18.667">
                 <StackPanel Orientation="Horizontal" Width="265" >
@@ -30,13 +28,12 @@
             </Button>
                 
             <Rectangle Fill="Black" HorizontalAlignment="Left" Height="86" Margin="210,132,0,0" VerticalAlignment="Top" Width="296"/>
-            <Label x:Name="welcomeLabel" Content="Welcome" Foreground="#a3ca39" FontSize="26.667" Margin="294,136,0,385.667" HorizontalAlignment="Left" Width="143" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
-            <Label x:Name="welcomeLabel_Copy" Foreground="White" Content=" What you want to do ?" FontSize="21.333" Margin="235,165,0,358.667" HorizontalAlignment="Left" Width="253" FontFamily="Lucida Sans Unicode"/>
-            <Image x:Name="triangleImg" Source="img/triangle.png" HorizontalAlignment="Left" Height="34" Margin="347,215,0,0" VerticalAlignment="Top" Width="29" Stretch="Fill"/>
+            <Label Content="Welcome" Foreground="#a3ca39" FontSize="26.667" Margin="294,136,0,385.667" HorizontalAlignment="Left" Width="143" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
+            <Label  Foreground="White" Content=" What you want to do ?" FontSize="21.333" Margin="235,165,0,358.667" HorizontalAlignment="Left" Width="253" FontFamily="Lucida Sans Unicode"/>
+            <Image  Source="img/triangle.png" HorizontalAlignment="Left" Height="34" Margin="347,215,0,0" VerticalAlignment="Top" Width="29" Stretch="Fill"/>
         
             </Grid>
-        <!--  </TabItem>
-            <TabItem x:Name="encryptFile" Header="encryptFile"  Visibility="Collapsed"> -->
+
         <Grid Name="encryptFileGrid" Background="#dfdfde" Visibility="Collapsed" Height="600" Width="700" >
 
             <Rectangle Fill="Black" HorizontalAlignment="Left" Height="86" Margin="146,20,0,0" VerticalAlignment="Top" Width="425"/>
@@ -99,89 +96,178 @@
                     <Image Source="img/back.png" Width="32" Height="32" Margin="0,0,10,0"/>
                 </StackPanel>
             </Button>
-            
+
         </Grid>
-        <Grid Name="encryptingGrid" Background="Beige" Visibility="Collapsed" Height="600" Width="700" >
-            <Label x:Name="labelPrS" Content="Private key sender saved as" HorizontalAlignment="Left" Margin="21,18,0,0" VerticalAlignment="Top" Width="179"/>
-            <Label x:Name="padPrivateSenderLbl" Content="C:\" HorizontalAlignment="Left" Margin="43,54,0,0" VerticalAlignment="Top" Width="350"/>
-            <Label x:Name="labelPuS" Content="Public key sender saved as" HorizontalAlignment="Left" Margin="21,80,0,0" VerticalAlignment="Top" Width="179"/>
-            <Label x:Name="padPublicSenderLbl" Content="C:\" HorizontalAlignment="Left" Margin="43,119,0,0" VerticalAlignment="Top" Width="350" Height="23"/>
-            <Label x:Name="labelPrR" Content="Private key receiver saved as" HorizontalAlignment="Left" Margin="21,142,0,0" VerticalAlignment="Top" Width="179"/>
-            <Label x:Name="padPrivateReceiverLbl" Content="C:\" HorizontalAlignment="Left" Margin="43,181,0,0" VerticalAlignment="Top" Width="350"/>
-            <Label x:Name="labelPuR" Content="Public key receiver saved as" HorizontalAlignment="Left" Margin="21,212,0,0" VerticalAlignment="Top" Width="179"/>
-            <Label x:Name="padPublicReceiverLbl" Content="C:\" HorizontalAlignment="Left" Margin="43,256,0,0" VerticalAlignment="Top" Width="350"/>
-            <Label x:Name="labelEnF" Content="Encrypted file saved as" HorizontalAlignment="Left" Margin="21,274,0,0" VerticalAlignment="Top" Width="179"/>
-            <Label x:Name="padEncryptedFile" Content="C:\" HorizontalAlignment="Left" Margin="43,310,0,0" VerticalAlignment="Top" Width="350"/>
-            <Label x:Name="labelEnSk" Content="Encrypted symetric key saved as" HorizontalAlignment="Left" Margin="21,336,0,0" VerticalAlignment="Top" Width="179"/>
-            <Label x:Name="padEncryptedSkey" Content="C:\" HorizontalAlignment="Left" Margin="43,367,0,0" VerticalAlignment="Top" Width="350"/>
-            <Label x:Name="labelEnH" Content="Encrypted hash saved as" HorizontalAlignment="Left" Margin="21,398,0,0" VerticalAlignment="Top" Width="179"/>
-            <Label x:Name="padEncryptedHash" Content="C:\" HorizontalAlignment="Left" Margin="43,432,0,0" VerticalAlignment="Top" Width="350"/>
-            <Label x:Name="namePrKeySenderLbl" Content="" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Margin="205,29,0,0" VerticalAlignment="Top" Width="188"/>
-            <Label x:Name="namePuKeySenderLbl" Content="" BorderThickness="1" BorderBrush="Black"  HorizontalAlignment="Left" Margin="205,91,0,0" VerticalAlignment="Top" Width="188"/>
-            <Label x:Name="namePrKeyReceiverLbl" Content="" BorderThickness="1" BorderBrush="Black"  HorizontalAlignment="Left" Margin="205,153,0,0" VerticalAlignment="Top" Width="188"/>
-            <Label x:Name="namePuKeyReceiverLbl" Content="" BorderThickness="1" BorderBrush="Black"  HorizontalAlignment="Left" Margin="205,218,0,0" VerticalAlignment="Top" Width="188"/>
-            <Label x:Name="nameEnFileLbl" Content="" BorderThickness="1" BorderBrush="Black"  HorizontalAlignment="Left" Margin="205,285,0,0" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0.537,2.212"/>
-            <Label x:Name="nameEnSymKLbl" Content="" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Margin="205,342,0,0" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0.537,2.212"/>
-            <Label x:Name="nameEnHashLbl" Content="" BorderThickness="1" BorderBrush="Black"  HorizontalAlignment="Left" Margin="205,398,0,0" VerticalAlignment="Top" Width="188" RenderTransformOrigin="0.537,2.212"/>
-            <ProgressBar x:Name="encrProgressbar" HorizontalAlignment="Left" Height="15" Margin="21,489,0,0" VerticalAlignment="Top" Width="424"/>
-            <Label x:Name="statusLbl" Content="Status" FontSize="50" HorizontalAlignment="Left" Margin="133,509,0,0" VerticalAlignment="Top" Width="200" Height="74" RenderTransformOrigin="0.5,0.5"/>
+
+        <Grid Name="encryptingGrid" Background="#dfdfde" Visibility="Collapsed" Width="700" Height="600" Margin="0,0,0,0.667" >
+            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="55" Margin="146,20,0,0" VerticalAlignment="Top" Width="425"/>
+            <Label x:Name="statusLbl" Content="Status" Foreground="#a3ca39" FontSize="24" Margin="155,23,0,499" HorizontalAlignment="Left" Width="auto" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
+            <ProgressBar x:Name="encrProgressbar" HorizontalAlignment="Left" Height="11" Margin="390,39,0,0" VerticalAlignment="Top" Width="159"/>
+            <Image Source="img/triangle.png" HorizontalAlignment="Left" Height="34" Margin="347,61,0,0" VerticalAlignment="Top" Width="29" Stretch="Fill"/>
+
+
+            <Rectangle Fill="#ededeb" Width="564" Margin="80,105,56,415"/>
+            <Label Background="#958884" Foreground="#fff" Content="Info about Sender" FontFamily="Lucida Sans Unicode" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="109,90,0,0" Height="24" />
+            <Label Content="Public key saved as" FontFamily="Lucida Sans Unicode" FontSize="10.667" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="auto" Margin="104,118,0,0" />
+            <Label x:Name="namePuKeySenderLbl" Content=""  FontFamily="Lucida Sans Unicode" FontSize="10.667" FontWeight="Bold" HorizontalAlignment="Left" Margin="212,118,0,0" VerticalAlignment="Top" Width="auto"/>
+            <CheckBox x:Name="checkBox2" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="87,123,0,0" VerticalAlignment="Top" Width="24" />
+            <Label x:Name="padPublicSenderLbl" FontFamily="Lucida Sans Unicode" FontSize="9.333" Content="C:\" HorizontalAlignment="Left" Margin="84,142,0,0" VerticalAlignment="Top" Width="261" />
+
+            <Rectangle Fill="#958884" HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="2" Margin="353,118,0,0"/>
+
+            <Label Content="Private key saved as" FontFamily="Lucida Sans Unicode" FontSize="10.667" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="auto" Margin="376,118,0,0" />
+            <Label x:Name="namePrKeySenderLbl" Content=""  FontFamily="Lucida Sans Unicode" FontSize="10.667" FontWeight="Bold" HorizontalAlignment="Left" Margin="487,118,0,0" VerticalAlignment="Top" Width="auto"/>
+            <CheckBox x:Name="checkBox1" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="363,123,0,0" VerticalAlignment="Top" Width="24" />
+            <Label x:Name="padPrivateSenderLbl"  FontFamily="Lucida Sans Unicode" FontSize="9.333" Content="C:\" HorizontalAlignment="Left" Margin="360,142,0,0" VerticalAlignment="Top" Width="275" />
+
+            <Rectangle Fill="#ededeb" Width="564" Margin="79,205,57,320"/>
+            <Label Content="Public key saved as" FontFamily="Lucida Sans Unicode" FontSize="10.667" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="auto" Margin="103,218,0,0" />
+            <Label x:Name="namePuKeyReceiverLbl" Content=""  FontFamily="Lucida Sans Unicode" FontSize="10.667" FontWeight="Bold" HorizontalAlignment="Left" Margin="210,218,0,0" VerticalAlignment="Top" Width="auto"/>
+            <CheckBox x:Name="checkBox4" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="86,223,0,0" VerticalAlignment="Top" Width="24" />
+            <Label x:Name="padPublicReceiverLbl"  FontFamily="Lucida Sans Unicode" FontSize="9.333" Content="C:\" HorizontalAlignment="Left" Margin="82,242,0,0" VerticalAlignment="Top" Width="263" />
+            <Rectangle Fill="#958884" HorizontalAlignment="Left" Height="47" VerticalAlignment="Top" Width="2" Margin="352,218,0,0"/>
+            <Label Background="#958884" Foreground="#fff" Content="Info about Receiver" FontFamily="Lucida Sans Unicode" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="108,190,0,0" Height="25" />
+            <Label Content="Private key saved as" FontFamily="Lucida Sans Unicode" FontSize="10.667" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="auto" Margin="375,218,0,0" />
+            <Label x:Name="namePrKeyReceiverLbl" Content=""  FontFamily="Lucida Sans Unicode" FontSize="10.667" FontWeight="Bold" HorizontalAlignment="Left" Margin="486,218,0,0" VerticalAlignment="Top" Width="auto"/>
+            <CheckBox x:Name="checkBox3" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="362,223,0,0" VerticalAlignment="Top" Width="24" />
+            <Label x:Name="padPrivateReceiverLbl"  FontFamily="Lucida Sans Unicode" FontSize="9.333" Content="C:\" HorizontalAlignment="Left" Margin="359,242,0,0" VerticalAlignment="Top" Width="276" />
+
+            <Rectangle Fill="#ededeb" Width="564" Margin="79,302,57,225"/>
+            <Label Background="#958884" Foreground="#fff" Content="Info about Encrypted file" FontFamily="Lucida Sans Unicode" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="108,285,0,0" Height="27" />
+            <Label Content="Saved as" FontFamily="Lucida Sans Unicode" FontSize="10.667" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="auto" Margin="103,317,0,0" />
+            <Label x:Name="nameEnFileLbl" Content=""  FontFamily="Lucida Sans Unicode" FontSize="10.667" FontWeight="Bold" HorizontalAlignment="Left" Margin="161,317,0,0" VerticalAlignment="Top" Width="auto"/>
+            <CheckBox x:Name="checkBox5" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="86,322,0,0" VerticalAlignment="Top" Width="24" />
+            <Label x:Name="padEncryptedFile"  FontFamily="Lucida Sans Unicode" FontSize="9.333" Content="C:\" HorizontalAlignment="Left" Margin="82,341,0,0" VerticalAlignment="Top" Width="auto" />
             <Button x:Name="backBtn_EnGr" Click="backBtn_EnGr_Click" Content="Back to home" HorizontalAlignment="Left" Margin="312,637,0,0" VerticalAlignment="Top" Width="133" Height="24"/>
-            <CheckBox x:Name="checkBox1" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="407,42,0,0" VerticalAlignment="Top" Width="24"/>
-            <CheckBox x:Name="checkBox2" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="407,104,0,0" VerticalAlignment="Top" Width="24" />
-            <CheckBox x:Name="checkBox3" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="407,166,0,0" VerticalAlignment="Top" Width="24"/>
-            <CheckBox x:Name="checkBox4" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="407,231,0,0" VerticalAlignment="Top" Width="24" />
-            <CheckBox x:Name="checkBox5" Content="" IsEnabled="False"  HorizontalAlignment="Left" Margin="407,298,0,0" VerticalAlignment="Top" Width="24"/>
-            <CheckBox x:Name="checkBox6" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="407,355,0,0" VerticalAlignment="Top" Width="24"/>
-            <CheckBox x:Name="checkBox7" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="407,411,0,0" VerticalAlignment="Top" Width="24" />
+
+            <Rectangle Fill="#ededeb" Width="564" Margin="79,398,57,130"/>
+            <Label Background="#958884" Foreground="#fff" Content="Info about Encrypted Symetric key" FontFamily="Lucida Sans Unicode" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,382,0,0" Height="26" />
+            <Label Content="Saved as" FontFamily="Lucida Sans Unicode" FontSize="10.667" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="auto" Margin="103,413,0,0" />
+            <Label x:Name="nameEnSymKLbl" Content=""  FontFamily="Lucida Sans Unicode" FontSize="10.667" FontWeight="Bold" HorizontalAlignment="Left" Margin="159,412,0,0" VerticalAlignment="Top" Width="auto"/>
+            <CheckBox x:Name="checkBox6" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="86,418,0,0" VerticalAlignment="Top" Width="24" />
+            <Label x:Name="padEncryptedSkey"  FontFamily="Lucida Sans Unicode" FontSize="9.333" Content="C:\" HorizontalAlignment="Left" Margin="82,437,0,0" VerticalAlignment="Top" Width="auto" />
+
+            <Rectangle Fill="#ededeb" Width="564" Margin="79,485,57,35"/>
+            <Label Background="#958884" Foreground="#fff" Content="Info about encrypted hash saved as" FontFamily="Lucida Sans Unicode" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,476,0,0" Height="26" />
+            <Label Content="Saved as" FontFamily="Lucida Sans Unicode" FontSize="10.667" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="auto" Margin="103,507,0,0" />
+            <Label x:Name="nameEnHashLbl" Content=""  FontFamily="Lucida Sans Unicode" FontSize="10.667" FontWeight="Bold" HorizontalAlignment="Left" Margin="159,506,0,0" Width="auto" Height="27" VerticalAlignment="Top"/>
+            <CheckBox x:Name="checkBox7" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="86,512,0,0" VerticalAlignment="Top" Width="24" />
+            <Label x:Name="padEncryptedHash"  FontFamily="Lucida Sans Unicode" FontSize="9.333" Content="C:\" HorizontalAlignment="Left" Margin="82,531,0,0" VerticalAlignment="Top" Width="auto" />
         </Grid>
 
         <!--   </TabItem>
             <TabItem x:Name="decryptFile" Header="decryptFile" Visibility="Collapsed"> -->
 
-        <Grid Name="decryptFileGrid" Background="Beige"  Visibility="Collapsed" Height="600" Width="700" >
-            <Button x:Name="decryptButton" Content="Decrypt"  Margin="48,398,324,50" Click="decryptButton_Click" FontSize="15"/>
-            <Label x:Name="label_2" Content="Encrypted symetric key" HorizontalAlignment="Left" Margin="14,159,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="privateLbl" Content=""  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="20,358,0,0" VerticalAlignment="Top" Width="280" Height="20"/>
-            <Label x:Name="label_3" Content="Signed hash" HorizontalAlignment="Left" Margin="20,219,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="publicLbl" Content=""  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="20,302,0,0" VerticalAlignment="Top" Width="280" Height="20"/>
-            <Label x:Name="hashLbl" Content=""  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="20,250,0,0" VerticalAlignment="Top" Width="280" Height="20"/>
-            <Label x:Name="symkeyLbl" Content=""  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="20,194,0,0" VerticalAlignment="Top" Width="280" Height="20"/>
-            <Label x:Name="label4" Content="Public key sender" HorizontalAlignment="Left" Margin="17,274,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="fileLbl" Content=""  BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="20,136,0,0" VerticalAlignment="Top" Width="280" Height="20"/>
-            <Label x:Name="label5" Content="Private key receiver" HorizontalAlignment="Left" Margin="14,327,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="label_1" Content="Encrypted file" HorizontalAlignment="Left" Margin="19,105,0,0" VerticalAlignment="Top" Width="100"/>
-            <Button x:Name="browseFileBut" Content="Browse" HorizontalAlignment="Left" Margin="330,136,0,0" VerticalAlignment="Top" Width="75" Click="browseFileBut_Click"/>
-            <Button x:Name="browseSemKeyBut" Content="Browse" HorizontalAlignment="Left" Margin="330,194,0,0" VerticalAlignment="Top" Width="75" Click="browseSemKeyBut_Click"/>
-            <Button x:Name="browseHashBut" Content="Browse" HorizontalAlignment="Left" Margin="330,250,0,0" VerticalAlignment="Top" Width="75" Click="browseHashBut_Click"/>
-            <Button x:Name="browsePublicBut" Content="Browse" HorizontalAlignment="Left" Margin="330,302,0,0" VerticalAlignment="Top" Width="75" Click="browsePublicBut_Click"/>
-            <Button x:Name="browsePrivateBut" Content="Browse" HorizontalAlignment="Left" Margin="330,358,0,0" VerticalAlignment="Top" Width="75" Click="browsePrivateBut_Click"/>
-            <Label x:Name="label1" FontSize="20" Content="Browse to these files to decrypt" HorizontalAlignment="Left" Margin="58,28,0,0" VerticalAlignment="Top" Width="314"/>
-            <Button x:Name="backButton_DeFileGr" Content="&lt; Back" Click="backButton_DeFileGr_Click" HorizontalAlignment="Left" Margin="330,430,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.533,4.733"/>
+        <Grid Name="decryptFileGrid" Background="#dfdfde" Visibility="Collapsed" Width="700" Height="600" Margin="0,0,0,0.667" >
+
+            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="86" Margin="146,20,0,0" VerticalAlignment="Top" Width="425"/>
+            <Label Content="Decrypt your file here" Foreground="#b8aca9" FontSize="24" Margin="235,24,0,498" HorizontalAlignment="Left" Width="285" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
+            <Label Foreground="White" Content="Browse to these files to decrypt." FontSize="16" Margin="241,53,0,493" HorizontalAlignment="Left" Width="282" FontFamily="Lucida Sans Unicode"/>
+            <Image Source="img/triangle.png" HorizontalAlignment="Left" Height="34" Margin="347,103,0,0" VerticalAlignment="Top" Width="29" Stretch="Fill"/>
+
+            <Label x:Name="label_2"  FontFamily="Lucida Sans Unicode" FontSize="12" Content="Encrypted symetric key" HorizontalAlignment="Left" Margin="148,203,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="privateLbl"  FontFamily="Lucida Sans Unicode" FontSize="10" Content="" Background="White" HorizontalAlignment="Left" Margin="152,414,0,0" VerticalAlignment="Top" Width="335" Height="30"/>
+            <Label x:Name="label_3"  FontFamily="Lucida Sans Unicode" FontSize="12" Content="Signed hash" HorizontalAlignment="Left" Margin="148,265,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="publicLbl"  FontFamily="Lucida Sans Unicode" FontSize="10" Content=""  Background="White" HorizontalAlignment="Left" Margin="152,350,0,0" VerticalAlignment="Top" Width="335" Height="30"/>
+            <Label x:Name="hashLbl"  FontFamily="Lucida Sans Unicode" FontSize="12" Content="" Background="White" HorizontalAlignment="Left" Margin="152,292,0,0" VerticalAlignment="Top" Width="335" Height="30"/>
+            <Label x:Name="symkeyLbl"  FontFamily="Lucida Sans Unicode" FontSize="10" Content="" Background="White" HorizontalAlignment="Left" Margin="152,230,0,0" VerticalAlignment="Top" Width="335" Height="30"/>
+            <Label x:Name="label4"  FontFamily="Lucida Sans Unicode" FontSize="12" Content="Public key sender" HorizontalAlignment="Left" Margin="149,324,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="fileLbl" Content="" FontFamily="Lucida Sans Unicode" FontSize="10" Background="white" HorizontalAlignment="Left" Margin="151,167,0,0" VerticalAlignment="Top" Width="335" Height="30"/>
+            <Label x:Name="label5"  FontFamily="Lucida Sans Unicode" FontSize="10" Content="Private key receiver" HorizontalAlignment="Left" Margin="148,387,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label_1" FontFamily="Lucida Sans Unicode" FontSize="12" Content="Encrypted file" HorizontalAlignment="Left" Margin="147,141,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="browseFileBut" Content="Browse" HorizontalAlignment="Left" Margin="500,168,0,0" VerticalAlignment="Top" Cursor="Hand" Foreground="#fff" Background="#a3ca39" BorderBrush="#fff" BorderThickness="2" FontFamily="Lucida Sans Unicode" Click="browseFileBut_Click" Height="29" Width="71"/>
+            <Button x:Name="browseSemKeyBut" Content="Browse" HorizontalAlignment="Left" Margin="500,230,0,0" VerticalAlignment="Top" Click="browseSemKeyBut_Click"  Cursor="Hand" Foreground="#fff" Background="#a3ca39" BorderBrush="#fff" BorderThickness="2" FontFamily="Lucida Sans Unicode" Height="29" Width="71"/>
+            <Button x:Name="browseHashBut" Content="Browse" HorizontalAlignment="Left" Margin="500,292,0,0" VerticalAlignment="Top" Click="browseHashBut_Click" Cursor="Hand" Foreground="#fff" Background="#a3ca39" BorderBrush="#fff" BorderThickness="2" FontFamily="Lucida Sans Unicode"  Height="29" Width="71"/>
+            <Button x:Name="browsePublicBut" Content="Browse" HorizontalAlignment="Left" Margin="500,350,0,0" VerticalAlignment="Top" Click="browsePublicBut_Click" Cursor="Hand" Foreground="#fff" Background="#a3ca39" BorderBrush="#fff" BorderThickness="2" FontFamily="Lucida Sans Unicode"  Height="29" Width="71"/>
+            <Button x:Name="browsePrivateBut" Content="Browse" HorizontalAlignment="Left" Margin="500,415,0,0" VerticalAlignment="Top" Click="browsePrivateBut_Click" Cursor="Hand" Foreground="#fff" Background="#a3ca39" BorderBrush="#fff" BorderThickness="2" FontFamily="Lucida Sans Unicode"  Height="29" Width="71"/>
+
+            <Button  x:Name="decryptButton" Cursor="Hand" Foreground="#eeefee" Background="#b8aca9" BorderBrush="#eee" BorderThickness="2" Margin="152,469,400,78" Click="decryptButton_Click" ToolTip="Click here if you want to decrypt your file" FontFamily="Lucida Sans Unicode">
+                <StackPanel Orientation="Horizontal" Width="129" >
+                    <Image Source="img/key.png" Width="32" Height="32" Margin="0,0,10,0"/>
+                    <TextBlock Margin="8"  FontSize="16" Width="84">Decrypt</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="backButton_DeFileGr" Cursor="Hand" Foreground="#454545" Background="#dfdfde" BorderBrush="Transparent" Margin="425,474,116,73" Click="backButton_DeFileGr_Click" ToolTip="Back to home" FontFamily="Lucida Sans Unicode">
+                <StackPanel Orientation="Horizontal" Width="146" >
+                    <TextBlock FontSize="14" Margin="8">
+                        Back to home
+                    </TextBlock>
+                    <Image Source="img/back.png" Width="32" Height="32" Margin="0,0,10,0"/>
+                </StackPanel>
+            </Button>
+
         </Grid>
 
-        <Grid Name="decryptingGrid" Background="Beige" Visibility="Collapsed" Height="600" Width="700" >
-            <ProgressBar Name="ProgresDecryption"  HorizontalAlignment="Left" Height="22" Margin="11,83,0,0" VerticalAlignment="Top" Width="385"/>
-            <Label x:Name="statusDecrLabel" Content="Status decryption = " HorizontalAlignment="Left" Margin="61,131,0,0" VerticalAlignment="Top" Width="154"/>
-            <Button x:Name="SaveFileBtn" Content="Save this file" HorizontalAlignment="Left" Margin="170,272,0,0" VerticalAlignment="Top" Width="128" Height="39"/>
-            <Button x:Name="backBtn_DeGr" Click="backBtn_DeGr_Click" Content="Back to home" HorizontalAlignment="Left" Margin="278,433,0,0" VerticalAlignment="Top" Width="118" Height="25"/>
-            <Label x:Name="Proglbl" Content="Decryption is progres...." HorizontalAlignment="Left" Margin="42,33,0,0" VerticalAlignment="Top" Width="371"/>
+        <Grid Name="decryptingGrid" Background="#dfdfde" Visibility="Collapsed" Height="600" Width="700" >
+
+            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="125" Margin="146,140,0,0" VerticalAlignment="Top" Width="425"/>
+            <Label x:Name="statusDecrLabel" Content="Status decryption" Foreground="#ea7f23" FontSize="24" Margin="235,144,0,378" HorizontalAlignment="Left" Width="285" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
+            <Label Foreground="White" Content="Decryption is progres...." FontSize="16" Margin="249,183,0,363" HorizontalAlignment="Left" Width="282" FontFamily="Lucida Sans Unicode"/>
+            <Image Source="img/triangle.png" HorizontalAlignment="Left" Height="34" Margin="345,261,0,0" VerticalAlignment="Top" Width="29" Stretch="Fill"/>
+            <ProgressBar Name="ProgresDecryption"  HorizontalAlignment="Left" Height="13" Margin="181,217,0,0" VerticalAlignment="Top" Width="352"/>
+            <Button x:Name="SaveFileBtn" Cursor="Hand" Foreground="#eeefee" Background="#ea7f23" BorderBrush="#eee" BorderThickness="2" Margin="284,332,268,215" ToolTip="Save your decrypted file" FontFamily="Lucida Sans Unicode">
+                <StackPanel Orientation="Horizontal" Width="129" >
+                    <Image Source="img/save.png" Width="32" Height="32" Margin="0,0,10,0"/>
+                    <TextBlock Margin="8"  FontSize="16" Width="84">SAVE IT</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="backBtn_DeGr" Cursor="Hand" Foreground="#454545" Background="#dfdfde" BorderBrush="Transparent" Margin="279,395,262,152" Click="backBtn_DeGr_Click" ToolTip="Back to home" FontFamily="Lucida Sans Unicode">
+                <StackPanel Orientation="Horizontal" Width="146" >
+                    <TextBlock FontSize="14" Margin="8">
+                        Back to home
+                    </TextBlock>
+                    <Image Source="img/back.png" Width="32" Height="32" Margin="0,0,10,0"/>
+                </StackPanel>
+            </Button>
+
         </Grid>
 
         <!-- Stenografie-layout -->
         <!-- Editor: Tim Van Den Bosch -->
-        <Grid Name="steganografieGrid" Background="Beige" Visibility="Collapsed" Height="600" Width="700">
+        <Grid Name="steganografieGrid" Background="#dfdfde" Visibility="Collapsed" Height="600" Width="700">
             <!--<Grid Name="steganografieGrid" Background="Beige" Visibility="Visible" Height="500" Width="450" d:IsHidden="False">-->
-            <Label x:Name="label" Content="Steganografie, here you can hide your data in an image" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Height="30" />
-            <Button x:Name="browseImageButton" Content="Select the image" HorizontalAlignment="Left" Margin="20,54,0,0" VerticalAlignment="Top" Width="100" Click="browseImageButton_Click"/>
-            <Button x:Name="hideButton" Content="Hide data" HorizontalAlignment="Left" Margin="21,388,0,0" VerticalAlignment="Top" Width="99" Height="27" Click="hideButton_Click"/>
-            <Button x:Name="discoverButton" Content="Retrieve data" HorizontalAlignment="Left" Margin="325,388,0,0" VerticalAlignment="Top" Width="99" Height="27" Click="discoverButton_Click"/>
-            <Button x:Name="backSteg_Btn" Click="backSteg_Btn_Click" Content="&lt; Back to home" HorizontalAlignment="Left" Margin="325,420,0,0" VerticalAlignment="Top" Width="99" Height="27"/>
-            <Image x:Name="selectedImage" Source="img/decrypt.jpg" HorizontalAlignment="Left" Height="180" Margin="240,45,0,0" VerticalAlignment="Top" Width="180" />
-            <Label x:Name="labelSelectedImage" Content="" HorizontalAlignment="Left" Margin="21,79,0,0" VerticalAlignment="Top" Width="205"/>
-            <TextBox x:Name="richTextBox" HorizontalAlignment="Left" Height="160" Margin="10,167,0,0" VerticalAlignment="Top" Width="216" />
-            <CheckBox x:Name="encrypedCheckBox" Content="Password" HorizontalAlignment="Left" Margin="10,335,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="passwordTextBox" HorizontalAlignment="Left" Height="23" Margin="85,333,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="141"/>
-            <Label x:Name="label10" Content="Your input here:" HorizontalAlignment="Left" Margin="10,136,0,0" VerticalAlignment="Top" Width="216"/>
+            <Rectangle Fill="Black" HorizontalAlignment="Left" Height="105" Margin="210,25,0,0" VerticalAlignment="Top" Width="296"/>
+            <Label x:Name="SteganografieLbl" Content="Steganografie" Foreground="#eac223" FontSize="26.667" Margin="260,27,0,495" HorizontalAlignment="Left" Width="auto" FontFamily="Lucida Sans Unicode" FontWeight="Bold"/>
+            <Label Foreground="White" Content="Here you can hide your data&#xA;              in an image." FontSize="16" Margin="235,69,0,469" HorizontalAlignment="Left" Width="253" FontFamily="Lucida Sans Unicode" VerticalAlignment="Center" Height="62"/>
+            <Image Source="img/triangle.png" HorizontalAlignment="Left" Height="34" Margin="347,125,0,0" VerticalAlignment="Top" Width="29" Stretch="Fill"/>
+            <Button x:Name="browseImageButton" Cursor="Hand" Foreground="#000" Background="#eac223" BorderBrush="#eee" BorderThickness="2" Margin="101,199,410,358" Click="browseImageButton_Click" ToolTip="Select the image" FontFamily="Lucida Sans Unicode">
+                <StackPanel Orientation="Horizontal" Width="174" >
+                    <Image Source="img/img.png" Width="32" Height="32" Margin="0,0,10,0"/>
+                    <TextBlock Margin="8"  FontSize="14" Width="116" Height="24">Select the image</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="hideButton" Cursor="Hand" Foreground="#eac223" Background="#000" BorderBrush="#eee" BorderThickness="2" Margin="466,445,90,112" Click="hideButton_Click" ToolTip="Hide data" FontFamily="Lucida Sans Unicode">
+                <StackPanel Orientation="Horizontal" Width="129" >
+                    <Image Source="img/hide.png" Width="32" Height="32" Margin="0,0,10,0"/>
+                    <TextBlock Margin="8"  FontSize="14" Width="82" Height="24">Hide data</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="discoverButton" Cursor="Hand" Foreground="#eac223" Background="#000" BorderBrush="#eee" BorderThickness="2" Margin="103,445,433,112" Click="discoverButton_Click" ToolTip="Retrieve  data" FontFamily="Lucida Sans Unicode">
+                <StackPanel Orientation="Horizontal" Width="144" >
+                    <Image Source="img/retrieve.png" Width="32" Height="32" Margin="0,0,10,0"/>
+                    <TextBlock Margin="8"  FontSize="14" Width="96" Height="24">Retrieve  data</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="backSteg_Btn" Cursor="Hand" Foreground="#454545" Background="#dfdfde" BorderBrush="Transparent" Margin="459,489,82,58" Click="backSteg_Btn_Click" ToolTip="Back to home" FontFamily="Lucida Sans Unicode">
+                <StackPanel Orientation="Horizontal" Width="146" >
+                    <TextBlock FontSize="14" Margin="8">
+                        Back to home
+                    </TextBlock>
+                    <Image Source="img/back.png" Width="32" Height="32" Margin="0,0,10,0"/>
+                </StackPanel>
+            </Button>
+
+            <Image x:Name="selectedImage" Source="img/sLock.png" HorizontalAlignment="Left" Height="180" Margin="106,258,0,0" VerticalAlignment="Top" Width="180" />
+            <Label x:Name="labelSelectedImage" Content="" HorizontalAlignment="Left" Margin="103,163,0,0" VerticalAlignment="Top" Width="205"/>
+            <TextBox x:Name="richTextBox"  FontFamily="Lucida Sans Unicode" FontSize="12"  BorderBrush="Transparent" HorizontalAlignment="Left" Height="160" Margin="364,204,0,0" VerticalAlignment="Top" Width="246" />
+            <CheckBox x:Name="encrypedCheckBox"  FontFamily="Lucida Sans Unicode" FontSize="14"  Content="Password" HorizontalAlignment="Left" Margin="364,374,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="passwordTextBox" BorderBrush="Transparent"  FontFamily="Lucida Sans Unicode" FontSize="12" HorizontalAlignment="Left" Height="29" Margin="371,394,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="239"/>
+            <Label x:Name="label10" FontFamily="Lucida Sans Unicode" FontSize="14" Content="Your input here:" HorizontalAlignment="Left" Margin="364,175,0,0" VerticalAlignment="Top" Width="216"/>
         </Grid>
 
         <Grid Name="settingsGrid" Background="Beige" Visibility="Collapsed" Height="600" Width="700">
@@ -236,6 +322,9 @@
                 <HamburgerMenu:HamburgerMenuItem  Name="exit_Menu" Icon="img/exit.png" Text="Exit" Selected="exit_Menu_Selected"/>
             </HamburgerMenu:HamburgerMenu>
         </Grid>
+        <GridSplitter x:Name="gridSplitter" Height="570.666666666667" VerticalAlignment="Top" Width="5"/>
+        <Rectangle Fill="Black" Height="570.666666666667" VerticalAlignment="Top" Width="100"/>
+        <Rectangle Fill="#ededeb" Height="570.666666666667" VerticalAlignment="Top" Width="100"/>
         <!-- </TabItem>
         </TabControl>  -->
 
