@@ -91,6 +91,7 @@ namespace CryptoProgramma
         {           
             homePageGrid.Visibility = Visibility.Visible;
             encryptFileGrid.Visibility = Visibility.Collapsed;
+            encryptingGrid.Visibility = Visibility.Collapsed;
         }
 
         /// <summary>
@@ -511,7 +512,7 @@ namespace CryptoProgramma
                 {
                     resultaatHash = "De gesignde hash, en de zelf berekende hash komen NIET overeen";
                 }
-                System.Windows.MessageBox.Show(resultaatHash);
+                //System.Windows.MessageBox.Show(resultaatHash);
                 Directory.CreateDirectory(hoofdPad + "\\DecryptedFiles");
                 File.WriteAllText(hoofdPad + "\\DecryptedFiles\\" + "ResultaatHash" +
                                  System.IO.Path.GetFileNameWithoutExtension(singedHash) + ".txt", resultaatHash);
